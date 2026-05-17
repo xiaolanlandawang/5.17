@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/about.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/about.js"></script>
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+
+
+<div class="about-content reveal">
+    <div class="title">WHE WE ARE?</div>
+    <div class="about-introduction">{$about_site.introduction|htmlspecialchars_decode}</div>
+    <div class="about-introduction-img">
+        <img src="{:cmf_get_image_url($about_site.left_image)}" alt="introduction">
+    </div>
+</div>
+
+<div class="about-do reveal">
+    <div class="title">WHAT WE DO?</div>
+    <div class="about-do-desc">{$about_site.do_desc|htmlspecialchars_decode}</div>
+</div>
+
+<div class="serve-wrap reveal" style="background-image: url('{:cmf_get_image_url($about_site.service_bg)}')">
+    <div class="serve">
+        <div class="title">CUSTOMERS WE SERVE?</div>
+        <div class="serve-desc">{$about_site.service_desc|htmlspecialchars_decode}</div>
+    </div>
+</div>
+
+<div class="global-wrap reveal" style="background-image: url('{:cmf_get_image_url($about_site.market_image)}')">
+    <div class="global">
+        <div class="title">GLOBAL MARKETS</div>
+        <div class="global-desc">{$about_site.market_description}</div>
+        <div class="global-content">
+            <foreach name="about_site.market" item="vo">
+                <div class="global-content-item">
+                    <div class="global-content-item-title">{$vo.market_name}</div>
+                    <div class="global-content-item-desc">{$vo.market_num}</div>
+                </div>
+            </foreach>
+        </div>
+    </div>
+</div>
+
+
+<div class="advantage reveal">
+    <div class="title">WEIHUA ADVANTAGES</div>
+    <div class="advantage-list">
+        <foreach name="about_site.advantage" item="vo">
+            <div class="advantage-item">
+                <div class="advantage-item-num">{$vo.advantage_num}</div>
+                <div class="advantage-item-title">{$vo.advantage_name}</div>
+            </div>
+        </foreach>
+    </div>
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>

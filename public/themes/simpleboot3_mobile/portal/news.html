@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_seo_title|default=''}</title>
+    <meta name="keywords" content="news,{$site_info.site_seo_keywords|default=''}">
+    <meta name="description" content="news-{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/news.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<div class="content clearfix">
+    <div class="title">NEWS CENTER</div>
+    <div class="category-list">
+        <ul>
+            <foreach name="news_category" item="vo">
+                <li class="category-item {:input('id')==$vo.id ? 'active' : ''}" onclick="location.href='{:cmf_url(\"portal/index/news\",array(\"id\"=>$vo[\"id\"]))}'">
+                {$vo.name}
+                </li>
+            </foreach>
+        </ul>
+    </div>
+
+    <div class="products-list">
+        <ul class="clearfix">
+            <foreach name="list" item="vo">
+                <li onclick="location.href='{:cmf_url(\"portal/index/news_info\",array(\"cid\"=>$vo[\"cid\"],\"id\"=>$vo[\"id\"]))}'">
+                <div class="item-img">
+                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
+                </div>
+                <div class="item-content">
+                    <div class="item-time">
+                        <span class="item-time-day">{:date('d',$vo.create_time)}</span>/{:date('Y-m',$vo.create_time)}
+                    </div>
+                    <div class="item-title">{$vo.post_title}</div>
+                    <div class="item-desc">{$vo.post_excerpt}</div>
+                </div>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>

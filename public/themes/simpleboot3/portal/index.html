@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head" />
+    <link href="__TMPL__/public/assets/css/index.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/index.js"></script>
+</head>
+
+<body>
+
+    <include file="public@nav" />
+
+    <!--BANNER START-->
+    <div class="banner">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <foreach name="slides" item="vo">
+                    <div class="swiper-slide">
+                        <php>
+                            $slideUrl = trim($vo['url'] ?? '');
+                            if ($slideUrl !== '' && !preg_match('/^(https?:)?\/\//i', $slideUrl) && strpos($slideUrl,
+                            '/') !== 0) {
+                            $slideUrl = 'http://' . $slideUrl;
+                            }
+                            $slideHref = $slideUrl ?: 'javascript:;';
+                            $slideTarget = !empty($vo['target']) ? $vo['target'] : '_self';
+                        </php>
+                        <a class="swiper-slide-link" href="{$slideHref}" target="{$slideTarget}">
+                            <img src="{:cmf_get_image_url($vo['image'])}" class="d-block w-100" alt="{$vo.title}">
+                        </a>
+                        <div class="swiper-slide-title">
+                            <div class="swiper-slide-name">{$vo.title}</div>
+                            <notempty name="vo.description">
+                                <div class="swiper-slide-desc">{$vo.description}</div>
+                            </notempty>
+                            <div class="swiper-slide-actions">
+                                <a href="{:cmf_url('portal/index/quote')}" class="btn-quote">GET A QUOTE</a>
+                                <a href="{:cmf_url('portal/index/product')}" class="btn-products">VIEW PRODUCTS</a>
+                            </div>
+                        </div>
+                    </div>
+                </foreach>
+            </div>
+            <!-- 分页器容器 -->
+            <div class="swiper-pagination swiper-pagination-bullets"></div>
+        </div>
+
+        <script>
+            var mySwiper = new Swiper('.swiper', {
+                autoplay: true,//可选选项，自动滑动
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true, // 允许点击分页器子弹切换幻灯片
+                    // 自定义分页器渲染函数（可选）
+                    renderBullet: function (index, className) {
+                        // 你可以在这里添加自定义的HTML结构或样式
+                        var index_text = index + 1;
+                        if (index <= 8) {
+                            index_text = '0' + index_text;
+                        }
+                        return '<span class="' + className + '">' + index_text + '</span>';
+                    },
+                },
+            })
+
+        </script>
+    </div>
+    <!--BANNER END-->
+
+    <!--HOT PRODUCTS  START-->
+    <div class="hot-products reveal">
+        <div class="title">HOT PRODUCTS</div>
+        <div class="hot-products-desc">{$index_site.products_description}</div>
+
+        <div class="products-category">
+            <div class="swiper-products-category">
+                <div class="swiper-wrapper">
+                    <foreach name="hot_products" item="vo">
+                        <div class="swiper-slide category-slide {$key==0 ? 'active' : ''}">
+                            <div class="swiper-products-category-title">{$vo.name}</div>
+                        </div>
+                    </foreach>
+                </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <div class="products">
+            <div class="swiper-products">
+                <div class="swiper-wrapper">
+                    <foreach name="hot_products" item="vo">
+                        <div class="swiper-slide">
+                            <ul class="products-list">
+                                <foreach name="vo['list']" item="v">
+                                    <li>
+                                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$v['id']))}">
+                                            <div class="product_list_item_img">
+                                                <img loading="lazy" src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.title}"
+                                                    title="{$v.title}">
+                                            </div>
+                                            <div class="product_list_item_title">{$v.title}</div>
+                                            <div class="product_list_item_category">{$v.industry}</div>
+                                        </a>
+                                        <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </foreach>
+                </div>
+                <!-- 分页器容器 -->
+                <div class="swiper-products-pagination swiper-products-pagination-bullets"></div>
+            </div>
+            <script>
+                // 初始化导航Swiper
+                const categorySwiper = new Swiper('.swiper-products-category', {
+                    slidesPerView: 'auto', // 自动根据内容宽度显示
+                    freeMode: true,        // 自由滚动模式
+                    resistanceRatio: 0,    // 边缘抵抗力
+                    watchSlidesProgress: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    }
+                });
+                var productSwiper = new Swiper('.swiper-products', {
+                    autoplay: false,//可选选项，自动滑动
+                    loop: false,
+                    on: {
+                        slideChange: function () {
+                            // 同步导航状态
+                            document.querySelectorAll('.category-slide')
+                                .forEach(el => el.classList.remove('active'));
+                            document.querySelectorAll('.category-slide')[this.activeIndex].classList.add('active');
+
+                            // 同步导航位置
+                            categorySwiper.slideTo(this.activeIndex);
+                        }
+                    }
+                })
+
+                // 绑定导航点击事件
+                document.querySelectorAll('.category-slide').forEach((slide, index) => {
+                    slide.addEventListener('click', () => {
+                        productSwiper.slideTo(index);
+                    });
+                });
+
+            </script>
+        </div>
+    </div>
+    <!--HOT PRODUCTS  END-->
+
+    <!--ABOUT START -->
+    <div class="about reveal">
+        <div class="about-wrap">
+            <div class="about-img">
+                <img loading="lazy" src="{:cmf_get_image_url($index_site['about_img'] ?? '')}" alt="{$site_info.site_name}">
+            </div>
+            <div class="about-content">
+                <div class="about-heading">WHO WE ARE</div>
+                <div class="about-desc">{$index_site.about_description|default=''}</div>
+                <ul>
+                    <notempty name="index_site.engineering">
+                        <foreach name="index_site.engineering" item="vo">
+                            <li class="about-content-item">
+                                <p class="about-content-num">{$vo.engineering_num}</p>
+                                <div class="about-content-line"></div>
+                                <p class="about-content-item-title">{$vo.engineering_name}</p>
+                                <p class="about-content-desc">{$vo.engineering_desc}</p>
+                            </li>
+                        </foreach>
+                    </notempty>
+                </ul>
+                <div class="about-actions">
+                    <a class="about-btn" href="{:cmf_url('portal/index/about')}">LEARN MORE -&gt;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ABOUT END -->
+
+    <!-- STATS START -->
+    <div class="home-stats reveal">
+        <div class="home-stats-wrap">
+            <div class="stat-item">
+                <div class="stat-num"><span class="counter" data-target="1988">0</span></div>
+                <div class="stat-text">Founded in China</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num"><span class="counter" data-target="3420">0</span>K</div>
+                <div class="stat-text">Square Meter Factory</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num"><span class="counter" data-target="1000">0</span></div>
+                <div class="stat-text">1000 R&D engineers team</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num"><span class="counter" data-target="170">0</span>+</div>
+                <div class="stat-text">Export to over 170 countries</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num"><span class="counter" data-target="500">0</span>+</div>
+                <div class="stat-text">500 honorary titles</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 100; // The lower the slower
+
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+
+                    const updateCount = () => {
+                        const count = +counter.innerText.replace(/,/g, '');
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc).toLocaleString('en-US');
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target.toLocaleString('en-US');
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            const statsSection = document.querySelector('.home-stats');
+            if (statsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        animateCounters();
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.3 });
+                observer.observe(statsSection);
+            }
+        });
+    </script>
+    <!-- STATS END -->
+
+
+    <!-- CHOOSE START -->
+    <div class="choose-warp reveal">
+        <div class="choose">
+            <div class="title">WHY CHOOSE US</div>
+            <div class="choose-desc">{$index_site.choose_description|default=''}</div>
+            <ul class="choose-list">
+                <notempty name="index_site.choose">
+                    <foreach name="index_site.choose" item="vo">
+                        <li class="choose-item">
+                            <div class="choose-item-icon">
+                                <img loading="lazy" src="{:cmf_get_image_url($vo.choose_image)}" alt="choose"
+                                    data-default_img="{:cmf_get_image_url($vo.choose_image)}"
+                                    data-active_img="{:cmf_get_image_url($vo.choose_image_active)}">
+                            </div>
+                            <div class="choose-item-title">{$vo.choose_name}</div>
+                            <div class="choose-item-desc">{$vo.choose_desc}</div>
+                        </li>
+                    </foreach>
+                </notempty>
+            </ul>
+        </div>
+    </div>
+    <!-- CHOOSE END -->
+
+
+    <notempty name="about_site.cert">
+        <!-- CERTIFICATE START -->
+        <div class="certificate reveal">
+            <div class="title">CERTIFICATE</div>
+            <div class="certificate-carousel">
+                <button class="certificate-nav certificate-button-prev" type="button" aria-label="Previous"></button>
+                <div class="certificate-swiper">
+                    <div class="swiper-wrapper">
+                        <foreach name="about_site.cert" item="vo">
+                            <div class="swiper-slide certificate-item">
+                                <img loading="lazy" src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+                <button class="certificate-nav certificate-button-next" type="button" aria-label="Next"></button>
+                <div class="certificate-pagination"></div>
+            </div>
+        </div>
+        <div class="certificate-preview" aria-hidden="true">
+            <button class="certificate-preview-close" type="button" aria-label="Close"></button>
+            <button class="certificate-preview-arrow certificate-preview-prev" type="button"
+                aria-label="Previous"></button>
+            <div class="certificate-preview-content">
+                <img src="" alt="">
+            </div>
+            <button class="certificate-preview-arrow certificate-preview-next" type="button" aria-label="Next"></button>
+        </div>
+        <!-- CERTIFICATE END -->
+    </notempty>
+
+    <notempty name="case_list">
+        <!-- CASE START -->
+        <div class="home-case reveal">
+            <div class="title">CASE STUDY</div>
+            <div class="home-case-carousel">
+                <div class="swiper home-case-swiper">
+                    <div class="swiper-wrapper case-list">
+                        <foreach name="case_list" item="vo">
+                            <div class="swiper-slide case-item" title="{$vo.post_title}">
+                                <a href="{:cmf_url('portal/index/industries_info',array('id'=>$vo.id))}">
+                                    <div class="case-item-img">
+                                        <img loading="lazy" src="{:cmf_get_image_url($vo.more.thumbnail)}"
+                                            alt="{$vo.post_title}">
+                                    </div>
+                                    <div class="case-item-title">{$vo.post_title}</div>
+                                    <div class="case-item-desc">{$vo.post_excerpt}</div>
+                                </a>
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+                <div class="home-case-button-prev"></div>
+                <div class="home-case-button-next"></div>
+                <div class="home-case-pagination"></div>
+            </div>
+        </div>
+        <!-- CASE END -->
+    </notempty>
+
+
+    <div class="news reveal">
+        <div class="title">NEWS CENTER</div>
+        <div class="news-list">
+            <foreach name="news_list" item="vo">
+                <div class="news-item" title="{$vo.title}">
+                    <a href="{:cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id']))}">
+                        <div class="news-item-img">
+                            <img loading="lazy" src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
+                        </div>
+                        <div class="news-item-title">{$vo.post_title}</div>
+                        <div class="news-item-desc">{$vo.post_excerpt}</div>
+                    </a>
+                </div>
+            </foreach>
+        </div>
+    </div>
+
+    <notempty name="index_site.faq">
+        <div class="faq reveal">
+            <div class="title">{$index_site.faq_title|default='FAQ'}</div>
+            <php>
+                $faqContactLink = !empty($index_site['faq_contact_btn_link']) ? $index_site['faq_contact_btn_link'] :
+                cmf_url('portal/index/quote');
+                $faqContactTitle = !empty($index_site['faq_contact_title']) ? $index_site['faq_contact_title'] : 'Can
+                not Find Your Question?';
+                $faqContactDesc = !empty($index_site['faq_contact_desc']) ? $index_site['faq_contact_desc'] : 'If you
+                can not find the answer, contact us and let us know how we can help you.';
+                $faqContactBtnText = !empty($index_site['faq_contact_btn_text']) ? $index_site['faq_contact_btn_text'] :
+                'Contact Us';
+            </php>
+            <div class="faq-wrap">
+                <div class="faq-list">
+                    <foreach name="index_site.faq" item="vo">
+                        <div class="faq-item {$key==0 ? 'active' : ''}">
+                            <div class="faq-question">
+                                <span>{$key+1}.{$vo.question}</span>
+                                <em>+</em>
+                            </div>
+                            <div class="faq-answer">{$vo.answer|nl2br}</div>
+                        </div>
+                    </foreach>
+                </div>
+                <div class="faq-contact">
+                    <div class="faq-contact-icon">?</div>
+                    <div class="faq-contact-title">{$faqContactTitle}</div>
+                    <div class="faq-contact-desc">{$faqContactDesc}</div>
+                    <a class="faq-contact-btn" href="{$faqContactLink}">{$faqContactBtnText}</a>
+                </div>
+            </div>
+        </div>
+    </notempty>
+
+    <div class="home-collect reveal">
+        <div class="home-collect-container">
+            <div class="home-collect-left">
+                <div class="quote-intro">
+                    <h2 class="intro-title">Need a Quick Quote? Help Us Serve You Better!</h2>
+                    <p class="intro-subtitle">To ensure we provide the most accurate solution, please share:</p>
+                    <ul class="intro-list">
+                        <li>
+                            <strong>1. Application:</strong> What will the crane be used for? 
+                        </li>
+                        <li>
+                            <strong>2. Key Specs:</strong> Lifting capacity (ton), span (m), and lifting height (m) required.
+                        </li>
+                        <li>
+                            <strong>3. Project Details:</strong> Site conditions (indoor/outdoor), budget range, and timeline.
+                        </li>
+                    </ul>
+                    <div class="intro-footer">
+                        Our team will recommend the most suitable and cost-effective solution for your project.
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="home-collect-form-section">
+                <h2 class="form-title">Customize Your Lifting Solutions</h2>
+                <div class="home-collect-form">
+                    <div class="home-collect-field">
+                        <label>Name</label>
+                        <input type="text" class="home-collect-name" placeholder="Name">
+                    </div>
+                    <div class="home-collect-field">
+                        <label>Email</label>
+                        <input type="text" class="home-collect-email" placeholder="Email">
+                    </div>
+                    <div class="home-collect-field full-width">
+                        <label>Phone / Whatsapp</label>
+                        <input type="text" class="home-collect-phone" placeholder="Phone / Whatsapp">
+                    </div>
+                    <div class="home-collect-field full-width">
+                        <label>Message</label>
+                        <textarea class="home-collect-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                    </div>
+                    <div class="home-collect-submit">SEND MESSAGE</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <include file="public@foot" />
+
+</body>
+
+</html>
+
+
+
+<!-- old -->

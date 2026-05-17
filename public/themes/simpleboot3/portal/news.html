@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_seo_title|default=''}</title>
+    <meta name="keywords" content="news,{$site_info.site_seo_keywords|default=''}">
+    <meta name="description" content="news-{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/news.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+<div class="main-content content reveal">
+    <div class="title">News Center</div>
+
+    <ul class="news-category">
+        <foreach name="news_category" item="vo">
+            <li class="news-category-item {$vo.id==input('id') ? 'active' : ''}">
+                <a href="{:cmf_url('portal/index/news',array('id'=>$vo['id']))}">{$vo.name}</a>
+            </li>
+        </foreach>
+    </ul>
+
+    <div class="news-list">
+        <ul>
+            <foreach name="list" item="vo">
+                <li class="news-item" onclick="location.href='{:cmf_url(\'portal/index/news_info\',array(\'id\'=>$vo[\'id\'],\'cid\'=>$vo[\'cid\']))}'">
+                    <div class="news-img">
+                        <img src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}" title="{$vo.post_title}">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-title">{$vo.post_title}</div>
+                        <div class="news-desc">{$vo.post_excerpt}</div>
+                        <div class="news-time">
+                            <span class="news-time-day">{:date('d',$vo.create_time)}</span>
+                            <span class="news-time-month">/{:date('Y-m',$vo.create_time)}</span>
+                        </div>
+                    </div>
+                </li>
+            </foreach>
+        </ul>
+        <div class="pagination">{$page}</div>
+    </div>
+
+</div>
+
+
+
+<include file="public@foot"/>
+
+</body>
+</html>

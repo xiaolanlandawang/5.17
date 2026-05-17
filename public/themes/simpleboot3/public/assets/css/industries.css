@@ -1,0 +1,209 @@
+.main-content{
+    width: 1400px;
+    margin: 80px auto;
+    font-size: 16px;
+    color: #333333;
+}
+.case-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+.case-list .case-item{
+    width: 32%;
+    margin-right: 2%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DEDEDE;
+    margin-top: 20px;
+}
+.case-list .case-item:nth-child(-n+3){
+    margin-top: 0;
+}
+.case-list .case-item:nth-child(3n){
+    margin-right: 0;
+}
+.case-list .case-item .case-item-img{
+    width: 100%;
+    aspect-ratio: 386 / 280;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+.case-list .case-item .case-item-img::before {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%);
+    transform: skewX(-25deg);
+}
+.case-list .case-item:hover .case-item-img::before {
+    -webkit-animation: shine .75s;
+    animation: shine .75s;
+}
+@-webkit-keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+@keyframes shine {
+    100% {
+        left: 100%;
+    }
+}
+.case-list .case-item .case-item-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.case-list .case-item .case-item-title{
+    font-weight: bold;
+    font-size: 18px;
+    color: #1A1A1A;
+    margin-top: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.case-list .case-item .case-item-desc{
+    font-size: 14px;
+    color: #666666;
+    margin-top: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.case-list .case-item .case-item-more{
+    font-size: 14px;
+    color: #00367D;
+    margin-top: 10px;
+}
+
+
+@media only screen and (min-width: 1000px) and (max-width: 1440px) {
+    .main-content{
+        width: 900px;
+        margin: 60px auto;
+    }
+    .case-list{
+        margin-top: 30px;
+    }
+    .case-list .case-item{
+        padding-bottom: 15px;
+        margin-top: 15px;
+    }
+    .case-list .case-item .case-item-img{
+        border-radius: 8px;
+    }
+    .case-list .case-item .case-item-title{
+        font-size: 16px;
+        margin-top: 6px;
+    }
+    .case-list .case-item .case-item-desc,
+    .case-list .case-item .case-item-more{
+        font-size: 13px;
+        margin-top: 6px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .main-content{
+        width: 700px;
+        margin: 40px auto;
+    }
+    .case-list{
+        margin-top: 20px;
+    }
+    .case-list .case-item{
+        padding-bottom: 10px;
+        margin-top: 10px;
+    }
+    .case-list .case-item .case-item-img{
+        border-radius: 6px;
+    }
+    .case-list .case-item .case-item-title{
+        font-size: 14px;
+        margin-top: 2px;
+    }
+    .case-list .case-item .case-item-desc,
+    .case-list .case-item .case-item-more{
+        font-size: 12px;
+        margin-top: 2px;
+    }
+}
+
+.case-bottom-cta {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F3F2F9 100%);
+    padding: 80px 0;
+    text-align: center;
+    margin-top: 60px;
+    border-radius: 12px;
+}
+
+.case-bottom-cta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.case-bottom-cta-title {
+    font-size: 36px;
+    color: #00367D;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.case-bottom-cta-desc {
+    font-size: 16px;
+    color: #666;
+    max-width: 850px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.case-bottom-cta-btn {
+    background-color: #00367D;
+    color: #fff;
+    padding: 15px 45px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.case-bottom-cta-btn:hover {
+    background-color: #002a61;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 54, 125, 0.2);
+}
+
+@media only screen and (max-width: 1000px) {
+    .case-bottom-cta {
+        padding: 50px 0;
+        margin-top: 40px;
+    }
+    .case-bottom-cta-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .case-bottom-cta-desc {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+    .case-bottom-cta-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+}

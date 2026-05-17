@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/service.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+<div class="content">
+    <ul class="download-list">
+        <foreach name="list" item="vo">
+            <li class="download-item">
+                <a href="{:cmf_get_image_preview_url($vo.more.file.url)}" target="_blank" download>
+                    <div class="download-item-title">{$vo.post_title}</div>
+                    <div class="download-item-line"></div>
+                    <div class="download-item-bottom">
+                        <div class="download-item-bottom-left">
+                            <img src="__TMPL__/public/assets/images/pdf.png" alt="pdf">
+                            Download PDF
+                        </div>
+                        <div class="download-item-bottom-right">
+                            <img src="__TMPL__/public/assets/images/download.png" alt="download">
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </foreach>
+    </ul>
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>

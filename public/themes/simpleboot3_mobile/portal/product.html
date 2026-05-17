@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$page_title|default=$site_info.site_name}</title>
+    <meta name="keywords" content="{$page_keywords|default=$site_info.site_name}">
+    <meta name="description" content="{$page_description|default=$site_info.site_name}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="preload" as="image" href="{$hero_image}" fetchpriority="high">
+
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/products.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product.js" defer></script>
+</head>
+<body>
+<div class="main">
+    <include file="public@nav"/>
+
+    <section class="mobile-product-hero">
+        <img class="mobile-product-hero__bg"
+             src="{$hero_image}"
+             alt="{$hero_title|default='Weihua Products'}"
+             fetchpriority="high"
+             loading="eager"
+             decoding="sync">
+        <div class="mobile-product-hero__inner">
+            <div class="mobile-product-hero__eyebrow">WEIHUA PRODUCTS</div>
+            <h1 class="mobile-product-hero__title">{$hero_title}</h1>
+            <p class="mobile-product-hero__desc">{$hero_description}</p>
+            <a href="javascript:;" class="mobile-product-hero__btn" id="inquiry">Get A Free Quote</a>
+        </div>
+    </section>
+
+    <div class="mobile-product-breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Products</span>
+    </div>
+
+    <div class="main-content">
+
+        <!--select-->
+        <div class="products-content-select">
+            <div class="products-content_title">Product Categories</div>
+            <div class="product_select">
+                <select name="category_id" id="product_category" aria-label="Product Categories">
+                    <option value="0" data-url="{:cmf_url('portal/index/product')}">All Products</option>
+                    <foreach name="category_list" item="vo">
+                        <option value="{$vo.id}" data-url="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}"
+                                {$vo['id']==input('id') ? 'selected' : ''}>{$vo.name}</option>
+                    </foreach>
+                </select>
+            </div>
+            <div class="mobile-product-summary">Showing {$product_total} product<if condition="$product_total neq 1">s</if></div>
+        </div>
+
+        <!--products-->
+        <div class="products-content">
+            <ul class="products-content-list">
+                <foreach name="list" item="vo" key="k">
+                    <li class="products-content-list-item" data-id="{$vo.id}">
+                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                            <div class="products-content-list-item-img">
+                                <img src="{:cmf_get_image_url($vo.thumbnail)}" 
+                                     alt="{$vo.title}" 
+                                     width="326" 
+                                     height="204"
+                                     <if condition="$k eq 0">loading="eager" fetchpriority="high"<else />loading="lazy"</if>
+                                     decoding="async">
+                            </div>
+                            <div class="mobile-product-tag">
+                                <notempty name="current_category">{$current_category.name}<else />{$vo.industry|default='Product'}</notempty>
+                            </div>
+                            <div class="products-content-list-item-title">{$vo.title}</div>
+                            <div class="product-content-li-desc">{$vo.industry|default='Tap to view more product details and parameters.'}</div>
+                        </a>
+                        <div class="product_list_item_btn">
+                            <div class="product_list_item_btn_submit" id="inquiry">CONSULT</div>
+                        </div>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+        <if condition="count($list) eq 0">
+            <div class="mobile-product-empty">
+                No products in this category yet.
+            </div>
+        </if>
+    </div>
+
+
+    <include file="public@foot"/>
+
+</div>
+</body>
+</html>

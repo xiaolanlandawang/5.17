@@ -1,0 +1,233 @@
+<!--FOOT START-->
+<div class="footer">
+    <div class="footer-content clearfix">
+
+        <div class="footer-about">
+            <div class="footer-logo">
+                <img src="__TMPL__/public/assets/images/logo-white.svg" alt="logo">
+            </div>
+            <div class="footer-about-desc">
+                HENAN WEIHUA CO., LTD. is a leading professional industry crane manufacturer and exporter located in the
+                crane hometown of China. As a trusted name in the industry, we cover more than 2/3 of the crane market
+                in China. Our expertise lies in designing, manufacturing, installation, sales, and consultation for
+                overhead cranes, gantry cranes, port cranes, electric hoists, and other related equipment.
+            </div>
+            <div class="footer-social">
+                <a href="{$site_info.facebook}" target="_blank" title="Facebook">
+                    <img src="__TMPL__/public/assets/images/header-facebook.png" alt="facebook">
+                </a>
+                <a href="{$site_info.linkedin}" target="_blank" title="LinkedIn">
+                    <img src="__TMPL__/public/assets/images/header-linkedin.png" alt="linkedin">
+                </a>
+                <a href="{$site_info.youtube}" target="_blank" title="YouTube">
+                    <img src="__TMPL__/public/assets/images/header-youtube.png" alt="youtube">
+                </a>
+                <a href="{$site_info.vk}" target="_blank" title="VK">
+                    <img src="__TMPL__/public/assets/images/header-vk.png" alt="vk">
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-news">
+            <div class="footer-title">PRODUCTS</div>
+            <div class="footer-news-list">
+                <foreach name="category_list" item="vo">
+                    <a href="{:cmf_url('portal/index/product', ['id' => $vo['id']])}"
+                        class="footer-news-item">{$vo.name}</a>
+                </foreach>
+            </div>
+        </div>
+
+        <div class="footer-contact">
+            <div class="footer-title">Contact Info</div>
+            <div class="footer-contact-item footer-contact-email" onclick="location.href='mailto:{$site_info.email}';">
+                {$site_info.email}</div>
+            <div class="footer-contact-item footer-contact-address">{$site_info.address}</div>
+            <div class="footer-contact-item footer-contact-tel" onclick="location.href='tel:{$site_info.sale_tel}';">
+                {$site_info.sale_tel}</div>
+            <div class="footer-contact-item footer-contact-wechat">{$site_info.wechat}</div>
+        </div>
+
+        <div class="footer-form">
+            <div class="footer-title">CONTACT US</div>
+            <div class="footer-field">
+                <label>Name</label>
+                <input type="text" class="footer-name" placeholder="Name">
+            </div>
+            <div class="footer-field">
+                <label>Email</label>
+                <input type="text" class="footer-email" placeholder="Email">
+            </div>
+            <div class="footer-field">
+                <label>Phone/Whatsapp</label>
+                <input type="text" class="footer-phone" placeholder="Phone/Whatsapp">
+            </div>
+            <div class="footer-field">
+                <label>Message</label>
+                <textarea class="footer-message"
+                    placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+            </div>
+            <div class="footer-submit">SUBMIT</div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Copyright &copy; Henan Weihua Heavy Machinery Co.,LTD. All Rights Reserved.
+    </div>
+</div>
+<!--FOOT END-->
+
+<div class="form-message-modal" aria-hidden="true">
+    <div class="form-message-dialog">
+        <div class="form-message-icon"></div>
+        <div class="form-message-title">Submit Success</div>
+        <div class="form-message-text">Thank you for your inquiry. We will contact you soon.</div>
+        <button class="form-message-button" type="button">OK</button>
+    </div>
+</div>
+
+
+<!-- Floating box -->
+
+<div class="right_fix">
+    <div class="right_fix_connect">
+        <div class="right_fix_box right_fix_form">
+            <img src="__TMPL__/public/assets/images/fix-form.webp" alt="form" title="form">
+        </div>
+        <div class="right_fix_box right_fix_whatsapp">
+            <a href="https://api.whatsapp.com/send?phone={$cleanNumber}" target="_blank">
+                <img src="__TMPL__/public/assets/images/fix-whatsapp.webp" alt="whatsapp" title="whatsapp">
+                <div class="right_fix_box_connect">
+                    <p>WhatsApp:</p>
+                    <p class="right_fix_box_connect_text">{$site_info.whatsapp}</p>
+                </div>
+            </a>
+        </div>
+        <div class="right_fix_box right_fix_wechat">
+            <img src="__TMPL__/public/assets/images/fix-wechat.webp" alt="wechat" title="wechat">
+            <div class="right_fix_box_connect">
+                <p>Wechat:</p>
+                <p class="right_fix_box_connect_text">{$site_info.wechat}</p>
+            </div>
+        </div>
+        <div class="right_fix_box right_fix_email">
+            <a href="mailto:{$site_info.email}">
+                <img src="__TMPL__/public/assets/images/fix-email.webp" alt="email" title="email">
+                <div class="right_fix_box_connect">
+                    <p>Email:</p>
+                    <p class="right_fix_box_connect_text">{$site_info.email}</p>
+                </div>
+            </a>
+        </div>
+        <div class="right_fix_box right_fix_top" title="Back to top">
+            <span class="right_fix_top_icon">&#8679;</span>
+        </div>
+    </div>
+</div>
+
+
+<!--弹窗-->
+<div class="popover_wrap" style="display: none;">
+    <div class="popover_container">
+        <div class=popover_close>
+            <img src="__TMPL__/public/assets/images/close.png" alt="close">
+        </div>
+        <div class="popover_content">
+            <div class="popover_title">
+                <h2>Develop your lifting solution</h2>
+                <p class="popover_title_description">Contact us today by email at :<a
+                        href="mailto:{$site_info.email}">{$site_info.email}</a>,
+                    or fill out the form below.</p>
+            </div>
+            <div class="popover_form">
+                <form method="post">
+                    <div class="popover_form_name">
+                        <input id="popover-name" type="text" name="name" placeholder="Name:">
+                    </div>
+                    <div class="popover_form_phone">
+                        <input id="popover-phone" type="text" name="phone" placeholder="Phone / WhatsApp:">
+                    </div>
+                    <div class="popover_form_email">
+                        <input id="popover-email" type="text" name="email" placeholder="E-mail:">
+                    </div>
+                    <div class="popover_form_content">
+                        <textarea id="popover-content" name="content" placeholder="Message:"></textarea>
+                    </div>
+                    <div class="popover_form_submit">
+                        <input name="product_id" id="product-id" type="hidden" value="{$product.id|default=''}">
+                        <input name="file" id="file" type="hidden" value="">
+                        <input type="hidden" name="feedback_type" id="feedback_type" value="2">
+                        <button id="popover-submit" type="button">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<notempty name="site_info.salesiq">
+    {:htmlspecialchars_decode($site_info.salesiq)}
+</notempty>
+
+<notempty name="site_info.google_tag_body">
+    {:htmlspecialchars_decode($site_info.google_tag_body)}
+</notempty>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intlTelInput.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const phoneInputs = document.querySelectorAll('.home-collect-phone, .quote-phone, .footer-phone, #popover-phone');
+        phoneInputs.forEach(input => {
+            const iti = window.intlTelInput(input, {
+                initialCountry: "auto",
+                geoIpLookup: function(callback) {
+                    fetch("https://ipapi.co/json")
+                        .then(res => res.json())
+                        .then(data => callback(data.country_code))
+                        .catch(() => callback("us"));
+                },
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/utils.js"
+            });
+            // Store the instance on the element for later access
+            input._iti = iti;
+        });
+
+        // Ensure iti wrapper and flags are correctly styled
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .iti { 
+                width: 100%; 
+                display: block !important;
+            }
+            .iti__country-list { 
+                z-index: 9999; 
+                color: #333;
+                text-align: left;
+            }
+            /* Fix for input padding when ITI is active */
+            .iti input {
+                padding-left: 52px !important;
+                width: 100% !important;
+            }
+            .iti__selected-flag {
+                padding: 0 8px 0 12px !important;
+                background: transparent !important;
+            }
+            .iti__flag-container {
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+        `;
+        document.head.appendChild(style);
+    });
+</script>
+<!-- old -->

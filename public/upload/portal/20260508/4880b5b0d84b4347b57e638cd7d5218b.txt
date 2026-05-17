@@ -1,0 +1,75 @@
+网站备份脚本
+
+
+cat > /root/backup_all_sites.sh << 'EOF'
+#!/bin/bash
+set -o pipefail
+
+# ========== 基本配置 ==========
+BACKUP_DIR="/www/backup/site_all"
+DATE=$(date +%F_%H-%M-%S)
+SITE_FILE="site_all_${DATE}.tar.gz"
+
+REMOTE_DIR="gdrive:/bt-backup/site-all/"
+
+mkdir -p "$BACKUP_DIR"
+
+echo "[$(date)] ===== start site backup ====="
+
+# 检查命令
+command -v tar >/dev/null 2>&1 || { echo "tar not found"; exit 1; }
+command -v rclone >/dev/null 2>&1 || { echo "rclone not found"; exit 1; }
+
+# ========== 需要备份的目录 ==========
+SRC_LIST=()
+
+[ -d /www/wwwroot ] && SRC_LIST+=(/www/wwwroot)
+[ -d /www/server/panel/vhost ] && SRC_LIST+=(/www/server/panel/vhost)
+[ -d /www/dk_project ] && SRC_LIST+=(/www/dk_project)
+
+if [ ${#SRC_LIST[@]} -eq 0 ]; then
+  echo "[$(date)] no valid source directories found"
+  exit 1
+fi
+
+echo "[$(date)] backup sources:"
+for item in "${SRC_LIST[@]}"; do
+  echo "  - $item"
+done
+
+# ========== 打包 ==========
+tar -czpf "$BACKUP_DIR/$SITE_FILE" \
+  --exclude="/www/backup" \
+  --exclude="*.log" \
+  --exclude="node_modules" \
+  --exclude=".git" \
+  --warning=no-file-changed \
+  --ignore-failed-read \
+  "${SRC_LIST[@]}"
+
+if [ $? -ne 0 ] || [ ! -s "$BACKUP_DIR/$SITE_FILE" ]; then
+  echo "[$(date)] site backup failed"
+  rm -f "$BACKUP_DIR/$SITE_FILE"
+  exit 1
+fi
+
+echo "[$(date)] site backup done: $SITE_FILE"
+
+# ========== 上传 ==========
+echo "[$(date)] upload site backup..."
+rclone copy "$BACKUP_DIR/$SITE_FILE" "$REMOTE_DIR"
+
+if [ $? -ne 0 ]; then
+  echo "[$(date)] upload site backup failed"
+  exit 1
+fi
+
+# ========== 清理 ==========
+find "$BACKUP_DIR" -type f -name "*.tar.gz" -mtime +7 -delete
+rclone delete "$REMOTE_DIR" --min-age 7d
+
+echo "[$(date)] ===== site backup done ====="
+echo "[$(date)] site file: $SITE_FILE"
+EOF
+
+chmod +x /root/backup_all_sites.sh

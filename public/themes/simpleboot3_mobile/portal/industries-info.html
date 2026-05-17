@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{$site_info.site_seo_title|default=''}</title>
+  <meta name="keywords" content="news,{$site_info.site_seo_keywords|default=''}">
+  <meta name="description" content="news-{$site_info.site_seo_description|default=''}">
+  <include file="public@head"/>
+  <link href="__TMPL__/public/assets/css/industries.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+<include file="public@banner"/>
+
+
+<div class="main-content content">
+  <div class="post_title">{$post.post_title}</div>
+  <div class="post_line"></div>
+  <div class="post_info clearfix">
+    <div class="post_info_left">
+      <span>Release time: {:date('Y-m-d H:i',$post.create_time)}</span>
+    </div>
+    <div class="post_info_right">Page view: {$post.post_hits}</div>
+  </div>
+  <div class="post_content">
+    {$post.post_content}
+  </div>
+
+  <div class="post_line"></div>
+  <div class="content-bottom clearfix">
+    <div class="prev">
+      Previous article:
+      <notempty name="prev_article">
+        <a href="{:cmf_url('portal/index/news_info',array('id'=>$prev_article['id']))}">
+          {$prev_article.post_title}
+        </a>
+        <else/>
+        none
+      </notempty>
+
+    </div>
+    <div class="next">
+      Next article:
+      <notempty name="next_article">
+        <a href="{:cmf_url('portal/index/news_info',array('id'=>$next_article['id']))}">
+          {$next_article.post_title}
+        </a>
+        <else/>
+        none
+      </notempty>
+    </div>
+  </div>
+
+</div>
+
+
+<include file="public@foot"/>
+
+</body>
+</html>

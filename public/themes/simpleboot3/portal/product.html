@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$page_title|default=$site_info.site_name}</title>
+    <meta name="keywords" content="{$page_keywords|default=$site_info.site_name}">
+    <meta name="description" content="{$page_description|default=$site_info.site_name}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/product.css" rel="stylesheet" type="text/css">
+    <link href="__TMPL__/public/assets/css/crane-selector.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product.js"></script>
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<div class="product-page">
+    <if condition="!$is_category_page">
+        <section class="products-banner" style="background-image:url('{$hero_image}');">
+            <div class="products-banner__inner">
+                <h1 class="products-banner__title">{$hero_title}</h1>
+                <p class="products-banner__desc">{$hero_description}</p>
+                <a href="javascript:;" class="products-banner__btn" id="inquiry">Get A Free Quote</a>
+            </div>
+        </section>
+
+        <section class="products-category-section reveal">
+            <div class="products-category-section__inner">
+                <div class="products-category-section__head">
+                    <h2 class="products-category-section__title">{$category_headline}</h2>
+                    <p class="products-category-section__desc">{$category_intro}</p>
+                </div>
+
+                <ul class="category-grid">
+                    <foreach name="category_cards" item="vo">
+                        <li class="category-grid__item">
+                            <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}" class="category-card">
+                                <div class="category-card__image-wrap">
+                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.name}" class="category-card__image">
+                                </div>
+                                <div class="category-card__title">{$vo.name}</div>
+                            </a>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+        </section>
+    <else />
+        <div class="product-breadcrumb">
+            <div class="product-breadcrumb__inner">
+                <a href="/">Home</a>
+                <span>&gt;</span>
+                <a href="{:cmf_url('portal/index/product')}">Products</a>
+                <span>&gt;</span>
+                <span>{$current_category_name}</span>
+            </div>
+        </div>
+
+        <section class="category-hero reveal">
+            <div class="category-hero__inner">
+                <div class="category-hero__content">
+                    <h1 class="category-hero__title">{$hero_title}</h1>
+                    <p class="category-hero__desc">{$hero_description}</p>
+                    <div class="category-hero__actions">
+                        <a href="javascript:;" class="category-hero__btn" id="inquiry">Get A Free Quote</a>
+                    </div>
+                </div>
+                <div class="category-hero__media">
+                    <div class="category-hero__image-wrap">
+                        <img src="{$hero_image}" alt="{$current_category_name}" class="category-hero__image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-showcase reveal">
+            <div class="products-showcase__head">
+                <h2 class="products-showcase__title">{$category_headline}</h2>
+                <p class="products-showcase__desc">{$category_intro}</p>
+            </div>
+
+            <div class="product_list_warp">
+                <ul class="product_list">
+                    <foreach name="list" item="vo">
+                        <li class="product_item">
+                            <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}" class="product_item__link">
+                                <div class="product_list_item_img">
+                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}" title="{$vo.title}">
+                                </div>
+                                <div class="product_list_item_title">{$vo.title}</div>
+                                <div class="product_list_item_category">{$vo.industry|default='Engineered lifting equipment for high-efficiency industrial material handling.'}</div>
+                            </a>
+                            <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+                        </li>
+                    </foreach>
+                </ul>
+
+                <if condition="count($list) eq 0">
+                    <div class="product-empty">
+                        <h3>No products available</h3>
+                        <p>This category does not have visible products yet. Once products are added in the backend, they will appear here automatically.</p>
+                    </div>
+                </if>
+
+                <div class="products-content-right-page">
+                    <ul class="pagination">{$page}</ul>
+                </div>
+            </div>
+        </section>
+
+    </if>
+
+    <include file="public@crane_selector"/>
+
+    <notempty name="case_list">
+        <div class="home-case reveal product-case">
+            <div class="title">CASE STUDY</div>
+            <div class="product-case-carousel">
+                <div class="swiper product-case-swiper">
+                    <div class="swiper-wrapper">
+                        <foreach name="case_list" item="vo">
+                            <div class="swiper-slide case-item" title="{$vo.post_title}">
+                                <a href="{:cmf_url('portal/index/industries_info',array('id'=>$vo.id))}">
+                                    <div class="case-item-img">
+                                        <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}">
+                                    </div>
+                                    <div class="case-item-title">{$vo.post_title}</div>
+                                    <div class="case-item-desc">{$vo.post_excerpt}</div>
+                                </a>
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+                <div class="product-case-button-prev"></div>
+                <div class="product-case-button-next"></div>
+                <div class="product-case-pagination"></div>
+            </div>
+        </div>
+    </notempty>
+
+    <if condition="$is_category_page">
+        <notempty name="category_faq.faq">
+            <php>
+                $categoryFaqTitle = !empty($category_faq['faq_title']) ? $category_faq['faq_title'] : 'FAQ';
+                $categoryFaqContactLink = !empty($category_faq['faq_contact_btn_link']) ? $category_faq['faq_contact_btn_link'] : cmf_url('portal/index/quote');
+                $categoryFaqContactTitle = !empty($category_faq['faq_contact_title']) ? $category_faq['faq_contact_title'] : 'Can not Find Your Question?';
+                $categoryFaqContactDesc = !empty($category_faq['faq_contact_desc']) ? $category_faq['faq_contact_desc'] : 'If you can not find the answer, contact us and let us know how we can help you.';
+                $categoryFaqContactBtnText = !empty($category_faq['faq_contact_btn_text']) ? $category_faq['faq_contact_btn_text'] : 'Contact Us';
+            </php>
+            <div class="faq reveal product-faq">
+                <div class="title">{$categoryFaqTitle}</div>
+                <div class="faq-wrap">
+                    <div class="faq-list">
+                        <foreach name="category_faq.faq" item="vo">
+                            <div class="faq-item {$key==0 ? 'active' : ''}">
+                                <div class="faq-question">
+                                    <span>{$key+1}.{$vo.question}</span>
+                                    <em>+</em>
+                                </div>
+                                <div class="faq-answer">{$vo.answer|nl2br}</div>
+                            </div>
+                        </foreach>
+                    </div>
+                    <div class="faq-contact">
+                        <div class="faq-contact-icon">?</div>
+                        <div class="faq-contact-title">{$categoryFaqContactTitle}</div>
+                        <div class="faq-contact-desc">{$categoryFaqContactDesc}</div>
+                        <a class="faq-contact-btn" href="{$categoryFaqContactLink}">{$categoryFaqContactBtnText}</a>
+                    </div>
+                </div>
+            </div>
+        </notempty>
+    </if>
+
+    <section class="product-collect-section reveal">
+        <div class="home-collect">
+            <div class="home-collect-container">
+                <div class="home-collect-left">
+                    <div class="quote-intro">
+                        <h2 class="intro-title">Need a Quick Quote? Help Us Serve You Better!</h2>
+                        <p class="intro-subtitle">To ensure we provide the most accurate solution, please share:</p>
+                        <ul class="intro-list">
+                            <li>
+                                <strong>1. Application:</strong> What will the crane be used for? 
+                            </li>
+                            <li>
+                                <strong>2. Key Specs:</strong> Lifting capacity (ton), span (m), and lifting height (m) required.
+                            </li>
+                            <li>
+                                <strong>3. Project Details:</strong> Site conditions (indoor/outdoor), budget range, and timeline.
+                            </li>
+                        </ul>
+                        <div class="intro-footer">
+                            Our team will recommend the most suitable and cost-effective solution for your project.
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="home-collect-form-section">
+                    <h2 class="form-title">Customize Your Lifting Solutions</h2>
+                    <div class="home-collect-form">
+                        <div class="home-collect-field">
+                            <label>Name</label>
+                            <input type="text" class="home-collect-name" placeholder="Name">
+                        </div>
+                        <div class="home-collect-field">
+                            <label>Email</label>
+                            <input type="text" class="home-collect-email" placeholder="Email">
+                        </div>
+                        <div class="home-collect-field full-width">
+                            <label>Phone / Whatsapp</label>
+                            <input type="text" class="home-collect-phone" placeholder="Phone / Whatsapp">
+                        </div>
+                        <div class="home-collect-field full-width">
+                            <label>Message</label>
+                            <textarea class="home-collect-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                        </div>
+                        <div class="home-collect-submit">SEND MESSAGE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- old -->

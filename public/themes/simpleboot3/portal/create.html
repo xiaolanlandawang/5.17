@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/service.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+
+<div class="content">
+    <foreach name="about_site.create" item="vo">
+        <div class="service-content clearfix">
+            <eq name="$key%2" value="1">
+                <div class="service-content-left">
+                    <img loading="lazy" src="{:cmf_get_image_url($vo.create_image)}"
+                    alt="{$vo.create_name}">
+                </div>
+                <div class="service-content-right">
+                    <div class="service-content-title">
+                        {$vo.create_name}
+                    </div>
+                    <div class="service-content-text">
+                        {$vo.create_desc|htmlspecialchars_decode}
+                    </div>
+                </div>
+                <else/>
+                <div class="service-content-left">
+                    <div class="service-content-title">
+                        {$vo.create_name}
+                    </div>
+                    <div class="service-content-text">
+                        {$vo.create_desc|htmlspecialchars_decode}
+                    </div>
+                </div>
+                <div class="service-content-right">
+                    <img loading="lazy" src="{:cmf_get_image_url($vo.create_image)}"
+                         alt="{$vo.create_name}">
+                </div>
+            </eq>
+
+        </div>
+    </foreach>
+
+</div>
+
+
+<include file="public@foot"/>
+
+</body>
+</html>

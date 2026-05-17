@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/product-info.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product-info.js"></script>
+</head>
+<body>
+<div class="main">
+    <include file="public@nav"/>
+
+    <include file="public@banner"/>
+
+    <div class="main-content">
+
+        <div class="product-info clearfix">
+            <!-- title -->
+            <div class="product-title">{$product.title}</div>
+            <!-- photos -->
+            <div class="product-photos">
+                <div class="swiper mySwiper2">
+                    <div class="swiper-wrapper main-image">
+                        <foreach name="product.photos" item="vo">
+                            <div class="swiper-slide">
+                                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}"/>
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper thumb-image">
+                        <foreach name="product.photos" item="vo">
+                            <div class="swiper-slide">
+                                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}"/>
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+
+                <script>
+                    var swiper = new Swiper(".mySwiper", {
+                        spaceBetween: 10,
+                        slidesPerView: 4,
+                        watchSlidesProgress: true,
+                    });
+                    var swiper2 = new Swiper(".mySwiper2", {
+                        spaceBetween: 10,
+                        thumbs: {
+                            swiper: swiper,
+                        },
+                    });
+                </script>
+            </div>
+
+            <div class="info_middle_box">
+                <notempty name="product.custom_field.input">
+                    <foreach name="product.custom_field.input" item="vo" key="key">
+                        <notempty name="product[$key]">
+                            <div class="info_middle_line"></div>
+                            <div class="info_middle_item">
+                                <div class="item_title">{$vo}:</div>
+                                <div class="item_content">{$product[$key]}</div>
+                            </div>
+                        </notempty>
+                    </foreach>
+                    <else/>
+                    <notempty name="product.lifting_capacity">
+                        <div class="info_middle_line"></div>
+                        <div class="info_middle_item">
+                            <div class="item_title">Capacity:</div>
+                            <div class="item_content">{$product.lifting_capacity}</div>
+                        </div>
+                    </notempty>
+                    <notempty name="product.lifting_height">
+                        <div class="info_middle_line"></div>
+                        <div class="info_middle_item">
+                            <div class="item_title">Lifting Height:</div>
+                            <div class="item_content">{$product.lifting_height}</div>
+                        </div>
+                    </notempty>
+                    <notempty name="product.span">
+                        <div class="info_middle_line"></div>
+                        <div class="info_middle_item">
+                            <div class="item_title">Span:</div>
+                            <div class="item_content">{$product.span}</div>
+                        </div>
+                    </notempty>
+                    <notempty name="product.operating_voltage">
+                        <div class="info_middle_line"></div>
+                        <div class="info_middle_item">
+                            <div class="item_title">Voltage/Hertz:</div>
+                            <div class="item_content">{$product.operating_voltage}</div>
+                        </div>
+                    </notempty>
+                    <notempty name="product.job_level">
+                        <div class="info_middle_line"></div>
+                        <div class="info_middle_item">
+                            <div class="item_title">Working Class:</div>
+                            <div class="item_content">{$product.job_level}</div>
+                        </div>
+                    </notempty>
+                </notempty>
+
+                <notempty name="product.parameter">
+                    <foreach name="product.parameter" item="vo">
+                        <div class="info_middle_line"></div>
+                        <div class="info_middle_item">
+                            <div class="item_title">{$vo.parameter_name}:</div>
+                            <div class="item_content">{$vo.parameter_val}</div>
+                        </div>
+                    </foreach>
+                </notempty>
+
+                <div class="info_middle_line"></div>
+                <div class="info_middle_apply">
+                    <span>Apply:</span> {$product.industry}
+                </div>
+                <notempty name="product.authentication_mark">
+                    <div class="info_middle_mark">
+                        <span class="info_middle_mark_title">
+                            Authentication mark:
+                        </span>
+                        <foreach name="product.authentication_mark" item="vo">
+                            <div class="info_middle_mark_img">
+                                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+                            </div>
+                        </foreach>
+                    </div>
+                </notempty>
+                <div class="info_right_btn info_right_submit" id="inquiry">SUBMIT</div>
+            </div>
+
+
+            <!-- info -->
+            <div class="info_content">
+                <ul class="info_content_title clearfix">
+                    <notempty name="product.custom_field.content">
+                        <foreach name="product.custom_field.content" item="vo" key="key">
+                            <notempty name="product[$key]">
+                                <li class="info_content_item" data-target="{$key}">
+                                    {$vo}
+                                </li>
+                            </notempty>
+                        </foreach>
+                        <else/>
+                        <notempty name="product.overview">
+                            <li class="info_content_item" data-target="overview">Product Overview</li>
+                        </notempty>
+                        <notempty name="product.scenario">
+                            <li class="info_content_item" data-target="scenario">Application Scenario</li>
+                        </notempty>
+                        <notempty name="product.certificate">
+                            <li class="info_content_item" data-target="certificate">Certificate</li>
+                        </notempty>
+                        <notempty name="product.features">
+                            <li class="info_content_item" data-target="features">Features</li>
+                        </notempty>
+                        <notempty name="product.customized">
+                            <li class="info_content_item" data-target="customized">Customized</li>
+                        </notempty>
+                    </notempty>
+                    <notempty name="product.custom_content">
+                        <foreach name="product.custom_content" item="vo">
+                            <div class="info_content_item" data-target="{:str_replace(' ', '', $vo['param_content_name'])}">{$vo.param_content_name}</div>
+                        </foreach>
+                    </notempty>
+                </ul>
+                <div class="info_content_content">
+                    <notempty name="product.custom_field.content">
+                        <foreach name="product.custom_field.content" item="vo" key="key">
+                            <notempty name="product[$key]">
+                                <eq name="key" value="certificate">
+                                    <div class="info_content_content_item" id="{$key}">
+                                        <div class="info_content_content_item-title">{$vo}</div>
+                                        <ul class="info_content_content_certificate">
+                                            <foreach name="product.certificate" item="v">
+                                                <li class="info_content_content_certificate_item">
+                                                    <a href="{:cmf_get_image_url($v.url)}" target="_blank"><div class="certificate_wrap">
+                                                        <img src="{:cmf_get_image_url($v.url)}"
+                                                             alt="{$v.name}" title="{$v.name}"></div>
+                                                        <div class="info_content_content_certificate_item_title">
+                                                            {$v.name}
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </foreach>
+                                            <div class="clear_both"></div>
+                                        </ul>
+                                    </div>
+                                    <else/>
+                                    <div class="info_content_content_item" id="{$key}">
+                                        <div class="info_content_content_item-title">{$vo}</div>
+                                        {$product[$key]}
+                                    </div>
+                                </eq>
+                            </notempty>
+                        </foreach>
+                        <else/>
+                        <notempty name="product.overview">
+                            <div class="info_content_content_item" id="overview">
+                                <div class="info_content_content_item-title">Product Overview</div>
+                                {$product.overview}
+                            </div>
+                        </notempty>
+                        <notempty name="product.overview">
+                            <div class="info_content_content_item" id="scenario">
+                                <div class="info_content_content_item-title">Application Scenario</div>
+                                {$product.scenario}
+                            </div>
+                        </notempty>
+                        <notempty name="product.certificate">
+                            <div class="info_content_content_item" id="certificate">
+                                <div class="info_content_content_item-title">Certificate</div>
+                                <ul class="info_content_content_certificate">
+                                    <foreach name="product.certificate" item="vo">
+                                        <li class="info_content_content_certificate_item">
+                                            <a href="{:cmf_get_image_url($vo.url)}" target="_blank"><div class="certificate_wrap">
+                                                <img src="{:cmf_get_image_url($vo.url)}"
+                                                     alt="{$vo.name}" title="{$vo.name}"></div>
+                                                <div class="info_content_content_certificate_item_title">
+                                                    {$vo.name}
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </foreach>
+                                    <div class="clear_both"></div>
+                                </ul>
+                            </div>
+                        </notempty>
+                        <notempty name="product.features">
+                            <div class="info_content_content_item" id="features">
+                                <div class="info_content_content_item-title">Features</div>
+                                {$product.features}
+                            </div>
+                        </notempty>
+                        <notempty name="product.customized">
+                            <div class="info_content_content_item" id="customized">
+                                <div class="info_content_content_item-title">Customized</div>
+                                {$product.customized}
+                            </div>
+                        </notempty>
+                    </notempty>
+                    <notempty name="product.custom_content">
+                        <foreach name="product.custom_content" item="vo">
+                            <div class="info_content_content_item" id="{:str_replace(' ', '', $vo['param_content_name'])}">
+                                <div class="info_content_content_item-title">{$vo.param_content_name}</div>
+                                {$vo.param_content_val}
+                            </div>
+                        </foreach>
+                    </notempty>
+                </div>
+            </div>
+
+
+
+
+            <!-- PRODUCT RECOMMENDATION -->
+            <notempty name="recommended_list">
+                <div class="related_products clearfix">
+                    <div class="content-title">
+                        HOT PRODUCTS
+                    </div>
+                    <div class="swiper product-content">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <ul class="product-content-ul">
+                                    <foreach name="recommended_list" item="vo" length="4">
+                                        <li class="product-content-li">
+                                            <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                                                <div class="product-content-li-img">
+                                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="product">
+                                                </div>
+                                                <div class="product-content-li-title">{$vo.title}</div>
+                                            </a>
+                                            <div class="product_list_item_btn">
+                                                <div class="product_list_item_btn_submit" id="inquiry1">CONSULT</div>
+                                            </div>
+                                        </li>
+                                    </foreach>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="product-line"></div>
+                    <script>
+                        var mySwiper = new Swiper('.product-content', {
+                            pagination: {
+                                el: '.product-line',
+                            },
+                        })
+                    </script>
+                </div>
+            </notempty>
+
+        </div>
+
+    </div>
+
+    <include file="public@foot"/>
+
+</div>
+
+</body>
+</html>

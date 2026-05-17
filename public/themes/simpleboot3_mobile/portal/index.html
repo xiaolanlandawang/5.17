@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{$site_info.site_name|default=''}</title>
+  <meta name="keywords" content="{$site_info.site_name|default=''}">
+  <meta name="description" content="{$site_info.site_name|default=''}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <include file="public@head"/>
+  <link href="__TMPL__/public/assets/css/index.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="__TMPL__/public/assets/js/index.js" defer></script>
+</head>
+<body>
+<div class="main">
+  <include file="public@nav"/>
+  <!--BANNER START-->
+  <div class="banner">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <foreach name="slides" item="vo">
+          <div class="swiper-slide">
+            <img src="{:cmf_get_image_url($vo['image'])}" class="d-block w-100" alt="{$vo.title}" fetchpriority="{$key==0 ? 'high' : 'auto'}" loading="{$key==0 ? 'eager' : 'lazy'}" decoding="async">
+            <div class="swiper-slide-title">{$vo.content}</div>
+          </div>
+        </foreach>
+      </div>
+      <!-- 鍒嗛〉鍣ㄥ鍣?-->
+      <div class="swiper-pagination swiper-pagination-bullets"></div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.swiper', {
+          autoplay: true,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function (index, className) {
+              var index_text = index + 1;
+              if (index <= 8) {
+                index_text = '0' + index_text;
+              }
+              return '<span class="' + className + '">' + index_text + '</span>';
+            },
+          },
+        });
+      });
+    </script>
+  </div>
+  <!--BANNER END-->
+
+  <!--PRODUCTS START-->
+  <div class="hot-products">
+    <div class="hot-products-title">HOT PRODUCTS</div>
+    <div class="hot-products-desc">{$index_site.products_description}</div>
+    <div class="product-category">
+      <foreach name="hot_products" item="vo">
+        <div class="product-category-item {$key==0 ? 'active' : ''}">{$vo.name}</div>
+      </foreach>
+    </div>
+    <div class="products">
+      <foreach name="hot_products" item="vo">
+        <div class="product-list {$key==0 ? 'active' : ''}">
+          <foreach name="vo.list" item="v" key="k">
+            <div class="product-item">
+              <a href="{:cmf_url('portal/index/product_info', ['id' => $v['id']])}">
+                <div class="product-img">
+                  <img loading="lazy" decoding="async" src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.title}">
+                </div>
+                <div class="product-title">{$v.title}</div>
+              </a>
+            </div>
+          </foreach>
+        </div>
+      </foreach>
+    </div>
+  </div>
+  <!--PRODUCTS END-->
+
+  <!--ABOUT US START-->
+  <div class="about">
+    <div class="about-title">ABOUT OUR COMPANY</div>
+    <div class="about-desc">{$index_site.about_description}</div>
+    <div class="about-content">
+      <ul>
+        <foreach name="index_site.engineering" item="vo">
+          <li class="about-content-item">
+            <p class="about-content-num">{$vo.engineering_num}</p>
+            <p class="about-content-title">{$vo.engineering_name}</p>
+            <p class="about-content-desc">{$vo.engineering_desc}</p>
+            <lt name="key" value=":count($index_site['engineering'])-1">
+              <div class="about-content-line"></div>
+            </lt>
+          </li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="about-img">
+      <img loading="lazy" decoding="async" src="{:cmf_get_image_url($index_site.about_img)}" alt="{$site_info.site_name}">
+    </div>
+  </div>
+  <!--ABOUT US END-->
+
+
+  <!--CHOOSE START-->
+  <div class="choose-warp">
+    <div class="choose">
+      <div class="choose-title">WHY CHOOSE US</div>
+      <div class="choose-desc">{$index_site.choose_description}</div>
+      <ul class="choose-list">
+        <foreach name="index_site.choose" item="vo">
+          <li class="choose-item">
+            <div class="choose-item-icon">
+              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.choose_image)}" alt="choose" data-default_img="{:cmf_get_image_url($vo.choose_image)}" data-active_img="{:cmf_get_image_url($vo.choose_image_active)}">
+            </div>
+            <div class="choose-item-title">{$vo.choose_name}</div>
+            <div class="choose-item-desc">{$vo.choose_desc}</div>
+          </li>
+        </foreach>
+      </ul>
+    </div>
+  </div>
+  <!--CHOOSE END-->
+
+
+  <div class="news">
+    <div class="title">NEWS CENTER</div>
+    <div class="news-list">
+      <foreach name="news_list" item="vo">
+        <div class="news-item" title="{$vo.title}">
+          <a href="{:cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id']))}">
+            <div class="news-item-img">
+              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
+            </div>
+            <div class="news-item-title">{$vo.post_title}</div>
+            <div class="news-item-desc">{$vo.post_excerpt}</div>
+          </a>
+        </div>
+      </foreach>
+    </div>
+  </div>
+
+  <include file="public@foot"/>
+
+</div>
+</body>
+</html>
+
+
+
+
+
+
+

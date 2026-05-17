@@ -1,0 +1,365 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .btn-cancel-thumbnail {
+        margin-top: 5px;
+    }
+
+    #photos, #files {
+        margin-bottom: 0;
+    }
+</style>
+<script type="text/html" id="photos-item-tpl">
+    <li id="saved-image{id}">
+        <input id="photo-{id}" type="hidden" name="photo_urls[]" value="{filepath}">
+        <input class="form-control" id="photo-{id}-name" type="text" name="photo_names[]" value="{name}"
+               style="width: 200px;" title="图片名称">
+        <img id="photo-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#photo-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-image{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-image{id}').before($('#saved-image{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+<script type="text/html" id="cert-item-tpl">
+    <li id="saved-cert{id}">
+        <input id="cert-{id}" type="hidden" name="cert_urls[]" value="{filepath}">
+        <input class="form-control" id="cert-{id}-name" type="text" name="cert_names[]" value="{name}"
+               style="width: 200px;" title="图片名称">
+        <img id="cert-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#cert-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-cert{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-cert{id}').before($('#saved-cert{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab">公司介绍</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('About/sitePost')}"
+          method="post">
+        <div class="tabbable">
+            <div class="tab-content">
+                <div class="form-group">
+                    <label for="input-introduction" class="col-sm-2 control-label">公司简介</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-introduction" name="about[introduction]" style="height: 100px;"
+                                  placeholder="请填写描述">{$site_info.introduction|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">公司简介图片</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="hidden" name="about[left_image]" id="left_image"
+                               value="{$site_info.left_image|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#left_image');">
+                            <if condition="empty($site_info.left_image)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                     id="left_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                                <else/>
+                                <img src="{:cmf_get_image_preview_url($site_info.left_image)}"
+                                     id="left_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <input type="button" class="btn btn-sm" onclick="$('#left_image-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#left_image').val('');return false;"
+                               value="取消图片">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-do_desc" class="col-sm-2 control-label">公司介绍</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-do_desc" name="about[do_desc]" style="height: 100px;"
+                                  placeholder="请填写描述">{$site_info.do_desc|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-service_desc" class="col-sm-2 control-label">客户服务描述</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-service_desc" name="about[service_desc]" style="height: 100px;"
+                                  placeholder="请填写描述">{$site_info.service_desc|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">客户服务背景图片</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="hidden" name="about[service_bg]" id="service_bg"
+                               value="{$site_info.service_bg|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#service_bg');">
+                            <if condition="empty($site_info.service_bg)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                     id="service_bg-preview"
+                                     width="135" style="cursor: pointer"/>
+                                <else/>
+                                <img src="{:cmf_get_image_preview_url($site_info.service_bg)}"
+                                     id="service_bg-preview"
+                                     width="135" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <input type="button" class="btn btn-sm" onclick="$('#service_bg-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#service_bg').val('');return false;"
+                               value="取消图片">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-market_description" class="col-sm-2 control-label">全球市场描述</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-market_description" name="about[market_description]" style="height: 100px;"
+                                  placeholder="请填写描述">{$site_info.market_description|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">全球市场图片</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="hidden" name="about[market_image]" id="market_image"
+                               value="{$site_info.market_image|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#market_image');">
+                            <if condition="empty($site_info.market_image)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                     id="market_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                                <else/>
+                                <img src="{:cmf_get_image_preview_url($site_info.market_image)}"
+                                     id="market_image-preview"
+                                     width="135" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <input type="button" class="btn btn-sm" onclick="$('#market_image-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#market_image').val('');return false;"
+                               value="取消图片">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        全球市场设置
+                    </label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="market" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.market">
+                                <foreach name="site_info.market" item="vo">
+                                    <li id="saved-market{$key}">
+                                        标题：<input class="form-control" type="text"
+                                                        name="market_name[]"
+                                                        value="{$vo.market_name|default=''}" style="width: 200px;">
+                                        &nbsp;&nbsp;&nbsp;
+                                        描述：<input class="form-control" type="text"
+                                                        name="market_num[]"
+                                                        value="{$vo.market_num|default=''}" style="width: 500px;" >
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-danger" href="javascript:(function(){$('#saved-market{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:market_add();" class="btn btn-default">添加市场</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        优势设置
+                    </label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="advantage" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.advantage">
+                                <foreach name="site_info.advantage" item="vo">
+                                    <li id="saved-advantage{$key}">
+                                        名称：<input class="form-control" type="text"
+                                                    name="advantage_name[]"
+                                                    value="{$vo.advantage_name|default=''}" style="width: 400px;">
+                                        &nbsp;&nbsp;&nbsp;
+                                        数目：<input class="form-control" type="text"
+                                                    name="advantage_num[]"
+                                                    value="{$vo.advantage_num|default=''}" style="width: 100px;" >
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-danger" href="javascript:(function(){$('#saved-advantage{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:advantage_add();" class="btn btn-default">添加优势</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">企业形象</label>
+                    <div class="col-md-6 col-sm-10">
+                        <ul id="photos" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.corporate_images">
+                                <foreach name="site_info.corporate_images" item="vo">
+                                    <php>$img_url=cmf_get_image_preview_url($vo['url']);</php>
+                                    <li id="saved-image{$key}">
+                                        <input id="photo-{$key}" type="hidden" name="photo_urls[]"
+                                               value="{$vo.url}">
+                                        <input class="form-control" id="photo-{$key}-name" type="text"
+                                               name="photo_names[]"
+                                               value="{$vo.name|default=''}" style="width: 200px;" title="图片名称">
+                                        <img id="photo-{$key}-preview"
+                                             src="{:cmf_get_image_preview_url($vo['url'])}"
+                                             style="height:34px;width: 44px;"
+                                             onclick="parent.imagePreviewDialog(this.src);">
+                                        <a class="btn btn-default"  href="javascript:uploadOneImage('图片上传','#photo-{$key}');"><i class="fa fa-upload fa-fw"></i></a>
+                                        <a class="btn btn-danger"  href="javascript:(function(){$('#saved-image{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                        <a class="btn btn-success"  href="javascript:(function(){$('#saved-image{$key}').before($('#saved-image{$key}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
+                           class="btn btn-default">选择图片</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-cert_description" class="col-sm-2 control-label">证书描述</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-cert_description" name="about[cert_description]" style="height: 100px;"
+                                  placeholder="请填写描述">{$site_info.cert_description|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">证书</label>
+                    <div class="col-md-6 col-sm-10">
+                        <ul id="cert" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.cert">
+                                <foreach name="site_info.cert" item="vo">
+                                    <php>$img_url=cmf_get_image_preview_url($vo['url']);</php>
+                                    <li id="saved-cert{$key}">
+                                        <input id="cert-{$key}" type="hidden" name="cert_urls[]"
+                                               value="{$vo.url}">
+                                        <input class="form-control" id="cert-{$key}-name" type="text"
+                                               name="cert_names[]"
+                                               value="{$vo.name|default=''}" style="width: 200px;" title="图片名称">
+                                        <img id="cert-{$key}-preview"
+                                             src="{:cmf_get_image_preview_url($vo['url'])}"
+                                             style="height:34px;width: 44px;"
+                                             onclick="parent.imagePreviewDialog(this.src);">
+                                        <a class="btn btn-default"  href="javascript:uploadOneImage('图片上传','#cert-{$key}');"><i class="fa fa-upload fa-fw"></i></a>
+                                        <a class="btn btn-danger"  href="javascript:(function(){$('#saved-cert{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                        <a class="btn btn-success"  href="javascript:(function(){$('#saved-cert{$key}').before($('#saved-cert{$key}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:uploadMultiImage('图片上传','#cert','cert-item-tpl');"
+                           class="btn btn-default">选择图片</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        创新制造设置
+                    </label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="create" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.create">
+                                <foreach name="site_info.create" item="vo">
+                                    <li id="saved-create{$key}">
+                                        标题：<input class="form-control" type="text"
+                                                    name="create_name[]"
+                                                    value="{$vo.create_name|default=''}" style="width: 100px;">
+                                        &nbsp;&nbsp;&nbsp;
+                                        描述：<textarea class="form-control" type="text" name="create_desc[]" style="height: 100px;width: 400px">{$vo.create_desc|default=''}</textarea>
+                                        &nbsp;&nbsp;&nbsp;
+                                        图片：<input type="hidden" name="create_image[]" id="create_image{$key}"
+                                                    value="{$vo.create_image}">
+                                        <a href="javascript:uploadOneImage('图片上传','#create_image{$key}');">
+                                            <if condition="empty($vo.create_image)">
+                                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                                     id="createe_image{$key}-preview"
+                                                     width="130" style="cursor: pointer"/>
+                                                <else/>
+                                                <img src="{:cmf_get_image_preview_url($vo.create_image)}"
+                                                     id="create_image{$key}-preview"
+                                                     width="130" style="cursor: pointer"/>
+                                            </if>
+                                        </a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-danger" href="javascript:(function(){$('#saved-create{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:create_add();" class="btn btn-default">添加</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">
+                            {:lang('SAVE')}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+<script type="text/javascript">
+    function create_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-create'+id+'">' +
+            '标题：' +
+            '<input class="form-control" type="text" name="create_name[]" value="" style="width: 100px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：' +
+            '<textarea class="form-control" type="text" name="create_desc[]" style="height: 100px;width: 400px"></textarea>' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片：' +
+            '<input type="hidden" name="create_image[]" id="create_image'+id+'" value="">' +
+            '<a href="javascript:uploadOneImage(\'图片上传\',\'#create_image'+id+'\');">' +
+            '<img src="__TMPL__/public/assets/images/default-thumbnail.png" id="create_image'+id+'-preview" width="130" style="cursor: pointer"/>' +
+            '</a>' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' +
+            '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-create'+id+'\').remove();})();">' +
+            '<i class="fa fa-trash fa-fw"></i>' +
+            '</a>' +
+            '</li>';
+        $('#create').append(html);
+    }
+
+    function market_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-market'+id+'">' +
+            '标题：' +
+            '<input class="form-control" type="text" name="market_name[]" value="" style="width: 200px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：' +
+            '<input class="form-control" type="text" name="market_num[]" value="" style="width: 500px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' +
+            '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-market'+id+'\').remove();})();">' +
+            '<i class="fa fa-trash fa-fw"></i>' +
+            '</a>' +
+            '</li>';
+        $('#market').append(html);
+    }
+
+    function advantage_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-advantage'+id+'">' +
+            '标题：' +
+            '<input class="form-control" type="text" name="advantage_name[]" value="" style="width: 400px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：' +
+            '<input class="form-control" type="text" name="advantage_num[]" value="" style="width: 100px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' +
+            '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-advantage'+id+'\').remove();})();">' +
+            '<i class="fa fa-trash fa-fw"></i>' +
+            '</a>' +
+            '</li>';
+        $('#advantage').append(html);
+    }
+</script>
+</body>
+</html>

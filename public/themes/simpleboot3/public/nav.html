@@ -1,0 +1,120 @@
+<php>
+    $cleanNumber = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
+    if (strpos($cleanNumber, '0') === 0) {
+    $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
+    }
+</php>
+<!--NAV START-->
+<div class="header">
+    <div class="header-top">
+        <div class="header-container">
+            <div class="header-contact">
+                <div class="header-contact-item">
+                    <a href="mailto:{$site_info.email}">
+                        <img src="__TMPL__/public/assets/images/header-email.png" alt="email">
+                        E-Mail: {$site_info.email}
+                    </a>
+                </div>
+                <div class="header-contact-item">
+                    <a href="https://api.whatsapp.com/send?phone={$cleanNumber}">
+                        <img src="__TMPL__/public/assets/images/header-whatsapp.png" alt="whatsapp">
+                        WhatsApp: {$site_info.whatsapp}
+                    </a>
+                </div>
+                <div class="header-contact-item">
+                    <img src="__TMPL__/public/assets/images/header-wechat.png" alt="wechat">
+                    Wechat: {$site_info.wechat}
+                </div>
+            </div>
+            <div class="header-link">
+                <div class="header-link-item">
+                    <a href="{$site_info.facebook}"><img src="__TMPL__/public/assets/images/header-facebook.png" alt="facebook"></a>
+                </div>
+                <div class="header-link-item">
+                    <a href="{$site_info.youtube}"><img src="__TMPL__/public/assets/images/header-youtube.png" alt="youtube"></a>
+                </div>
+                <div class="header-link-item">
+                    <a href="{$site_info.linkedin}"><img src="__TMPL__/public/assets/images/header-linkedin.png" alt="linkedin"></a>
+                </div>
+                <div class="header-link-item">
+                    <a href="{$site_info.vk}"><img src="__TMPL__/public/assets/images/header-vk.png" alt="vk"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-container">
+        <div class="header-logo">
+            <a href="/">
+                <img src="__TMPL__/public/assets/images/logo.svg" alt="{$site_info.site_name|default=''}">
+            </a>
+        </div>
+
+        <ul class="header-nav">
+            <li class="nav-item">
+                <a class="nav-title" href="/">Home</a>
+            </li>
+            <li class="nav-item nav-item-about">
+                <a class="nav-title" href="{:cmf_url('portal/index/about')}">About Us</a>
+                <div class="nav-sub about-nav">
+                    <div class="nav-sub-item">
+                        <a href="{:cmf_url('portal/index/about')}">About Weihua</a>
+                    </div>
+                    <div class="nav-sub-item">
+                        <a href="{:cmf_url('portal/index/cert')}">Certificates</a>
+                    </div>
+                    <div class="nav-sub-item">
+                        <a href="{:cmf_url('portal/index/create')}">Innovation&Creation</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item nav-item-product">
+                <a class="nav-title" href="{:cmf_url('portal/index/product')}">Products</a>
+                <div class="nav-sub product-nav">
+                    <foreach name="category_list" item="vo">
+                        <div class="nav-sub-item">
+                            <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}">
+                                {$vo['name']}
+                            </a>
+                        </div>
+                    </foreach>
+                </div>
+            </li>
+            <li class="nav-item nav-item-about">
+                <a class="nav-title" href="{:cmf_url('portal/index/service')}">Service</a>
+                <div class="nav-sub about-nav">
+                    <div class="nav-sub-item">
+                        <a href="{:cmf_url('portal/index/service')}">Global Market</a>
+                    </div>
+                    <div class="nav-sub-item">
+                        <a href="{:cmf_url('portal/index/excellent_service')}">Excellent Service</a>
+                    </div>
+                    <div class="nav-sub-item">
+                        <a href="{:cmf_url('portal/index/download')}">Download</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item nav-item-about">
+                <a class="nav-title" href="{:cmf_url('portal/index/industries')}">Case</a>
+            </li>
+            <li class="nav-item nav-item-about">
+                <a class="nav-title" href="{:cmf_url('portal/index/news')}">News Center</a>
+                <div class="nav-sub about-nav">
+                    <foreach name="news_category" item="vo">
+                        <div class="nav-sub-item">
+                            <a href="{:cmf_url('portal/index/news',array('id'=>$vo['id']))}">
+                                {$vo['name']}
+                            </a>
+                        </div>
+                    </foreach>
+                </div>
+            </li>
+            
+            <li class="nav-item nav-item-contact">
+                <a class="nav-title" href="{:cmf_url('portal/index/quote')}">Get A Quote</a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+<!--NAV END-->
+

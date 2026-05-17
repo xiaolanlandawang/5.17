@@ -1,0 +1,311 @@
+<!--FOOT START-->
+<div class="footer">
+    <div class="footer-logo">
+        <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/logo-white.svg" alt="logo">
+    </div>
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <div class="footer-contact clearfix">
+            <div class="footer-contact-item">
+                <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-email.webp" alt="email">
+                <p class="footer-contact-item-content">
+                    <a onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>
+                </p>
+            </div>
+            <div class="footer-contact-item">
+                <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-location.webp" alt="location">
+                <p class="footer-contact-item-content">{$site_info.address}</p>
+            </div>
+            <php>
+                $cleanNumber = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
+                if (strpos($cleanNumber, '0') === 0) {
+                $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
+                }
+            </php>
+            <if condition="!empty($site_info.whatsapp)">
+                <div class="footer-contact-item">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/quote-whatsapp.webp" alt="whatsapp">
+                    <p class="footer-contact-item-content">
+                        <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone={$cleanNumber}');"
+                            target="_blank">{$site_info.whatsapp}</a>
+                    </p>
+                </div>
+            </if>
+            <if condition="!empty($site_info.sale_tel)">
+                <div class="footer-contact-item">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-phone.webp" alt="phone">
+                    <p class="footer-contact-item-content">
+                        <a onclick="gtag_report_conversion('tel:{$site_info.sale_tel}');">{$site_info.sale_tel}</a>
+                    </p>
+                </div>
+            </if>
+            <if condition="!empty($site_info.wechat)">
+                <div class="footer-contact-item">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-wechat.webp" alt="wechat">
+                    <p class="footer-contact-item-content">
+                        <a target="_blank">{$site_info.wechat}</a>
+                    </p>
+                </div>
+            </if>
+            <div class="footer-contact-social">
+                <a href="{$site_info.linkedin|default='javascript:;'}"><img loading="lazy" decoding="async"
+                        src="__TMPL__/public/assets/images/linkedin.webp" alt="linkedin"></a>
+                <a href="{$site_info.facebook|default='javascript:;'}"><img loading="lazy" decoding="async"
+                        src="__TMPL__/public/assets/images/facebook.webp" alt="facebook"></a>
+                <a href="{$site_info.youtube|default='javascript:;'}"><img loading="lazy" decoding="async"
+                        src="__TMPL__/public/assets/images/youtube.webp" alt="youtube"></a>
+            </div>
+        </div>
+
+        <div class="footer-feedback">
+            <div class="footer-feedback-item">
+                <label>NAME:</label>
+                <input type="text" name="footer-name" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <div class="footer-feedback-item">
+                <label>EMAIL:</label>
+                <input type="text" name="footer-email" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <div class="footer-feedback-item">
+                <label>PHONE:</label>
+                <input type="text" class="footer-phone" name="footer-phone" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <div class="footer-feedback-item">
+                <label>MESSAGE:</label>
+                <input type="text" name="footer-message" value="" placeholder="Please Enter">
+            </div>
+            <div class="footer-feedback-line"></div>
+            <button class="footer-feedback-btn">Submit Your Request</button>
+        </div>
+        <div class="footer-bottom"
+            style="text-align: center; color: rgba(255,255,255,0.6); font-size: 1.2rem; margin-top: 2rem; padding-bottom: 2rem;">
+            Copyright &copy; Henan Weihua Heavy Machinery Co.,LTD. All Rights Reserved.
+        </div>
+    </div>
+    <div class="right_fix">
+        <div class="right_fix_connect">
+            <div class="right_fix_box right_fix_email">
+                <a href="mailto:{$site_info.email}">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-email-mobile.webp" alt="email" title="email">
+                    <p class="right_fix_box_title">Send Email</p>
+                </a>
+            </div>
+            <div class="right_fix_box right_fix_whatsapp">
+                <a href="https://api.whatsapp.com/send?phone={$cleanNumber}">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-whatsapp-mobile.webp" alt="whatsapp" title="whatsapp">
+                    <p class="right_fix_box_title">WhatsApp</p>
+                </a>
+            </div>
+            <div class="right_fix_box right_fix_form">
+                <a href="javascript:;">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-form-mobile.webp" alt="form" title="form">
+                    <p class="right_fix_box_title">Get A Quote</p>
+                </a>
+            </div>
+            <div class="right_fix_box right_fix_wechat">
+                <a href="tel:{$site_info.sale_tel}">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-tel-mobile.webp" alt="sale_tel" title="sale_tel">
+                    <p class="right_fix_box_title">Sale Tel</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FOOT END-->
+
+<div class="popover_wrap" style="display: none;">
+    <div class="popover_container">
+        <div class=popover_close>
+            <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/close.png" alt="">
+        </div>
+        <div class="popover_content">
+            <div class="popover_title">
+                <h2>Develop your lifting solution</h2>
+                <p class="popover_title_description">Contact us today by email at :<a
+                        onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>, or fill
+                    out the form below.</p>
+            </div>
+            <div class="popover_form">
+                <form method="post">
+                    <div class="popover_form_name">
+                        <input id="popover-name" type="text" name="name" placeholder="Name:">
+                    </div>
+                    <div class="popover_form_phone">
+                        <input id="popover-phone" type="text" name="phone" placeholder="Phone / WhatsApp:">
+                    </div>
+                    <div class="popover_form_email">
+                        <input id="popover-email" type="text" name="email" placeholder="E-mail:">
+                    </div>
+                    <div class="popover_form_content">
+                        <textarea id="popover-content" name="content" placeholder="Message:"></textarea>
+                    </div>
+                    <div class="popover_form_submit">
+                        <input name="product_id" id="product-id" type="hidden" value="{$product.id|default=''}">
+                        <input name="file" id="file" type="hidden" value="">
+                        <input type="hidden" name="feedback_type" id="feedback_type" value="2">
+                        <input type="hidden" id="file_url" value="">
+                        <button id="popover-submit" type="button">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<notempty name="site_info.salesiq">
+    {:htmlspecialchars_decode($site_info.salesiq)}
+</notempty>
+
+<notempty name="site_info.google_tag_body">
+    {:htmlspecialchars_decode($site_info.google_tag_body)}
+</notempty>
+
+<script>
+    $(document).ready(function () {
+        var itiReady = false;
+        var itiLoading = false;
+        var itiPromise = null;
+
+        function appendStylesOnce() {
+            if (document.getElementById('intl-tel-inline-style')) {
+                return;
+            }
+            var style = document.createElement('style');
+            style.id = 'intl-tel-inline-style';
+            style.innerHTML = `
+                .iti {
+                    width: 100%;
+                    display: block !important;
+                    margin-bottom: 10px;
+                }
+                .iti__country-list {
+                    z-index: 9999;
+                    color: #333;
+                    text-align: left;
+                }
+                .iti input {
+                    padding-left: 52px !important;
+                    width: 100% !important;
+                }
+                .iti__selected-flag {
+                    padding: 0 8px 0 12px !important;
+                    background: transparent !important;
+                }
+                .iti__flag-container {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+                .iti--container {
+                    z-index: 100010 !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function loadCss(href) {
+            return new Promise(function (resolve) {
+                var existed = document.querySelector('link[href="' + href + '"]');
+                if (existed) {
+                    resolve();
+                    return;
+                }
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = href;
+                link.onload = resolve;
+                link.onerror = resolve;
+                document.head.appendChild(link);
+            });
+        }
+
+        function loadJs(src) {
+            return new Promise(function (resolve, reject) {
+                var existed = document.querySelector('script[src="' + src + '"]');
+                if (existed) {
+                    if (window.intlTelInput) {
+                        resolve();
+                    } else {
+                        existed.addEventListener('load', function () { resolve(); }, { once: true });
+                        existed.addEventListener('error', function () { reject(new Error('load failed')); }, { once: true });
+                    }
+                    return;
+                }
+                var script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = resolve;
+                script.onerror = function () { reject(new Error('load failed')); };
+                document.body.appendChild(script);
+            });
+        }
+
+        function initIntlTelInputs() {
+            if (!window.intlTelInput) {
+                return;
+            }
+            var phoneInputs = document.querySelectorAll('.quote-phone, .footer-phone, #popover-phone');
+            phoneInputs.forEach(function (input) {
+                if (input._iti) {
+                    return;
+                }
+                var iti = window.intlTelInput(input, {
+                    initialCountry: "auto",
+                    dropdownContainer: document.body,
+                    useFullscreenPopup: false,
+                    geoIpLookup: function (callback) {
+                        fetch("https://ipapi.co/json")
+                            .then(function (res) { return res.json(); })
+                            .then(function (data) { callback(data.country_code || "us"); })
+                            .catch(function () { callback("us"); });
+                    },
+                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/utils.js"
+                });
+                input._iti = iti;
+            });
+            itiReady = true;
+        }
+
+        function ensureIntlTelInputLoaded() {
+            if (itiReady) {
+                return Promise.resolve();
+            }
+            if (itiLoading && itiPromise) {
+                return itiPromise;
+            }
+
+            itiLoading = true;
+            itiPromise = Promise.all([
+                loadCss("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intlTelInput.css"),
+                loadJs("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intlTelInput.min.js")
+            ]).then(function () {
+                appendStylesOnce();
+                initIntlTelInputs();
+            }).catch(function () {
+                // Keep form available even when CDN/network fails
+            }).finally(function () {
+                itiLoading = false;
+            });
+
+            return itiPromise;
+        }
+
+        $(document).on('focus click', '.quote-phone, .footer-phone, #popover-phone, .right_fix_form, .footer-feedback-btn, #popover-submit', function () {
+            ensureIntlTelInputLoaded();
+        });
+
+        // Idle prefetch after first render to reduce wait on first interaction
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(function () {
+                ensureIntlTelInputLoaded();
+            }, { timeout: 2500 });
+        } else {
+            setTimeout(function () {
+                ensureIntlTelInputLoaded();
+            }, 2500);
+        }
+    });
+</script>

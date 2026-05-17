@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_seo_title|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}">
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/industries.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+<div class="main-content">
+    <div class="title">CASE</div>
+    <div class="case-list">
+        <foreach name="list" item="vo">
+            <div class="case-item" title="{$vo.post_title}">
+                <a href="{:cmf_url('portal/index/industries_info',array('id'=>$vo.id))}">
+                    <div class="case-item-img">
+                        <img src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}">
+                    </div>
+                    <div class="case-item-title">{$vo.post_title}</div>
+                    <div class="case-item-desc">{$vo.post_excerpt}</div>
+                </a>
+            </div>
+        </foreach>
+    </div>
+    <ul class="pagination">{$page}</ul>
+    <div class="case-bottom-cta reveal">
+        <div class="case-bottom-cta-container">
+            <h2 class="case-bottom-cta-title">Didn't Find Your Industry? Custom Solutions Await!</h2>
+            <p class="case-bottom-cta-desc">
+                If your specific industry is not listed above, or you have unique lifting requirements, please don't hesitate to reach out. Our engineering team at Weihua Crane specializes in designing bespoke lifting solutions tailored to your exact facility needs. Let us help you elevate your operations.
+            </p>
+            <button class="case-bottom-cta-btn open-popover-btn">
+                Talk to Our Engineers &rarr;
+            </button>
+        </div>
+    </div>
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>

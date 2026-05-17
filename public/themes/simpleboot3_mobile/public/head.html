@@ -1,0 +1,30 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<script>
+    // Immediate font-size calculation to prevent layout shifts
+    (function() {
+        var width = window.innerWidth;
+        document.documentElement.style.fontSize = (width / 37.5) + 'px';
+    })();
+</script>
+<link rel="shortcut icon" type="image/x-icon" href="__TMPL__/public/assets/images/logo.ico">
+<link href="__TMPL__/public/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="__TMPL__/public/assets/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
+<link href="__TMPL__/public/assets/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__TMPL__/public/assets/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="__TMPL__/public/assets/js/bootstrap.min.js" defer></script>
+<script type="text/javascript" src="__TMPL__/public/assets/js/swiper-bundle.min.js" defer></script>
+<script type="text/javascript" src="__TMPL__/public/assets/js/common.js" defer></script>
+
+<notempty name="site_info.google_analytics">
+    {:htmlspecialchars_decode($site_info.google_analytics)}
+</notempty>
+
+
+<style>
+    #zsiq_chat_wrap{
+        max-height: 550px !important;
+    }
+    .zsiq-float{
+        bottom: 80px!important;
+    }
+</style>

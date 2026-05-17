@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_name|default=''}">
+    <meta name="description" content="{$site_info.site_name|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/quote.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<include file="public@banner"/>
+
+<div class="main-content">
+    <div class="contact-container">
+        <div class="contact-left">
+            <div class="quote-intro">
+                <h2 class="intro-title">Need a Quick Quote? Help Us Serve You Better!</h2>
+                <p class="intro-subtitle">To ensure we provide the most accurate solution, please share:</p>
+                <ul class="intro-list">
+                    <li>
+                        <strong>1. Application:</strong> What will the crane be used for? 
+                        <span>(e.g., warehouse logistics, port container handling)</span>
+                    </li>
+                    <li>
+                        <strong>2. Key Specs:</strong> Lifting capacity (ton), span (m), and lifting height (m) required.
+                    </li>
+                    <li>
+                        <strong>3. Project Details:</strong> Site conditions (indoor/outdoor), budget range, and timeline.
+                    </li>
+                </ul>
+                <div class="intro-footer">
+                    Our team will recommend the most suitable and cost-effective solution for your project.
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-form-section">
+            <h2 class="form-title">Customize Your Lifting Solutions</h2>
+            <div class="quote">
+                <div class="quote-field">
+                    <label>Name</label>
+                    <input type="text" name="name" class="quote-name" placeholder="Name">
+                </div>
+                <div class="quote-field">
+                    <label>Email</label>
+                    <input type="text" name="email" class="quote-email" placeholder="Email">
+                </div>
+                <div class="quote-field full-width">
+                    <label>Phone/Whatsapp</label>
+                    <input type="text" name="phone" class="quote-phone" placeholder="Phone/Whatsapp">
+                </div>
+                <div class="quote-field full-width">
+                    <label>Message</label>
+                    <textarea name="message" class="quote-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                </div>
+                <div class="quote-btn" onclick="submit()">SEND MESSAGE</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="public@foot"/>
+
+<script>
+    let quoteSubmitting = false;
+
+    function showQuoteMessage(title, message, type) {
+        if (typeof window.showFormMessage === 'function') {
+            window.showFormMessage(title, message, type);
+        } else {
+            alert(message || title);
+        }
+    }
+
+    function clearQuoteForm() {
+        $('.quote-name, .quote-email, .quote-phone, .quote-message').val('');
+    }
+
+    function getFormattedPhoneNumber($input) {
+        let rawValue = $input.val();
+        if ($input[0] && $input[0]._iti) {
+            let iti = $input[0]._iti;
+            let fullNumber = iti.getNumber();
+            if (fullNumber && fullNumber.indexOf('+') === -1) {
+                let countryData = iti.getSelectedCountryData();
+                if (countryData && countryData.dialCode) {
+                    return '+' + countryData.dialCode + ' ' + rawValue;
+                }
+            }
+            return fullNumber || rawValue;
+        }
+        return rawValue;
+    }
+
+    function submit() {
+        let name = $('.quote-name').val();// 姓名
+        let phone = getFormattedPhoneNumber($('.quote-phone'));// 手机号
+        let email = $('.quote-email').val();// 邮箱
+        let content = $('.quote-message').val();// 内容
+
+        if (quoteSubmitting) {
+            return;
+        }
+
+        let $button = $('.quote-btn');
+        let data = {
+            name: name,
+            phone: phone,
+            email: email,
+            content: content,
+            type: 2,
+        }
+        quoteSubmitting = true;
+        $button.addClass('is-loading').text('SUBMITTING...');
+        $.ajax({
+            url: '/portal/index/inquiry',
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 1) {
+                    //谷歌点击转化
+                    if (typeof gtag_report_conversion === 'function') {
+                        gtag_report_conversion();
+                    }
+                    clearQuoteForm();
+                    showQuoteMessage('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
+                } else {
+                    showQuoteMessage('Submit Failed', res.msg || 'Please try again later.', 'error');
+                }
+            },
+            error: function () {
+                showQuoteMessage('Submit Failed', 'Network error. Please try again later.', 'error');
+            },
+            complete: function () {
+                quoteSubmitting = false;
+                $button.removeClass('is-loading').text('SUBMIT');
+            }
+        })
+    }
+
+</script>
+
+</body>
+</html>
+
+
+

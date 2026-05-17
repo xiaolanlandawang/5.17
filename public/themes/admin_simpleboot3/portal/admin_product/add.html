@@ -1,0 +1,491 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+
+    .btn-cancel-thumbnail {
+        margin-top: 5px;
+    }
+
+    #photos, #files {
+        margin-bottom: 0;
+    }
+</style>
+<script type="text/html" id="photos-item-tpl">
+    <li id="saved-image{id}">
+        <input id="photo-{id}" type="hidden" name="photo_urls[]" value="{filepath}">
+        <input class="form-control" id="photo-{id}-name" type="text" name="photo_names[]" value="{name}"
+               style="width: 200px;" title="图片名称">
+        <img id="photo-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#photo-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-image{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-image{id}').before($('#saved-image{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+<script type="text/html" id="files-item-tpl">
+    <li id="saved-file{id}">
+        <input id="file-{id}" type="hidden" name="file_urls[]" value="{filepath}">
+        <input class="form-control" id="file-{id}-name" type="text" name="file_names[]" value="{name}"
+               style="width: 200px;" title="文件名称">
+        <a class="btn btn-info" id="file-{id}-preview" href="{preview_url}" target="_blank"><i class="fa fa-download fa-fw"></i></a>
+        <a class="btn btn-default" href="javascript:uploadOne('文件上传','#file-{id}','file');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-file{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-file{id}').before($('#saved-file{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+<script type="text/html" id="certificate-item-tpl">
+    <li id="saved-certificate{id}">
+        <input id="certificate-{id}" type="hidden" name="certificate_urls[]" value="{filepath}">
+        <input class="form-control" id="certificate-{id}-name" type="text" name="certificate_names[]" value=""
+               style="width: 200px;" title="图片名称">
+        <img id="certificate-{id}-preview" src="{url}" style="height:34px;width: 44px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a class="btn btn-default" href="javascript:uploadOneImage('图片上传','#certificate-{id}');"><i class="fa fa-upload fa-fw"></i></a>
+        <a class="btn btn-danger" href="javascript:(function(){$('#saved-certificate{id}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+        <a class="btn btn-success" href="javascript:(function(){$('#saved-certificate{id}').before($('#saved-certificate{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+    </li>
+</script>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminProduct/index')}">产品列表</a></li>
+        <li class="active"><a href="{:url('AdminProduct/add')}">添加产品</a></li>
+    </ul>
+    <form action="{:url('AdminProduct/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="100">分类<span class="form-required">*</span></th>
+                        <td>
+                            <select class="form-control" name="category_id" id="js-category-select" required>
+                                <option value="0">请选择分类</option>
+                                {$category_list}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>产品名称<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="title"
+                                   id="title" required value="" placeholder="请输入产品名称"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>产品别名</th>
+                        <td>
+                            <input type="text" class="form-control" id="input-alias" name="alias" placeholder="请输入别名">
+                            <p class="help-block">用于url美化</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><b>缩略图</b></th>
+                        <td>
+                            <div>
+                                <input type="hidden" name="thumbnail" id="thumbnail" value="">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                         id="thumbnail-preview"
+                                         width="135" style="cursor: pointer"/>
+                                </a>
+                                <br>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                                <p class="help-block">建议尺寸：350*350</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>相册</th>
+                        <td>
+                            <ul id="photos" class="pic-list list-unstyled form-inline"></ul>
+                            <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
+                               class="btn btn-default">选择图片</a>
+                            <p class="help-block">建议尺寸：587*587</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>认证证书</th>
+                        <td>
+                            <foreach name="authentication_mark" item="vo">
+                                <label>
+                                    <input class="js-check" type="checkbox" name="authentication_mark[]" value="{$key}">
+                                    {$vo.name}
+                                </label>
+                                <img src="{:cmf_get_image_url($vo.url)}" width="18" height="18" onclick="imagePreviewDialog(this.src);">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            </foreach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>起重量</th>
+                        <td>
+                            <input class="form-control" type="text" name="lifting_capacity" value="" placeholder="请输入起重量"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>起升高度</th>
+                        <td>
+                            <input class="form-control" type="text" name="lifting_height" value="" placeholder="请输入起升高度"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>跨度</th>
+                        <td>
+                            <input class="form-control" type="text" name="span" value="" placeholder="请输入跨度"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>电压/频率</th>
+                        <td>
+                            <input class="form-control" type="text" name="operating_voltage" value="" placeholder="请输入电压/频率"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>工作等级</th>
+                        <td>
+                            <input class="form-control" type="text" name="job_level" value="" placeholder="请输入工作等级"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>额外参数</th>
+                        <td>
+                            <ul id="parameter" class="pic-list list-unstyled form-inline"></ul>
+                            <a href="javascript:parameter_add();" class="btn btn-default">添加</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>应用行业</th>
+                        <td>
+                            <textarea class="form-control" name="industry" style="height: 50px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>产品概述</th>
+                        <td>
+                            <script type="text/plain" id="content" name="overview"></script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>应用场景</th>
+                        <td>
+                            <script type="text/plain" id="scenario_content" name="scenario"></script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>证书</th>
+                        <td>
+                            <ul id="certificate" class="pic-list list-unstyled form-inline"></ul>
+                            <a href="javascript:uploadMultiImage('图片上传','#certificate','certificate-item-tpl');"
+                               class="btn btn-default">选择图片</a>
+                            <p class="help-block">建议尺寸：338*476</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>特点特征</th>
+                        <td>
+                            <script type="text/plain" id="features_content" name="features"></script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>定制服务</th>
+                        <td>
+                            <script type="text/plain" id="customized_content" name="customized"></script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>自定义字段名</th>
+                        <td>
+                            <ul class="pic-list list-unstyled form-inline">
+                                <li id="saved-lifting_capacity">
+                                    <b>起重量</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[input][lifting_capacity]"
+                                                  value="{$product.custom_field.input.lifting_capacity|default='Capacity'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-lifting_capacity').before($('#saved-lifting_capacity').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-lifting_height">
+                                    <b>起重高度</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[input][lifting_height]"
+                                                  value="{$product.custom_field.input.lifting_height|default='Lifting Height'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-lifting_height').before($('#saved-lifting_height').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-span">
+                                    <b>跨度</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[input][span]"
+                                                  value="{$product.custom_field.input.span|default='Span'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-span').before($('#saved-span').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-operating_voltage">
+                                    <b>电压频率</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[input][operating_voltage]"
+                                                  value="{$product.custom_field.input.operating_voltage|default='Voltage/Hertz'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-operating_voltage').before($('#saved-operating_voltage').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-job_level">
+                                    <b>工作等级</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[input][job_level]"
+                                                  value="{$product.custom_field.input.job_level|default='Working Class'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-job_level').before($('#saved-job_level').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                            </ul>
+                            <hr>
+                            <ul class="pic-list list-unstyled form-inline">
+                                <li id="saved-overview">
+                                    <b>产品概述</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[content][overview]"
+                                                  value="{$product.custom_field.content.overview|default='Product Overview'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-overview').before($('#saved-overview').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-scenario">
+                                    <b>应用场景</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[content][scenario]"
+                                                  value="{$product.custom_field.content.scenario|default='Application Scenario'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-scenario').before($('#saved-scenario').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-certificate">
+                                    <b>证书</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[content][certificate]"
+                                                  value="{$product.custom_field.content.certificate|default='Certificate'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-certificate').before($('#saved-certificate').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-features">
+                                    <b>特点特征</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[content][features]"
+                                                  value="{$product.custom_field.content.features|default='Features'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-features').before($('#saved-features').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                                <li id="saved-customized">
+                                    <b>定制服务</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    参数名：<input class="form-control" type="text"
+                                                  name="custom_field_name[content][customized]"
+                                                  value="{$product.custom_field.content.customized|default='Customized'}" style="width: 200px;">
+                                    <a class="btn btn-success"  href="javascript:(function(){$('#saved-customized').before($('#saved-customized').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>自定义内容</th>
+                        <td>
+                            <ul id="param_content" class="pic-list list-unstyled form-inline"></ul>
+                            <a href="javascript:param_content_add();" class="btn btn-default">添加</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>排序</th>
+                        <td>
+                            <input class="form-control" type="number" name="list_order"
+                                   id="list_order" value="10000"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>推荐</th>
+                        <td>
+                            <input class="js-check" type="checkbox" name="is_recommended" value="1"/>推荐
+                        </td>
+                    </tr>
+                </table>
+                <hook name="portal_admin_article_edit_view_main"/>
+                <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('AdminProduct/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><b>SEO标题</b></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-control" type="text" name="seo_title" id="seo_title"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><b>SEO关键字</b></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="form-control" name="seo_keywords" id="seo_keywords"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><b>SEO描述</b></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="form-control" name="seo_description" id="seo_description"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        scenariocontent = new baidu.editor.ui.Editor();
+        scenariocontent.render('scenario_content');
+        try {
+            scenariocontent.sync();
+        } catch (err) {
+        }
+
+        featurescontent = new baidu.editor.ui.Editor();
+        featurescontent.render('features_content');
+        try {
+            featurescontent.sync();
+        } catch (err) {
+        }
+
+        customizedcontent = new baidu.editor.ui.Editor();
+        customizedcontent.render('customized_content');
+        try {
+            customizedcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function parameter_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-parameter'+id+'">' +
+            '参数名：' +
+            '<input class="form-control" type="text" name="parameter_name[]" value="" style="width: 200px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参数值：' +
+            '<input class="form-control" type="text" name="parameter_val[]" value="" style="width: 300px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' +
+            '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-parameter'+id+'\').remove();})();">' +
+            '<i class="fa fa-trash fa-fw"></i>' +
+            '</a>' +
+            '</li>';
+        $('#parameter').append(html);
+    }
+
+    function param_content_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-param_content'+id+'">' +
+            '参数名：' +
+            '<input class="form-control" type="text" name="param_content_name[]" value="" style="width: 200px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参数值：' +
+            '<script type="text/plain" id="param_content' + id + '" name="param_content_val[]"><\/script>' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' +
+            '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-param_content'+id+'\').remove();})();">' +
+            '<i class="fa fa-trash fa-fw"></i>' +
+            '</a>' +
+            '</li>';
+        $('#param_content').append(html);
+
+        param_content = new baidu.editor.ui.Editor();
+        param_content.render('param_content' + id);
+        try {
+            param_content.sync();
+        } catch (err) {
+        }
+    }
+
+    function checkCapacity(key) {
+        openIframeLayer("{:url('AdminProduct/select')}?key="+key+"&ids=" + $('#js-'+key+'-input').val(), '请选择起重量', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                var selecteds = iframeWin.confirm();
+
+                if (selecteds.selectedIds.length === 0) {
+                    layer.msg('请选择起重量');
+                    return;
+                }
+                $('#js-'+key+'-input').val(selecteds.selectedIds.join(','));
+                for (var i = 0; i < selecteds.selecteds.length; i++) {
+                    if ($('#saved-'+key+selecteds.selecteds[i].id).length > 0){
+                        continue;
+                    }
+                    $('#'+key).append('<li id="saved-'+key+selecteds.selecteds[i].id+'"><input class="form-control" type="text" name="'+key+'[]" value="'+selecteds.selecteds[i].name+'" style="width: 200px;"><a class="btn btn-danger" href="javascript:(function(){$(\'#saved-'+key+selecteds.selecteds[i].id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+                }
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+
+    function input_add(domid) {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        $('#'+domid).append('<li id="saved-'+domid+id+'"><input class="form-control" type="text" name="'+domid+'[]" value="" style="width: 200px;"><a class="btn btn-danger" href="javascript:(function(){$(\'#saved-'+domid+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+    }
+
+    function doSelectTags() {
+        var selectedTagsId = $('#js-tags-id-input').val();
+        openIframeLayer("{:url('AdminProfession/select')}?ids=" + selectedTagsId, '请选择标签', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                var selectedTags = iframeWin.confirm();
+                if (selectedTags.selectedTagsId.length == 0) {
+                    layer.msg('请选择标签');
+                    return;
+                }
+                $('#js-tags-id-input').val(selectedTags.selectedTagsId.join(','));
+                $('#js-tags-name-input').val(selectedTags.selectedTagsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+</script>
+</body>
+</html>
