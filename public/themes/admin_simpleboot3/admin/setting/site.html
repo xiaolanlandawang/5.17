@@ -186,6 +186,23 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="input-google_head" class="col-sm-2 control-label" style="font-weight:700;color:#1a6e9a;">Google代码(head)</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-google_head" name="options[google_head]" style="height: 120px;" placeholder="粘贴 GTM &lt;head&gt; 代码片段">{$site_info.google_head|default=''}</textarea>
+                                <p class="help-block">Google Tag Manager &lt;head&gt; 代码，粘贴到此处后将自动输出到每个页面的 &lt;head&gt; 标签内。</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-google_body" class="col-sm-2 control-label" style="font-weight:700;color:#1a6e9a;">Google代码(body)</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-google_body" name="options[google_body]" style="height: 120px;" placeholder="粘贴 GTM &lt;body&gt; noscript 代码片段">{$site_info.google_body|default=''}</textarea>
+                                <p class="help-block">Google Tag Manager &lt;noscript&gt; 代码，粘贴到此处后将自动输出到每个页面 &lt;body&gt; 开头。</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="1">
                                     {:lang('SAVE')}

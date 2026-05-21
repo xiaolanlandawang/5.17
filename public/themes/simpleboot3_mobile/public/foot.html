@@ -13,7 +13,8 @@
                 </p>
             </div>
             <div class="footer-contact-item">
-                <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-location.webp" alt="location">
+                <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-location.webp"
+                    alt="location">
                 <p class="footer-contact-item-content">{$site_info.address}</p>
             </div>
             <php>
@@ -24,7 +25,8 @@
             </php>
             <if condition="!empty($site_info.whatsapp)">
                 <div class="footer-contact-item">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/quote-whatsapp.webp" alt="whatsapp">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/quote-whatsapp.webp"
+                        alt="whatsapp">
                     <p class="footer-contact-item-content">
                         <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone={$cleanNumber}');"
                             target="_blank">{$site_info.whatsapp}</a>
@@ -33,7 +35,8 @@
             </if>
             <if condition="!empty($site_info.sale_tel)">
                 <div class="footer-contact-item">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-phone.webp" alt="phone">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-phone.webp"
+                        alt="phone">
                     <p class="footer-contact-item-content">
                         <a onclick="gtag_report_conversion('tel:{$site_info.sale_tel}');">{$site_info.sale_tel}</a>
                     </p>
@@ -41,7 +44,8 @@
             </if>
             <if condition="!empty($site_info.wechat)">
                 <div class="footer-contact-item">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-wechat.webp" alt="wechat">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-wechat.webp"
+                        alt="wechat">
                     <p class="footer-contact-item-content">
                         <a target="_blank">{$site_info.wechat}</a>
                     </p>
@@ -54,6 +58,8 @@
                         src="__TMPL__/public/assets/images/facebook.webp" alt="facebook"></a>
                 <a href="{$site_info.youtube|default='javascript:;'}"><img loading="lazy" decoding="async"
                         src="__TMPL__/public/assets/images/youtube.webp" alt="youtube"></a>
+                <a class="vk-social" href="{$site_info.vk|default='javascript:;'}"><img loading="lazy" decoding="async"
+                        src="__TMPL__/public/assets/images/header-vk.png" alt="vk"></a>
             </div>
         </div>
 
@@ -82,32 +88,36 @@
         </div>
         <div class="footer-bottom"
             style="text-align: center; color: rgba(255,255,255,0.6); font-size: 1.2rem; margin-top: 2rem; padding-bottom: 2rem;">
-            Copyright &copy; Henan Weihua Heavy Machinery Co.,LTD. All Rights Reserved.
+            Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
         </div>
     </div>
     <div class="right_fix">
         <div class="right_fix_connect">
             <div class="right_fix_box right_fix_email">
                 <a href="mailto:{$site_info.email}">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-email-mobile.webp" alt="email" title="email">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-email-mobile.webp"
+                        alt="email" title="email">
                     <p class="right_fix_box_title">Send Email</p>
                 </a>
             </div>
             <div class="right_fix_box right_fix_whatsapp">
                 <a href="https://api.whatsapp.com/send?phone={$cleanNumber}">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-whatsapp-mobile.webp" alt="whatsapp" title="whatsapp">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-whatsapp-mobile.webp"
+                        alt="whatsapp" title="whatsapp">
                     <p class="right_fix_box_title">WhatsApp</p>
                 </a>
             </div>
             <div class="right_fix_box right_fix_form">
                 <a href="javascript:;">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-form-mobile.webp" alt="form" title="form">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-form-mobile.webp"
+                        alt="form" title="form">
                     <p class="right_fix_box_title">Get A Quote</p>
                 </a>
             </div>
             <div class="right_fix_box right_fix_wechat">
                 <a href="tel:{$site_info.sale_tel}">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-tel-mobile.webp" alt="sale_tel" title="sale_tel">
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-tel-mobile.webp"
+                        alt="sale_tel" title="sale_tel">
                     <p class="right_fix_box_title">Sale Tel</p>
                 </a>
             </div>
@@ -155,8 +165,144 @@
     </div>
 </div>
 
+<!-- Floating WhatsApp Button (above live chat) -->
+<if condition="!empty($site_info.whatsapp)">
+    <php>
+        $cleanNumberWa = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
+    </php>
+    <a href="https://api.whatsapp.com/send?phone={$cleanNumberWa}" target="_blank" id="mobile-float-whatsapp" title="WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.978 14.057.95 11.433.95c-5.449 0-9.873 4.38-9.877 9.808 0 1.813.499 3.59 1.443 5.161l-1.005 3.67 3.774-.984zm11.085-6.732c-.3-.15-1.774-.875-2.05-.975-.273-.1-.472-.15-.672.15-.2.3-.775.975-.95 1.174-.175.2-.35.225-.65.075-1.127-.566-1.958-1.034-2.738-2.372-.2-.35-.2-.6-.35-.75-.15-.15-.3-.35-.45-.525-.15-.175-.2-.3-.3-.5-.1-.2-.05-.375.025-.525.075-.15.672-.782.75-.95.08-.175.04-.325-.02-.475-.06-.15-.672-1.62-.92-2.21-.242-.58-.487-.5-.672-.51-.173-.008-.371-.01-.57-.01-.2 0-.525.075-.8.375-.273.3-1.042 1.016-1.042 2.479 0 1.462 1.067 2.877 1.217 3.078.15.2 2.1 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
+        </svg>
+    </a>
+    <style>
+        #mobile-float-whatsapp {
+            position: fixed;
+            bottom: 80px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99998;
+            box-shadow: 0 4px 14px rgba(37,211,102,0.5);
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        #mobile-float-whatsapp.wa-visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        #mobile-float-whatsapp:active {
+            transform: scale(0.92);
+        }
+        #mobile-float-whatsapp svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+        #mobile-float-whatsapp::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #25D366;
+            opacity: 0.35;
+            z-index: -1;
+            animation: wa-pulse 2s ease-out infinite;
+        }
+        @keyframes wa-pulse {
+            0%   { transform: scale(1);   opacity: 0.35; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+    </style>
+    <script>
+        setTimeout(function () {
+            var btn = document.getElementById('mobile-float-whatsapp');
+            if (btn) btn.classList.add('wa-visible');
+        }, 4000);
+    </script>
+</if>
+
+<!-- Tawk.to position alignment: match WhatsApp button right:6px -->
+<script>
+    var Tawk_API = Tawk_API || {};
+    Tawk_API.customStyle = {
+        zIndex: 99997,
+        visibility: {
+            mobile: {
+                position: 'br',
+                xOffset: 6,
+                yOffset: 160
+            }
+        }
+    };
+</script>
+
 <notempty name="site_info.salesiq">
-    {:htmlspecialchars_decode($site_info.salesiq)}
+    <div id="zoho-salesiq-raw-mobile" style="display: none;">{:htmlspecialchars_decode($site_info.salesiq)}</div>
+    <script>
+        $(document).ready(function () {
+            var salesiqLoaded = false;
+            function loadSalesIQ() {
+                if (salesiqLoaded) return;
+                salesiqLoaded = true;
+                
+                var rawContainer = document.getElementById('zoho-salesiq-raw-mobile');
+                if (!rawContainer) return;
+                
+                var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = rawContainer.innerHTML;
+                
+                // Inject non-script elements (a, style, div, etc.)
+                while (tempDiv.firstChild) {
+                    var node = tempDiv.firstChild;
+                    if (node.nodeName && node.nodeName.toLowerCase() === 'script') {
+                        tempDiv.removeChild(node);
+                    } else {
+                        document.body.appendChild(node);
+                    }
+                }
+                
+                // Re-parse and inject scripts (must recreate to execute)
+                var tempDiv2 = document.createElement('div');
+                tempDiv2.innerHTML = rawContainer.innerHTML;
+                var scripts = tempDiv2.getElementsByTagName('script');
+                var scriptArr = [];
+                for (var i = 0; i < scripts.length; i++) { scriptArr.push(scripts[i]); }
+                for (var i = 0; i < scriptArr.length; i++) {
+                    var s = document.createElement('script');
+                    for (var j = 0; j < scriptArr[i].attributes.length; j++) {
+                        var attr = scriptArr[i].attributes[j];
+                        s.setAttribute(attr.name, attr.value);
+                    }
+                    if (scriptArr[i].src) {
+                        s.src = scriptArr[i].src;
+                    } else {
+                        s.text = scriptArr[i].text || scriptArr[i].textContent || scriptArr[i].innerHTML;
+                    }
+                    document.body.appendChild(s);
+                }
+                rawContainer.remove();
+            }
+            
+            setTimeout(function () {
+                window.addEventListener('scroll', loadSalesIQ, { passive: true, once: true });
+                window.addEventListener('mousemove', loadSalesIQ, { passive: true, once: true });
+                window.addEventListener('touchstart', loadSalesIQ, { passive: true, once: true });
+                window.addEventListener('click', loadSalesIQ, { passive: true, once: true });
+            }, 3000);
+            
+            setTimeout(loadSalesIQ, 8000);
+        });
+    </script>
 </notempty>
 
 <notempty name="site_info.google_tag_body">
@@ -247,7 +393,7 @@
             if (!window.intlTelInput) {
                 return;
             }
-            var phoneInputs = document.querySelectorAll('.quote-phone, .footer-phone, #popover-phone');
+            var phoneInputs = document.querySelectorAll('.quote-phone, .footer-phone, #popover-phone, .home-collect-phone');
             phoneInputs.forEach(function (input) {
                 if (input._iti) {
                     return;
@@ -293,19 +439,13 @@
             return itiPromise;
         }
 
-        $(document).on('focus click', '.quote-phone, .footer-phone, #popover-phone, .right_fix_form, .footer-feedback-btn, #popover-submit', function () {
+        $(document).on('focus click', '.quote-phone, .footer-phone, #popover-phone, .home-collect-phone, .right_fix_form, .footer-feedback-btn, #popover-submit', function () {
             ensureIntlTelInputLoaded();
         });
 
-        // Idle prefetch after first render to reduce wait on first interaction
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(function () {
-                ensureIntlTelInputLoaded();
-            }, { timeout: 2500 });
-        } else {
-            setTimeout(function () {
-                ensureIntlTelInputLoaded();
-            }, 2500);
-        }
+        // Listen to interaction to load immediately
+        window.addEventListener('scroll', ensureIntlTelInputLoaded, { passive: true, once: true });
+        window.addEventListener('mousemove', ensureIntlTelInputLoaded, { passive: true, once: true });
+        window.addEventListener('touchstart', ensureIntlTelInputLoaded, { passive: true, once: true });
     });
 </script>

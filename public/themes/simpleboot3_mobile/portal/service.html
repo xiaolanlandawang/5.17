@@ -14,7 +14,11 @@
 
 <include file="public@banner"/>
 
-<div class="content">
+<div class="mobile-breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <span>Services</span>
+</div><div class="content">
 
     <div class="content">
         <div class="title">GLOBAL SERVICE</div>
@@ -49,11 +53,11 @@
         <div class="service-partner">
             <div class="title">Companies that have established cooperation</div>
             <ul class="service-partner-list">
-                <foreach name="service_site.companies" item="vo">
+                <volist name="service_site.companies" id="vo" length="9">
                     <li class="service-partner-item">
                         <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
                     </li>
-                </foreach>
+                </volist>
             </ul>
         </div>
 

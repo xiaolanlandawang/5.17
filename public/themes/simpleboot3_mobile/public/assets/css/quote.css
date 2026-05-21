@@ -1,81 +1,114 @@
-.main-content{
+/* ============================================================
+   quote.css — Get A Quote page responsive styles
+   ============================================================ */
+
+.main-content {
+    width: 92%;             /* ← was max-width:37.5rem but no width */
     max-width: 37.5rem;
     margin: 2rem auto;
-    font-family: Arial, Arial;
-    font-size: 1.2rem;
-    color: #333333;
-    line-height: 2rem;
+    font-family: Arial, sans-serif;
+    font-size: 1.3rem;
+    color: #333;
+    line-height: 1.7;
 }
-.title{
+
+.title {
     font-weight: bold;
-    font-size: 3rem;
-    color: #333333;
-    line-height: 3rem;
+    font-size: clamp(2.2rem, 7vw, 3rem);
+    color: #333;
+    line-height: 1.3;
     text-align: center;
     font-style: italic;
 }
-.contact{
+
+/* Contact info block */
+.contact {
     margin-top: 2rem;
     display: flex;
+    flex-direction: column;  /* stack on mobile */
 }
-.contact .contact-left{
+
+.contact .contact-left {
     width: 100%;
     background-color: #ea222d;
-    padding: 0 2rem;
-}
-.contact .contact-left .contact-left-title{
-    font-weight: bold;
-    font-size: 2.8rem;
-    color: #FFFFFF;
-    line-height: 3rem;
-    font-style: italic;
-    margin: 2rem 0;
-}
-.contact .contact-left .contact-left-content{
-    font-size: 1.4rem;
-    color: #FFFFFF;
-    line-height: 2rem;
-}
-.contact .contact-left .contact-left-content img{
-    width: 1.4rem;
-    height: 1.4rem;
-    float: left;
-    margin-top: 0.2rem;
-}
-.contact .contact-left .contact-left-content a p{
-    margin-left: 3rem;
+    padding: 1.5rem 1.6rem;
+    border-radius: 0.6rem;
 }
 
-.quote{
-    width: 35rem;
-    margin: 1rem auto;
+.contact .contact-left .contact-left-title {
+    font-weight: bold;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    color: #fff;
+    line-height: 1.3;
+    font-style: italic;
+    margin: 1.5rem 0;
 }
-.quote input,.quote textarea{
-    border: 1px solid #ECECEC;
+
+.contact .contact-left .contact-left-content {
+    font-size: 1.4rem;
+    color: #fff;
+    line-height: 1.8;
+    margin-top: 0.6rem;
+}
+
+.contact .contact-left .contact-left-content img {
+    width: 1.6rem;
+    height: 1.6rem;
+    float: left;
+    margin-top: 0.3rem;
+    margin-right: 0.6rem;
+}
+
+.contact .contact-left .contact-left-content a p {
+    margin-left: 2.4rem;
+    color: #fff;
+    word-break: break-all;
+}
+
+/* Quote form */
+.quote {
+    width: 100%;            /* ← was 35rem fixed */
+    margin: 1.5rem auto;
+}
+
+.quote input,
+.quote textarea {
+    border: 1px solid #ececec;
     border-radius: 2rem;
     outline: none;
-    padding-left: 1rem;
+    padding-left: 1.4rem;
     line-height: 4rem;
-    width: 35rem;
+    width: 100%;            /* ← was 35rem fixed */
     margin-top: 1rem;
+    font-size: 1.4rem;
+    box-sizing: border-box;
 }
 
-.quote .quote-message{
-    height: 24rem;
+.quote .quote-message {
+    height: 20rem;
     resize: none;
+    line-height: 1.6;
+    padding: 1rem 1.4rem;
 }
-.quote input::placeholder,.quote textarea::placeholder{
-    color: #333333;
+
+.quote input::placeholder,
+.quote textarea::placeholder {
+    color: #999;
+    font-size: 1.3rem;
 }
-.quote .quote-btn{
-    width: 20rem;
+
+.quote .quote-btn {
+    width: 100%;            /* ← was 20rem fixed, now full-width */
+    max-width: 24rem;
     height: 5rem;
     background: #ea222d;
     border-radius: 2.5rem;
-    font-family: Trade Gothic Next LT Pro, Trade Gothic Next LT Pro;
+    font-family: Roboto, sans-serif;
     font-size: 1.8rem;
-    color: #FFFFFF;
+    color: #fff;
     line-height: 5rem;
     text-align: center;
-    margin: 1rem auto 0;
+    margin: 1.5rem auto 0;
+    cursor: pointer;
+    display: block;
 }

@@ -15,8 +15,11 @@
 
 <include file="public@banner"/>
 
-
-
+<div class="mobile-breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <span>About Us</span>
+</div>
 <div class="about-content">
     <div class="title">WHE WE ARE?</div>
     <div class="about-introduction">{$about_site.introduction|htmlspecialchars_decode}</div>
@@ -62,8 +65,9 @@
                 <div class="advantage-item-title">{$vo.advantage_name}</div>
             </div>
         </foreach>
-    </div>
 </div>
+
+
 
 <include file="public@foot"/>
 

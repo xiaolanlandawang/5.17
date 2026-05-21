@@ -1,0 +1,57 @@
+<section class="crane-selector-module">
+    <div class="crane-selector__inner">
+        <div class="crane-selector__panel">
+            <h2 class="crane-selector__title">
+                <notempty name="crane_selector_title">{$crane_selector_title}<else />Not Sure Which Crane Type You Need?</notempty>
+            </h2>
+            <p class="crane-selector__desc">
+                <notempty name="crane_selector_desc">{$crane_selector_desc}<else />Send your lifting capacity, span, lifting height, working area and application. Our team can help you choose the suitable crane category and configuration.</notempty>
+            </p>
+            <a href="javascript:;" class="crane-selector__cta" id="inquiry">
+                <notempty name="crane_selector_btn_text">{$crane_selector_btn_text}<else />Ask for Selection Support</notempty>
+            </a>
+        </div>
+
+        <div class="crane-selector__list-wrap">
+            <ul class="crane-selector__list">
+                <if condition="!empty($crane_selector_items)">
+                    <foreach name="crane_selector_items" item="vo">
+                        <li class="crane-selector__item">
+                            <span class="crane-selector__item-scene">{$vo.scene}</span>
+                            <span class="crane-selector__item-type">{$vo.type}</span>
+                        </li>
+                    </foreach>
+                <else />
+                    <li class="crane-selector__item">
+                        <span class="crane-selector__item-scene">Workshop or warehouse heavy lifting</span>
+                        <span class="crane-selector__item-type">Overhead Cranes</span>
+                    </li>
+                    <li class="crane-selector__item">
+                        <span class="crane-selector__item-scene">Outdoor construction or open-yard lifting</span>
+                        <span class="crane-selector__item-type">Gantry Cranes</span>
+                    </li>
+                    <li class="crane-selector__item">
+                        <span class="crane-selector__item-scene">High-temperature steel plant handling</span>
+                        <span class="crane-selector__item-type">Metallurgy Cranes</span>
+                    </li>
+                    <li class="crane-selector__item">
+                        <span class="crane-selector__item-scene">Container terminal and marine cargo handling</span>
+                        <span class="crane-selector__item-type">Port Cranes</span>
+                    </li>
+                    <li class="crane-selector__item">
+                        <span class="crane-selector__item-scene">Compact workshop and light-duty lifting</span>
+                        <span class="crane-selector__item-type">Light Cranes</span>
+                    </li>
+                    <li class="crane-selector__item">
+                        <span class="crane-selector__item-scene">Crane spare parts and lifting accessories</span>
+                        <span class="crane-selector__item-type">Crane Parts</span>
+                    </li>
+                    <li class="crane-selector__item">
+                        <span class="crane-selector__item-scene">Efficient material lifting for factories and warehouses</span>
+                        <span class="crane-selector__item-type">Electric Hoists</span>
+                    </li>
+                </if>
+            </ul>
+        </div>
+    </div>
+</section>

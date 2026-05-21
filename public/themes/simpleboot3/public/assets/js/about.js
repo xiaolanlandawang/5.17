@@ -100,4 +100,36 @@ $(document).ready(function() {
             switchCertificatePreview(1);
         }
     });
+    // Counter animation for about stats
+    function animateAboutCounter($el) {
+        var target = parseInt($el.data('target'), 10);
+        var duration = 1800;
+        var start = null;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            var progress = Math.min((timestamp - start) / duration, 1);
+            var ease = 1 - Math.pow(1 - progress, 3);
+            $el.text(Math.floor(ease * target).toLocaleString());
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                $el.text(target.toLocaleString());
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    var aboutCounterObserver = new IntersectionObserver(function(entries, obs) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                animateAboutCounter($(entry.target));
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    $('.about-counter').each(function() {
+        aboutCounterObserver.observe(this);
+    });
 })

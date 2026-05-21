@@ -1177,15 +1177,18 @@
     width: 1400px;
     margin: 80px auto;
 }
-.news-list{
+.home-news-carousel{
     margin-top: 40px;
+    position: relative;
+}
+.home-news-swiper{
+    overflow: hidden;
+}
+.news-list{
     display: flex;
 }
 .news-list .news-item{
-    width: 24%;
-    margin-right: 1.33%;
-}
-.news-list .news-item:last-child{
+    width: auto;
     margin-right: 0;
 }
 .news-list .news-item .news-item-img{
@@ -1213,6 +1216,56 @@
 }
 .news-list .news-item:hover .news-item-title{
     color: #ea222d;
+}
+.home-news-button-prev,
+.home-news-button-next{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid #dbe4f0;
+    background: #fff;
+    position: absolute;
+    top: calc(50% - 38px);
+    transform: translateY(-50%);
+    z-index: 2;
+    cursor: pointer;
+}
+.home-news-button-prev{
+    left: -18px;
+}
+.home-news-button-next{
+    right: -18px;
+}
+.home-news-button-prev::after,
+.home-news-button-next::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #0d57b7;
+    border-right: 2px solid #0d57b7;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.home-news-button-prev::after{
+    transform: translate(-40%, -50%) rotate(-135deg);
+}
+.home-news-button-next::after{
+    transform: translate(-60%, -50%) rotate(45deg);
+}
+.home-news-pagination{
+    margin-top: 18px;
+    text-align: center;
+}
+.home-news-pagination .swiper-pagination-bullet{
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+    background: #c7d2e3;
+    opacity: 1;
+}
+.home-news-pagination .swiper-pagination-bullet-active{
+    background: #0d57b7;
 }
 
 .faq{
@@ -1323,7 +1376,7 @@
         width: 900px;
         margin: 60px auto;
     }
-    .news-list{
+    .home-news-carousel{
         margin-top: 24px;
     }
     .news-list .news-item .news-item-title{
@@ -1388,7 +1441,7 @@
         width: 700px;
         margin: 40px auto;
     }
-    .news-list{
+    .home-news-carousel{
         margin-top: 20px;
     }
     .news-list .news-item .news-item-title{
@@ -1398,6 +1451,10 @@
     .news-list .news-item .news-item-desc {
         font-size: 13px;
         margin-top: 0;
+    }
+    .home-news-button-prev,
+    .home-news-button-next{
+        display: none;
     }
 
     .faq{

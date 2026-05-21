@@ -18,10 +18,33 @@
 
 
 <div class="about-content reveal">
-    <div class="title">WHE WE ARE?</div>
-    <div class="about-introduction">{$about_site.introduction|htmlspecialchars_decode}</div>
-    <div class="about-introduction-img">
-        <img src="{:cmf_get_image_url($about_site.left_image)}" alt="introduction">
+    <div class="about-overview-card">
+        <div class="about-overview-eyebrow">WHO WE ARE</div>
+        <div class="about-overview-title">WEIHUA CRANE</div>
+        <div class="about-overview-subtitle">World leading crane manufacturer, making the world easier.</div>
+        <div class="about-introduction">HENAN WEIHUA CO., LTD., founded in 1988, is a large-scale equipment manufacturing enterprise specializing in the development of overhead crane, gantry crane, port container crane, electric hoist, metallurgical crane, multifunctional crane and other products. We has 10 series of more than 200 categories of lifting machinery manufacturing qualifications. The leading products are widely used in machinery, metallurgy, mining, electric power, railway, port, petroleum, chemical and other industries, serving the national key projects such as West-east gas transmission, South-north water Diversion project, Olympic Games project, Hangzhou Bay Cross-sea Bridge and thousands of large enterprises such as China Coal, China Shenhua, Sinopec, PetroChina, Baowu Iron and Steel. And exported to Thailand, Malaysia, Australia and other more than 170 countries and regions.</div>
+    </div>
+    <div class="about-overview-stats">
+        <div class="about-overview-stat">
+            <div class="about-overview-stat-num"><span class="about-counter" data-target="1988">0</span></div>
+            <div class="about-overview-stat-title">Founded in China</div>
+        </div>
+        <div class="about-overview-stat">
+            <div class="about-overview-stat-num"><span class="about-counter" data-target="3420">0</span>K</div>
+            <div class="about-overview-stat-title">Square Meter Factory</div>
+        </div>
+        <div class="about-overview-stat">
+            <div class="about-overview-stat-num"><span class="about-counter" data-target="1000">0</span></div>
+            <div class="about-overview-stat-title">1000 R&amp;D engineers team</div>
+        </div>
+        <div class="about-overview-stat">
+            <div class="about-overview-stat-num"><span class="about-counter" data-target="170">0</span>+</div>
+            <div class="about-overview-stat-title">Export to over 170 countries</div>
+        </div>
+        <div class="about-overview-stat">
+            <div class="about-overview-stat-num"><span class="about-counter" data-target="500">0</span>+</div>
+            <div class="about-overview-stat-title">500 honorary titles</div>
+        </div>
     </div>
 </div>
 
@@ -49,21 +72,9 @@
                 </div>
             </foreach>
         </div>
-    </div>
 </div>
 
 
-<div class="advantage reveal">
-    <div class="title">WEIHUA ADVANTAGES</div>
-    <div class="advantage-list">
-        <foreach name="about_site.advantage" item="vo">
-            <div class="advantage-item">
-                <div class="advantage-item-num">{$vo.advantage_num}</div>
-                <div class="advantage-item-title">{$vo.advantage_name}</div>
-            </div>
-        </foreach>
-    </div>
-</div>
 
 <include file="public@foot"/>
 

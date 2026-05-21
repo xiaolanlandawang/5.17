@@ -44,6 +44,41 @@ $(document).ready(function() {
         });
     }
 
+    if ($('.home-news-swiper .news-item').length) {
+        new Swiper('.home-news-swiper', {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 18,
+            loop: false,
+            watchOverflow: true,
+            navigation: {
+                nextEl: '.home-news-button-next',
+                prevEl: '.home-news-button-prev',
+            },
+            pagination: {
+                el: '.home-news-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    spaceBetween: 12,
+                },
+                1000: {
+                    slidesPerView: 2,
+                    slidesPerGroup: 2,
+                    spaceBetween: 16,
+                },
+                1441: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    spaceBetween: 18,
+                }
+            }
+        });
+    }
+
     if ($('.certificate-swiper .certificate-item').length) {
         new Swiper('.certificate-swiper', {
             slidesPerView: 4,

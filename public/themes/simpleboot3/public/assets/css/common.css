@@ -103,13 +103,23 @@ a:focus {
     margin-right: 20px;
     line-height: 40px;
     color: #1A1A1A;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 .header .header-top .header-contact .header-contact-item img{
     width: 16px;
     height: 16px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .header .header-top .header-contact .header-contact-item a{
     color: #1A1A1A;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 .header .header-top .header-link{
     display: flex;
@@ -204,6 +214,15 @@ a:focus {
 
 
 
+
+@media screen and (max-width: 1440px) {
+    .header .header-top .header-contact .header-contact-item .contact-label {
+        display: none;
+    }
+    .header .header-top .header-contact .header-contact-item {
+        margin-right: 12px;
+    }
+}
 
 @media screen and (min-width: 1000px) and (max-width: 1440px){
     .header .header-container{
@@ -446,6 +465,9 @@ a:focus {
 }
 .footer .footer-content .footer-contact .footer-contact-item.footer-contact-wechat{
     background-image: url(../images/foot-wechat.webp);
+}
+.footer .footer-content .footer-contact .footer-contact-item.footer-contact-whatsapp{
+    background-image: url(../images/quote-whatsapp.webp);
 }
 
 .footer .footer-content .footer-form{

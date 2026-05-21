@@ -6,6 +6,7 @@
     <title>{$site_info.site_name|default=''}</title>
     <meta name="keywords" content="{$site_info.site_name|default=''}">
     <meta name="description" content="{$site_info.site_name|default=''}">
+    <meta name="google-site-verification" content="xq1U9Wx4JsDxE2JtMVkiWU4bMGKhuJOgiHulcoo4Wy4" />
     <include file="public@head" />
     <link href="__TMPL__/public/assets/css/index.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="__TMPL__/public/assets/js/index.js"></script>
@@ -338,18 +339,25 @@
 
     <div class="news reveal">
         <div class="title">NEWS CENTER</div>
-        <div class="news-list">
-            <foreach name="news_list" item="vo">
-                <div class="news-item" title="{$vo.title}">
-                    <a href="{:cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id']))}">
-                        <div class="news-item-img">
-                            <img loading="lazy" src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
+        <div class="home-news-carousel">
+            <div class="swiper home-news-swiper">
+                <div class="swiper-wrapper news-list">
+                    <foreach name="news_list" item="vo">
+                        <div class="swiper-slide news-item" title="{$vo.title}">
+                            <a href="{:cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id']))}">
+                                <div class="news-item-img">
+                                    <img loading="lazy" src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
+                                </div>
+                                <div class="news-item-title">{$vo.post_title}</div>
+                                <div class="news-item-desc">{$vo.post_excerpt}</div>
+                            </a>
                         </div>
-                        <div class="news-item-title">{$vo.post_title}</div>
-                        <div class="news-item-desc">{$vo.post_excerpt}</div>
-                    </a>
+                    </foreach>
                 </div>
-            </foreach>
+            </div>
+            <div class="home-news-button-prev"></div>
+            <div class="home-news-button-next"></div>
+            <div class="home-news-pagination"></div>
         </div>
     </div>
 

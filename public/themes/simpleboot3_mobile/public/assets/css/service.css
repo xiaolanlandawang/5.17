@@ -1,174 +1,228 @@
-.content{
-    width: 35rem;
+/* ============================================================
+   service.css — Service / Download page responsive styles
+   ============================================================ */
+
+.content {
+    width: 92%;             /* ← was 35rem fixed */
+    max-width: 36rem;
     margin: 4rem auto;
-    font-family: Arial, Arial;
-    font-size: 1.2rem;
-    color: #333333;
-    line-height: 2rem;
+    font-family: Arial, sans-serif;
+    font-size: 1.3rem;
+    color: #333;
+    line-height: 1.7;
 }
-.content .title{
-    font-family: Arial, Arial;
+
+.content .title {
+    font-family: Arial, sans-serif;
     font-weight: bold;
-    font-size: 2rem;
-    color: #333333;
-    line-height: 3rem;
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    color: #333;
+    line-height: 1.3;
     text-align: center;
 }
 
-.service-desc{
-    margin: 2rem auto;
+.service-desc {
+    margin: 1.5rem auto;
     text-align: center;
-    font-size: 16px;
-}
-.service-img{
-    width: 100%;
-    margin: 2rem 0;
-}
-.service-img img{
-    width: 100%;
+    font-size: 1.4rem;
+    line-height: 1.7;
 }
 
-.service-area{
-    margin: 2rem auto;
+.service-img {
+    width: 100%;
+    margin: 1.5rem 0;
 }
-.service-area .service-area-item{
-    padding: 2rem 1rem;
-    color: #FFFFFF;
+
+.service-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Service region cards */
+.service-area {
+    margin: 1.5rem auto;
+}
+
+.service-area .service-area-item {
+    padding: 1.5rem 1.2rem;
+    color: #fff;
     margin-top: 1rem;
+    border-radius: 0.4rem;
 }
-.service-area .service-area-item .service-area-title{
-    font-size: 2rem;
+
+.service-area .service-area-item .service-area-title {
+    font-size: 1.8rem;
     font-weight: bold;
 }
-.service-area .service-area-item .service-area-line{
+
+.service-area .service-area-item .service-area-line {
     width: 100%;
     height: 1px;
-    background: #FFFFFF;
-    margin: 2rem 0;
+    background: rgba(255,255,255,.5);
+    margin: 1.5rem 0;
 }
-.service-area .service-area-item .service-area-country{
+
+.service-area .service-area-item .service-area-country {
     font-size: 1.4rem;
+    line-height: 1.7;
 }
 
-
-.service-intro{
-    margin: 2rem auto;
-    display: flex;
-    justify-content: space-between;
+/* Service intro — 2 columns on 360px+, stack on 320px */
+.service-intro {
+    margin: 1.5rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
 }
-.service-intro .service-intro-item{
-    width: 48%;
-    background-color: #EFECF0;
+
+@media (max-width: 340px) {
+    .service-intro {
+        grid-template-columns: 1fr;
+    }
+}
+
+.service-intro .service-intro-item {
+    width: 100%;
+    background-color: #efecf0;
     padding: 1rem;
+    border-radius: 0.4rem;
 }
-.service-intro .service-intro-item .service-intro-title{
-    font-size: 1.6rem;
-    color: #1A1A1A;
+
+.service-intro .service-intro-item .service-intro-title {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    font-weight: bold;
 }
-.service-intro .service-intro-item .service-intro-desc{
+
+.service-intro .service-intro-item .service-intro-desc {
     font-size: 1.2rem;
-    margin-top: 1rem;
-    color: #444444;
+    margin-top: 0.8rem;
+    color: #555;
+    line-height: 1.6;
 }
 
-
-.service-partner{
+/* Partner logos — 3 columns */
+.service-partner {
     width: 100%;
-    margin: 3rem auto;
+    margin: 2.5rem auto;
 }
-.service-partner .service-partner-list{
+
+.service-partner .service-partner-list {
     margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
 }
-.service-partner .service-partner-list .service-partner-item{
-    width: 32%;
-    margin-right: 2%;
-    margin-top: 1rem;
-    border: 1px solid #E7E7E7;
-}
-.service-partner .service-partner-list .service-partner-item:nth-child(3n){
+
+.service-partner .service-partner-list .service-partner-item {
+    width: 100%;
     margin-right: 0;
+    margin-top: 0;
+    border: 1px solid #e7e7e7;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.service-partner .service-partner-list .service-partner-item img{
+
+.service-partner .service-partner-list .service-partner-item img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
-
-
+/* Service content sections (text + image) */
 .service-content {
-    margin-top: 3rem;
+    margin-top: 2.5rem;
 }
 
 .service-content:first-child {
     margin-top: 0;
 }
 
-.service-content .service-content-left, .service-content .service-content-right {
+.service-content .service-content-left,
+.service-content .service-content-right {
     font-weight: 400;
-    font-size: 1.2rem;
-    color: #333333;
+    font-size: 1.3rem;
+    color: #333;
+    line-height: 1.7;
 }
 
-.service-content .service-content-left img, .service-content .service-content-right img{
+.service-content .service-content-left img,
+.service-content .service-content-right img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
 }
+
 .service-content .service-content-title {
     font-weight: bold;
-    font-size: 2rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 1.4;
 }
+
 .service-content .service-content-text {
-    margin-top: 1rem;
+    margin-top: 0.8rem;
 }
 
+/* Download items */
+.download-list {
+    margin: 2.5rem auto;
+}
 
-.download-list{
-    margin: 3rem auto;
-}
-.download-list .download-item{
-    background: #FFFFFF;
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.16);
-    padding: 2rem;
-    margin-right: 4%;
+.download-list .download-item {
+    background: #fff;
+    box-shadow: 0 0 12px 1px rgba(0,0,0,.1);
+    padding: 1.6rem;
+    margin-right: 0;
     margin-top: 1rem;
+    border-radius: 0.6rem;
 }
-.download-list .download-item .download-item-title{
-    font-size: 2rem;
-    color: #1A1A1A;
+
+.download-list .download-item .download-item-title {
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    font-weight: bold;
+    word-break: break-word;
 }
-.download-list .download-item .download-item-line{
+
+.download-list .download-item .download-item-line {
     width: 100%;
     height: 1px;
-    background: #C1C1C1;
-    margin: 1rem 0;
+    background: #c1c1c1;
+    margin: 0.8rem 0;
 }
-.download-list .download-item .download-item-bottom{
+
+.download-list .download-item .download-item-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #333333;
+    color: #333;
 }
-.download-list .download-item .download-item-bottom .download-item-bottom-left img{
-    margin-right: 1rem;
+
+.download-list .download-item .download-item-bottom .download-item-bottom-left img {
+    margin-right: 0.8rem;
+    vertical-align: middle;
 }
-.download-list .download-item .download-item-bottom .download-item-bottom-right{
-    width: 3rem;
-    height: 3rem;
-    border: 1px solid #C1C1C1;
+
+.download-list .download-item .download-item-bottom .download-item-bottom-right {
+    width: 3.2rem;
+    height: 3.2rem;
+    border: 1px solid #c1c1c1;
     border-radius: 50%;
     position: relative;
+    flex-shrink: 0;
 }
-.download-list .download-item .download-item-bottom .download-item-bottom-right img{
+
+.download-list .download-item .download-item-bottom .download-item-bottom-right img {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.download-list .download-item:hover .download-item-title{
+
+.download-list .download-item:hover .download-item-title {
     color: #ea222d;
 }
-
-

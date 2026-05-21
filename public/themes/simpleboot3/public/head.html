@@ -8,12 +8,15 @@
 <script type="text/javascript" src="__TMPL__/public/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="__TMPL__/public/assets/js/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="__TMPL__/public/assets/js/common.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intlTelInput.css">
-
 
 <notempty name="site_info.google_analytics">
     {:htmlspecialchars_decode($site_info.google_analytics)}
 </notempty>
+
+<notempty name="site_info.google_head">
+    {:htmlspecialchars_decode($site_info.google_head)}
+</notempty>
+
 
 <style>
     #zsiq_chat_wrap{

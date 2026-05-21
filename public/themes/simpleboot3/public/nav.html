@@ -1,3 +1,6 @@
+<notempty name="site_info.google_body">
+    {:htmlspecialchars_decode($site_info.google_body)}
+</notempty>
 <php>
     $cleanNumber = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
     if (strpos($cleanNumber, '0') === 0) {
@@ -5,6 +8,7 @@
     }
 </php>
 <!--NAV START-->
+
 <div class="header">
     <div class="header-top">
         <div class="header-container">
@@ -12,18 +16,24 @@
                 <div class="header-contact-item">
                     <a href="mailto:{$site_info.email}">
                         <img src="__TMPL__/public/assets/images/header-email.png" alt="email">
-                        E-Mail: {$site_info.email}
+                        <span class="contact-label">E-Mail:</span> {$site_info.email}
+                    </a>
+                </div>
+                <div class="header-contact-item">
+                    <a href="tel:{$site_info.sale_tel}">
+                        <img src="__TMPL__/public/assets/images/header-tel.svg" alt="tel">
+                        <span class="contact-label">Tel:</span> {$site_info.sale_tel}
                     </a>
                 </div>
                 <div class="header-contact-item">
                     <a href="https://api.whatsapp.com/send?phone={$cleanNumber}">
                         <img src="__TMPL__/public/assets/images/header-whatsapp.png" alt="whatsapp">
-                        WhatsApp: {$site_info.whatsapp}
+                        <span class="contact-label">WhatsApp:</span> {$site_info.whatsapp}
                     </a>
                 </div>
                 <div class="header-contact-item">
                     <img src="__TMPL__/public/assets/images/header-wechat.png" alt="wechat">
-                    Wechat: {$site_info.wechat}
+                    <span class="contact-label">Wechat:</span> {$site_info.wechat}
                 </div>
             </div>
             <div class="header-link">

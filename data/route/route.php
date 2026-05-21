@@ -27,7 +27,7 @@ Route::get('Accessories', 'portal/index/product?id=29')->append(array('id' => '2
 
 Route::get('Hoist', 'portal/index/product?id=30')->append(array('id' => '30',));
 
-Route::get('LD Single Girder Overhead Crane', 'portal/index/product_info?id=62')->append(array('id' => '62',));
+Route::get('ld-single-girder-overhead-crane', 'portal/index/product_info?id=62')->append(array('id' => '62',));
 
 Route::get('Double Girder Overhead Crane', 'portal/index/product_info?id=67')->append(array('id' => '67',));
 
@@ -290,8 +290,6 @@ Route::get('Weihua-Provide-Port-Crane-Solutions-for-Inland-River-Port', 'portal/
 Route::get('WEIHUA-2500t/h-Bridge-Grab-Ship-Unloader', 'portal/index/industries_info?id=22')->append(array('id' => '22',));
 
 Route::get('550t-Gantry-Crane-Load-Test', 'portal/index/industries_info?id=23')->append(array('id' => '23',));
-
-Route::get('zhangaoqi123$', 'admin/Index/index');
 
 Route::get('case', 'portal/index/industries');
 

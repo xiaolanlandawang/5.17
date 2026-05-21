@@ -119,4 +119,11 @@ $(document).ready(function() {
         $('#file').val($(this).data('href'));
         $('.popover_wrap').show();
     })
+
+    // Wrap tables inside rich-text content to make them scrollable horizontally
+    $('.info_content_content_item table').each(function() {
+        if (!$(this).parent().hasClass('table-responsive-wrapper')) {
+            $(this).wrap('<div class="table-responsive-wrapper"></div>');
+        }
+    });
 });

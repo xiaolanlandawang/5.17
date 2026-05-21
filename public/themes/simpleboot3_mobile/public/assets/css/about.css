@@ -1,191 +1,273 @@
-/***
- * about styles
- **/
-.title{
-    font-size: 2rem;
+/* ============================================================
+   about.css — About Us page responsive styles
+   ============================================================ */
+
+.title {
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
     font-weight: bold;
     text-align: center;
 }
-.about-content{
-    width: 35.5rem;
+
+/* ─── Introduction Section ───────────────────────────────── */
+.about-content {
+    width: 92%;             /* ← was 35.5rem fixed */
+    max-width: 36rem;
     margin: 3rem auto;
-    font-size: 1.2rem;
-    color: #333333;
+    font-size: 1.3rem;
+    color: #333;
+    line-height: 1.7;
 }
-.about-content .about-introduction{
-    font-size: 1.2rem;
+
+.about-content .about-introduction {
+    font-size: 1.3rem;
     margin-top: 1rem;
-    text-align: center;
+    text-align: left;
+    line-height: 1.8;
 }
-.about-content .about-introduction-img{
+
+.about-content .about-introduction-img {
     width: 100%;
     margin-top: 1rem;
 }
-.about-content .about-introduction-img img{
+
+.about-content .about-introduction-img img {
     width: 100%;
+    height: auto;
+    display: block;
 }
 
-.about-do{
-    width: 35.5rem;
+/* ─── What We Do ─────────────────────────────────────────── */
+.about-do {
+    width: 92%;             /* ← was 35.5rem fixed */
+    max-width: 36rem;
     margin: 3rem auto;
 }
-.about-do .about-do-desc{
-    font-size: 1.2rem;
+
+.about-do .about-do-desc {
+    font-size: 1.3rem;
     margin-top: 1rem;
+    line-height: 1.7;
 }
 
-.serve-wrap{
+/* ─── Serve / Map Section ────────────────────────────────── */
+.serve-wrap {
     width: 100%;
     margin: 3rem auto 0;
     background-repeat: no-repeat;
     background-position: center center;
     position: relative;
-    background-size: 100% 100%;
+    background-size: cover;
 }
-.serve-wrap::after{
-    content:'';
-    background-color: rgba(0, 0, 0, 0.2);
+
+.serve-wrap::after {
+    content: '';
+    background-color: rgba(0,0,0,.2);
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
+    pointer-events: none;
 }
-.serve{
-    width: 35.5rem;
+
+.serve {
+    width: 92%;             /* ← was 35.5rem fixed */
+    max-width: 36rem;
     margin: 0 auto;
     padding: 3rem 0;
     position: relative;
     z-index: 1;
 }
-.serve .title{
-    color: #FFFFFF;
-}
-.serve .serve-desc{
-    font-size: 1.2rem;
-    color: #FFFFFF;
-    margin-top: 1rem;
-    text-align: center;
+
+.serve .title {
+    color: #fff;
 }
 
-.global-wrap{
+.serve .serve-desc {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-top: 1rem;
+    text-align: center;
+    line-height: 1.7;
+}
+
+/* ─── Global Section ─────────────────────────────────────── */
+.global-wrap {
     width: 100%;
     margin: 0 auto 3rem;
     background-repeat: no-repeat;
     background-position: center top;
     background-size: 100% auto;
 }
-.global{
-    padding-top: 5rem;
-    width: 35.5rem;
+
+.global {
+    padding-top: 4rem;
+    width: 92%;             /* ← was 35.5rem fixed */
+    max-width: 36rem;
     margin: 0 auto;
 }
-.global .global-desc{
-    font-size: 1.2rem;
+
+.global .global-desc {
+    font-size: 1.3rem;
     margin-top: 1rem;
+    line-height: 1.7;
 }
-.global .global-content{
+
+.global .global-content {
     margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
 }
-.global .global-content .global-content-item{
-    margin-top: 1rem;
-    width: 49%;
+
+.global .global-content .global-content-item {
+    width: 100%;
+    margin-top: 0;
     background-color: #ededed;
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
+    border-radius: 0.4rem;
 }
-.global .global-content .global-content-item .global-content-item-title{
-    font-size: 2rem;
+
+.global .global-content .global-content-item .global-content-item-title {
+    font-size: 1.6rem;
+    font-weight: bold;
 }
-.global .global-content .global-content-item .global-content-item-desc{
+
+.global .global-content .global-content-item .global-content-item-desc {
     font-size: 1.2rem;
-    margin-top: 1rem;
+    margin-top: 0.6rem;
+    line-height: 1.6;
 }
 
-
-.advantage{
-    width: 35.5rem;
+/* ─── Advantage Grid ─────────────────────────────────────── */
+.advantage {
+    width: 92%;             /* ← was 35.5rem fixed */
+    max-width: 36rem;
     margin: 3rem auto;
 }
-.advantage .advantage-list{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+
+.advantage .advantage-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }
-.advantage .advantage-list .advantage-item{
-    width: 48%;
-    margin-top: 2rem;
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.16);
-    padding: 3rem 2rem;
+
+.advantage .advantage-list .advantage-item {
+    width: 100%;
+    margin-top: 0;
+    box-shadow: 0 0 12px 1px rgba(0,0,0,.12);
+    padding: 2rem 1rem;
     text-align: center;
+    border-radius: 0.4rem;
 }
-.advantage .advantage-list .advantage-item .advantage-item-num{
-    font-size: 4rem;
+
+.advantage .advantage-list .advantage-item .advantage-item-num {
+    font-size: clamp(2.8rem, 9vw, 4rem);
     font-weight: bold;
     color: #ea222d;
 }
-.advantage .advantage-list .advantage-item .advantage-item-title{
-    font-size: 1.4rem;
-    margin-top: 2rem;
+
+.advantage .advantage-list .advantage-item .advantage-item-title {
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    line-height: 1.4;
 }
 
-/**
- * certificate styles
- ***/
-.certificate{
-    width: 35.5rem;
+/* ─── Certificates ───────────────────────────────────────── */
+.certificate {
+    width: 92%;             /* ← was 35.5rem fixed */
+    max-width: 36rem;
     margin: 3rem auto;
 }
-.certificate .certificate-list{
+
+.certificate .certificate-list {
     margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
 }
-.certificate .certificate-list .certificate-item{
+
+.certificate .certificate-list .certificate-item {
     cursor: pointer;
-    width: 49%;
-    margin-top: 1rem;
-    margin-right: 2%;
-}
-.certificate .certificate-list .certificate-item:nth-child(2n){
+    width: 100%;
+    margin-top: 0;
     margin-right: 0;
 }
-.certificate .certificate-list .certificate-item img{
+
+.certificate .certificate-list .certificate-item img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
 }
 
-.gallery{
-    width: 35.5rem;
+/* ─── Gallery ────────────────────────────────────────────── */
+.gallery {
+    width: 92%;             /* ← was 35.5rem fixed */
+    max-width: 36rem;
     margin: 3rem auto;
 }
-.gallery .gallery-list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+
+.gallery .gallery-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }
-.gallery .gallery-list .gallery-item{
-    width: 49%;
-    margin-top: 2rem;
+
+.gallery .gallery-list .gallery-item {
+    width: 100%;
+    margin-top: 0;
 }
-.gallery .gallery-list .gallery-item .gallery-item-img{
+
+.gallery .gallery-list .gallery-item .gallery-item-img {
     width: 100%;
     overflow: hidden;
+    aspect-ratio: 4 / 3;
 }
-.gallery .gallery-list .gallery-item .gallery-item-img img{
+
+.gallery .gallery-list .gallery-item .gallery-item-img img {
     width: 100%;
-    transition: all .3s ease-in-out;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
 }
-.gallery .gallery-list .gallery-item .gallery-item-title{
-    margin-top: 1rem;
-    font-size: 2rem;
+
+.gallery .gallery-list .gallery-item .gallery-item-title {
+    margin-top: 0.6rem;
+    font-size: 1.5rem;
     font-weight: bold;
+    line-height: 1.4;
 }
-.gallery .gallery-list .gallery-item:hover .gallery-item-img img{
+
+.gallery .gallery-list .gallery-item:hover .gallery-item-img img {
     transform: scale(1.05);
 }
-.gallery .gallery-list .gallery-item:hover .gallery-item-title{
+
+.gallery .gallery-list .gallery-item:hover .gallery-item-title {
     color: #ea222d;
+}
+
+/* ─── Map Section ─────────────────────────────────────────── */
+.about-map {
+    width: 92%;
+    max-width: 36rem;
+    margin: 3rem auto;
+}
+
+.about-map .title {
+    margin-bottom: 1.5rem;
+}
+
+.about-map .map-container {
+    width: 100%;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 0.6rem 1.6rem rgba(11,35,71,.04);
+    border: 0.1rem solid #e4eaf3;
+}
+
+.about-map .map-container iframe {
+    display: block;
+    width: 100%;
+    height: 30rem;
+    border: 0;
 }

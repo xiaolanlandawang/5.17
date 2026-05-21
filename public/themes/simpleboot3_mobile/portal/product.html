@@ -5,7 +5,7 @@
     <title>{$page_title|default=$site_info.site_name}</title>
     <meta name="keywords" content="{$page_keywords|default=$site_info.site_name}">
     <meta name="description" content="{$page_description|default=$site_info.site_name}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <link rel="preload" as="image" href="{$hero_image}" fetchpriority="high">
 
     <include file="public@head"/>
@@ -16,81 +16,220 @@
 <div class="main">
     <include file="public@nav"/>
 
-    <section class="mobile-product-hero">
-        <img class="mobile-product-hero__bg"
-             src="{$hero_image}"
-             alt="{$hero_title|default='Weihua Products'}"
-             fetchpriority="high"
-             loading="eager"
-             decoding="sync">
+    <if condition="!$is_category_page">
+        <!-- ========================================== -->
+        <!-- PRODUCTS OVERVIEW / MAIN PAGE             -->
+        <!-- ========================================== -->
+        <section class="mobile-product-hero mobile-overview-hero">
+            <img class="mobile-product-hero__bg"
+                 src="{$hero_image}"
+                 alt="{$hero_title|default='Weihua Products'}"
+                 fetchpriority="high"
+                 loading="eager"
+                 decoding="sync">
+            <div class="mobile-overview-hero__text">PRODUCTS</div>
+        </section>
+
+        <div class="mobile-product-breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <span>Products</span>
+        </div>
+
+        <div class="main-content">
+            <div class="products-category-section">
+                <div class="products-category-section__head">
+                    <h2 class="products-category-section__title">{$category_headline}</h2>
+                    <p class="products-category-section__desc">{$category_intro}</p>
+                </div>
+
+                <ul class="mobile-category-grid">
+                    <foreach name="category_cards" item="vo">
+                        <li class="mobile-category-grid__item">
+                            <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}" class="mobile-category-card">
+                                <div class="mobile-category-card__image-wrap">
+                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.name}" class="mobile-category-card__image" loading="lazy">
+                                </div>
+                                <div class="mobile-category-card__content">
+                                    <div class="mobile-category-card__title">{$vo.name}</div>
+                                    <div class="mobile-category-card__count">{$vo.product_count|default=0} Products</div>
+                                    <span class="mobile-category-card__arrow">View All ➔</span>
+                                </div>
+                            </a>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+
+    <else />
+        <!-- ========================================== -->
+        <!-- SPECIFIC CATEGORY PAGE                    -->
+        <!-- ========================================== -->
+        <section class="mobile-product-hero mobile-category-hero">
+            <img class="mobile-product-hero__bg"
+                 src="{$hero_image}"
+                 alt="{$current_category_name}"
+                 fetchpriority="high"
+                 loading="eager"
+                 decoding="sync">
+        </section>
+
+        <div class="mobile-product-breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="{:cmf_url('portal/index/product')}">Products</a>
+            <span>/</span>
+            <span>{$current_category_name}</span>
+        </div>
+
         <div class="mobile-product-hero__inner">
-            <div class="mobile-product-hero__eyebrow">WEIHUA PRODUCTS</div>
             <h1 class="mobile-product-hero__title">{$hero_title}</h1>
             <p class="mobile-product-hero__desc">{$hero_description}</p>
             <a href="javascript:;" class="mobile-product-hero__btn" id="inquiry">Get A Free Quote</a>
         </div>
-    </section>
 
-    <div class="mobile-product-breadcrumb">
-        <a href="/">Home</a>
-        <span>/</span>
-        <span>Products</span>
-    </div>
-
-    <div class="main-content">
-
-        <!--select-->
-        <div class="products-content-select">
-            <div class="products-content_title">Product Categories</div>
-            <div class="product_select">
-                <select name="category_id" id="product_category" aria-label="Product Categories">
-                    <option value="0" data-url="{:cmf_url('portal/index/product')}">All Products</option>
-                    <foreach name="category_list" item="vo">
-                        <option value="{$vo.id}" data-url="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}"
-                                {$vo['id']==input('id') ? 'selected' : ''}>{$vo.name}</option>
-                    </foreach>
-                </select>
+        <div class="main-content">
+            <!-- Select dropdown for quick switching (keeps excellent UX) -->
+            <div class="products-content-select">
+                <div class="products-content_title">Product Categories</div>
+                <div class="product_select">
+                    <select name="category_id" id="product_category" aria-label="Product Categories">
+                        <option value="0" data-url="{:cmf_url('portal/index/product')}">All Products</option>
+                        <foreach name="category_list" item="vo">
+                            <option value="{$vo.id}" data-url="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}"
+                                    {$vo['id']==input('id') ? 'selected' : ''}>{$vo.name}</option>
+                        </foreach>
+                    </select>
+                </div>
+                <div class="mobile-product-summary">Showing {$product_total} product<if condition="$product_total neq 1">s</if></div>
             </div>
-            <div class="mobile-product-summary">Showing {$product_total} product<if condition="$product_total neq 1">s</if></div>
+
+            <!-- Products Grid Section -->
+            <div class="products-showcase-section">
+                <div class="products-showcase__head">
+                    <h2 class="products-showcase__title">{$category_headline}</h2>
+                    <p class="products-showcase__desc">{$category_intro}</p>
+                </div>
+
+                <div class="products-content">
+                    <ul class="products-content-list">
+                        <foreach name="list" item="vo" key="k">
+                            <li class="products-content-list-item" data-id="{$vo.id}">
+                                <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                                    <div class="products-content-list-item-img">
+                                        <img src="{:cmf_get_image_url($vo.thumbnail)}"
+                                             alt="{$vo.title}"
+                                             <if condition="$k eq 0">loading="eager" fetchpriority="high"<else />loading="lazy"</if>
+                                             decoding="async">
+                                    </div>
+                                    <div class="products-content-list-item-title">{$vo.title}</div>
+                                    <div class="product-content-li-desc">{$vo.industry|default='Tap to view more product details and parameters.'}</div>
+                                </a>
+                                <div class="product_list_item_btn">
+                                    <div class="product_list_item_btn_submit" id="inquiry">CONSULT</div>
+                                </div>
+                            </li>
+                        </foreach>
+                    </ul>
+                </div>
+
+                <if condition="count($list) eq 0">
+                    <div class="mobile-product-empty">
+                        No products in this category yet.
+                    </div>
+                </if>
+
+                <div class="products-pagination-container">
+                    <span class="products-pagination-info">Page {$list->currentPage()} of {$list->lastPage()}</span>
+                    <div class="products-content-right-page">
+                        <ul class="pagination">{$page}</ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!--products-->
-        <div class="products-content">
-            <ul class="products-content-list">
-                <foreach name="list" item="vo" key="k">
-                    <li class="products-content-list-item" data-id="{$vo.id}">
-                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
-                            <div class="products-content-list-item-img">
-                                <img src="{:cmf_get_image_url($vo.thumbnail)}" 
-                                     alt="{$vo.title}" 
-                                     width="326" 
-                                     height="204"
-                                     <if condition="$k eq 0">loading="eager" fetchpriority="high"<else />loading="lazy"</if>
-                                     decoding="async">
+        <!-- FAQ Section -->
+        <notempty name="category_faq.faq">
+            <div class="faq product-faq">
+                <div class="title">{$category_faq.faq_title|default='FAQ'}</div>
+                <div class="faq-wrap">
+                    <div class="faq-list">
+                        <foreach name="category_faq.faq" item="vo">
+                            <div class="faq-item {$key==0 ? 'active' : ''}">
+                                <div class="faq-question">
+                                    <span>{$key+1}.{$vo.question}</span>
+                                    <em>+</em>
+                                </div>
+                                <div class="faq-answer">{$vo.answer|nl2br}</div>
                             </div>
-                            <div class="mobile-product-tag">
-                                <notempty name="current_category">{$current_category.name}<else />{$vo.industry|default='Product'}</notempty>
+                        </foreach>
+                    </div>
+                </div>
+            </div>
+        </notempty>
+    </if>
+
+    <include file="public@crane_selector"/>
+
+    <!-- Customize Inquiry / Quick Quote Section (only on specific category page) -->
+    <if condition="$is_category_page">
+        <section class="product-collect-section">
+            <div class="home-collect">
+                <div class="home-collect-container">
+                    <div class="home-collect-form-section">
+                        <h2 class="form-title">Customize Your Lifting Solutions</h2>
+                        <div class="home-collect-form">
+                            <div class="home-collect-field">
+                                <label>Name</label>
+                                <input type="text" class="home-collect-name" placeholder="Name">
                             </div>
-                            <div class="products-content-list-item-title">{$vo.title}</div>
-                            <div class="product-content-li-desc">{$vo.industry|default='Tap to view more product details and parameters.'}</div>
-                        </a>
-                        <div class="product_list_item_btn">
-                            <div class="product_list_item_btn_submit" id="inquiry">CONSULT</div>
+                            <div class="home-collect-field">
+                                <label>Email</label>
+                                <input type="text" class="home-collect-email" placeholder="Email">
+                            </div>
+                            <div class="home-collect-field full-width">
+                                <label>Phone / Whatsapp</label>
+                                <input type="text" class="home-collect-phone" placeholder="Phone / Whatsapp">
+                            </div>
+                            <div class="home-collect-field full-width">
+                                <label>Message</label>
+                                <textarea class="home-collect-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                            </div>
+                            <div class="home-collect-submit">SEND MESSAGE</div>
                         </div>
-                    </li>
-                </foreach>
-            </ul>
-        </div>
-        <if condition="count($list) eq 0">
-            <div class="mobile-product-empty">
-                No products in this category yet.
+                    </div>
+                </div>
             </div>
-        </if>
-    </div>
+        </section>
+    </if>
 
+    <!-- Case Studies Section (rendered globally on products pages for excellent cross-linking) -->
+    <notempty name="case_list">
+        <div class="home-case product-case">
+            <div class="title">CASE STUDY</div>
+            <div class="swiper product-case-swiper">
+                <div class="swiper-wrapper">
+                    <foreach name="case_list" item="vo" key="k">
+                        <if condition="$k lt 4">
+                            <div class="swiper-slide case-item" title="{$vo.post_title}">
+                                <a href="{:cmf_url('portal/index/industries_info',array('id'=>$vo.id))}">
+                                    <div class="case-item-img">
+                                        <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}">
+                                    </div>
+                                    <div class="case-item-title">{$vo.post_title}</div>
+                                    <div class="case-item-desc">{$vo.post_excerpt}</div>
+                                </a>
+                            </div>
+                        </if>
+                    </foreach>
+                </div>
+                <div class="swiper-pagination product-case-pagination"></div>
+            </div>
+        </div>
+    </notempty>
 
     <include file="public@foot"/>
-
 </div>
 </body>
 </html>

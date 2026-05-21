@@ -82,6 +82,19 @@ class IndexController extends HomeBaseController
             ->select();
         $this->assign('slides', $slides);
 
+        // Fetch "Why Choose Us" slide items dynamically (by name containing 'choose' or '选择', defaulting to ID 14)
+        $chooseSlideId = 14;
+        $slideInfo = Db::name('slide')->where('name', 'like', '%choose%')->whereOr('name', 'like', '%选择%')->find();
+        if ($slideInfo) {
+            $chooseSlideId = $slideInfo['id'];
+        }
+        $why_choose_slides = $SlideItemModel->field('title,description,image,url,target,content')
+            ->where('slide_id', $chooseSlideId)
+            ->where('status', 1)
+            ->order('list_order asc')
+            ->select();
+        $this->assign('why_choose_slides', $why_choose_slides);
+
         $limit = 6;
         $productModel = new ProductModel();
         $productCategoryModel = new ProductCategoryModel();
@@ -119,7 +132,6 @@ class IndexController extends HomeBaseController
             ->where('p.post_type', 8)
             ->field('p.id,p.post_title,p.post_excerpt,p.thumbnail,p.create_time,c.category_id')
             ->order('c.list_order asc,p.create_time desc')
-            ->limit(4)
             ->select();
         $this->assign('news_list', $news_list);
 

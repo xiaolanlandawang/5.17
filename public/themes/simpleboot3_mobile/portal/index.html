@@ -5,7 +5,8 @@
   <title>{$site_info.site_name|default=''}</title>
   <meta name="keywords" content="{$site_info.site_name|default=''}">
   <meta name="description" content="{$site_info.site_name|default=''}">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="google-site-verification" content="xq1U9Wx4JsDxE2JtMVkiWU4bMGKhuJOgiHulcoo4Wy4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
   <include file="public@head"/>
   <link href="__TMPL__/public/assets/css/index.css" rel="stylesheet" type="text/css">
@@ -21,7 +22,30 @@
         <foreach name="slides" item="vo">
           <div class="swiper-slide">
             <img src="{:cmf_get_image_url($vo['image'])}" class="d-block w-100" alt="{$vo.title}" fetchpriority="{$key==0 ? 'high' : 'auto'}" loading="{$key==0 ? 'eager' : 'lazy'}" decoding="async">
-            <div class="swiper-slide-title">{$vo.content}</div>
+            <php>
+              $rawContent = html_entity_decode($vo['content']);
+              $cleaned = preg_replace('/<br\s*\/?>/i', '|', $rawContent);
+              $cleaned = strip_tags($cleaned);
+              if (strpos($cleaned, '|') === false && strpos($cleaned, ':') !== false) {
+                  $cleaned = str_replace(':', '|', $cleaned);
+              }
+              $parts = explode('|', $cleaned);
+              $lines = [];
+              foreach ($parts as $part) {
+                  $trimmed = trim(html_entity_decode($part), " \t\n\r\0\x0B\xc2\xa0");
+                  if ($trimmed !== '') {
+                      $lines[] = $trimmed;
+                  }
+              }
+              $line1 = isset($lines[0]) ? $lines[0] : '';
+              $line2 = isset($lines[1]) ? $lines[1] : '';
+            </php>
+            <div class="swiper-slide-title">
+              <span class="banner-title-line1">{$line1}</span>
+              <notempty name="line2">
+                <span class="banner-title-line2">{$line2}</span>
+              </notempty>
+            </div>
           </div>
         </foreach>
       </div>
@@ -30,7 +54,7 @@
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        new Swiper('.swiper', {
+        new Swiper('.banner .swiper', {
           autoplay: true,
           loop: true,
           pagination: {
@@ -80,27 +104,44 @@
 
   <!--ABOUT US START-->
   <div class="about">
-    <div class="about-title">ABOUT OUR COMPANY</div>
-    <div class="about-desc">{$index_site.about_description}</div>
-    <div class="about-content">
-      <ul>
-        <foreach name="index_site.engineering" item="vo">
-          <li class="about-content-item">
-            <p class="about-content-num">{$vo.engineering_num}</p>
-            <p class="about-content-title">{$vo.engineering_name}</p>
-            <p class="about-content-desc">{$vo.engineering_desc}</p>
-            <lt name="key" value=":count($index_site['engineering'])-1">
-              <div class="about-content-line"></div>
-            </lt>
-          </li>
-        </foreach>
-      </ul>
-    </div>
+    <div class="about-title">WHO WE ARE?</div>
     <div class="about-img">
       <img loading="lazy" decoding="async" src="{:cmf_get_image_url($index_site.about_img)}" alt="{$site_info.site_name}">
     </div>
+    <div class="about-desc">{$index_site.about_description}</div>
+    <div class="about-btn-wrap">
+      <a href="/about.html" class="about-btn">LEARN MORE <i class="about-btn-arrow">➔</i></a>
+    </div>
   </div>
   <!--ABOUT US END-->
+
+  <!-- STATS START -->
+  <div class="home-stats">
+    <div class="home-stats-wrap">
+      <div class="stat-item">
+        <div class="stat-num"><span class="counter" data-target="1988">0</span></div>
+        <div class="stat-text">Founded in China</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="counter" data-target="3420">0</span>K</div>
+        <div class="stat-text">Square Meter Factory</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="counter" data-target="1000">0</span></div>
+        <div class="stat-text">1000 R&D engineers team</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="counter" data-target="170">0</span>+</div>
+        <div class="stat-text">Export to over 170 countries</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="counter" data-target="500">0</span>+</div>
+        <div class="stat-text">500 honorary titles</div>
+      </div>
+    </div>
+  </div>
+  <!-- STATS END -->
+
 
 
   <!--CHOOSE START-->
@@ -108,38 +149,116 @@
     <div class="choose">
       <div class="choose-title">WHY CHOOSE US</div>
       <div class="choose-desc">{$index_site.choose_description}</div>
-      <ul class="choose-list">
-        <foreach name="index_site.choose" item="vo">
-          <li class="choose-item">
-            <div class="choose-item-icon">
-              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.choose_image)}" alt="choose" data-default_img="{:cmf_get_image_url($vo.choose_image)}" data-active_img="{:cmf_get_image_url($vo.choose_image_active)}">
+      <div class="choose-grid">
+        <notempty name="why_choose_slides">
+          <foreach name="why_choose_slides" item="vo">
+            <div class="choose-grid-item">
+              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.image)}" alt="{$vo.title}">
+              <div class="choose-grid-overlay">
+                <span class="choose-grid-text">{$vo.title}</span>
+              </div>
             </div>
-            <div class="choose-item-title">{$vo.choose_name}</div>
-            <div class="choose-item-desc">{$vo.choose_desc}</div>
-          </li>
-        </foreach>
-      </ul>
+          </foreach>
+        <else/>
+          <!-- Fallback to index_site.choose uploaded images if slides are not populated yet -->
+          <foreach name="index_site.choose" item="vo">
+            <div class="choose-grid-item">
+              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.choose_image)}" alt="{$vo.choose_name}">
+              <div class="choose-grid-overlay">
+                <span class="choose-grid-text">{$vo.choose_name}</span>
+              </div>
+            </div>
+          </foreach>
+        </notempty>
+      </div>
     </div>
   </div>
   <!--CHOOSE END-->
+
+  <notempty name="about_site.cert">
+    <!-- CERTIFICATE START -->
+    <div class="certificate">
+      <div class="title">CERTIFICATE</div>
+      <div class="swiper certificate-swiper">
+        <div class="swiper-wrapper">
+          <foreach name="about_site.cert" item="vo">
+            <div class="swiper-slide certificate-item">
+              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+            </div>
+          </foreach>
+        </div>
+        <div class="swiper-pagination certificate-pagination"></div>
+      </div>
+    </div>
+    <!-- CERTIFICATE END -->
+  </notempty>
+
+  <notempty name="case_list">
+    <!-- CASE START -->
+    <div class="home-case">
+      <div class="title">CASE STUDY</div>
+      <ul class="case-list">
+        <foreach name="case_list" item="vo" key="k">
+          <if condition="$k lt 4">
+            <li class="case-item" title="{$vo.post_title}">
+              <a href="{:cmf_url('portal/index/industries_info',array('id'=>$vo.id))}">
+                <div class="case-item-img">
+                  <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}">
+                </div>
+                <div class="case-item-title">{$vo.post_title}</div>
+                <div class="case-item-desc">{$vo.post_excerpt}</div>
+              </a>
+            </li>
+          </if>
+        </foreach>
+      </ul>
+    </div>
+    <!-- CASE END -->
+  </notempty>
+
 
 
   <div class="news">
     <div class="title">NEWS CENTER</div>
     <div class="news-list">
-      <foreach name="news_list" item="vo">
-        <div class="news-item" title="{$vo.title}">
-          <a href="{:cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id']))}">
-            <div class="news-item-img">
-              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
-            </div>
-            <div class="news-item-title">{$vo.post_title}</div>
-            <div class="news-item-desc">{$vo.post_excerpt}</div>
-          </a>
-        </div>
+      <foreach name="news_list" item="vo" key="k">
+        <if condition="$k lt 4">
+          <div class="news-item" title="{$vo.title}">
+            <a href="{:cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id']))}">
+              <div class="news-item-img">
+                <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
+              </div>
+              <div class="news-item-title">{$vo.post_title}</div>
+              <div class="news-item-desc">{$vo.post_excerpt}</div>
+            </a>
+          </div>
+        </if>
       </foreach>
     </div>
   </div>
+
+  <notempty name="index_site.faq">
+    <!-- FAQ START -->
+    <div class="faq">
+      <div class="title">{$index_site.faq_title|default='FAQ'}</div>
+      <div class="faq-wrap">
+        <div class="faq-list">
+          <foreach name="index_site.faq" item="vo">
+            <div class="faq-item {$key==0 ? 'active' : ''}">
+              <div class="faq-question">
+                <span>{$key+1}.{$vo.question}</span>
+                <em>+</em>
+              </div>
+              <div class="faq-answer">{$vo.answer|nl2br}</div>
+            </div>
+          </foreach>
+        </div>
+      </div>
+    </div>
+    <!-- FAQ END -->
+  </notempty>
+
+
 
   <include file="public@foot"/>
 
