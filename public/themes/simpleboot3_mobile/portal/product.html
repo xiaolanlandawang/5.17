@@ -27,7 +27,10 @@
                  fetchpriority="high"
                  loading="eager"
                  decoding="sync">
-            <div class="mobile-overview-hero__text">PRODUCTS</div>
+            <div class="mobile-overview-hero__content">
+                <div class="mobile-overview-hero__text">PRODUCTS</div>
+                <div class="mobile-overview-hero__desc">The company mainly produces core products such as intelligent cranes, multi-functional special cranes, port cranes, ship cranes, and metallurgical cranes.</div>
+            </div>
         </section>
 
         <div class="mobile-product-breadcrumb">
@@ -90,20 +93,7 @@
         </div>
 
         <div class="main-content">
-            <!-- Select dropdown for quick switching (keeps excellent UX) -->
-            <div class="products-content-select">
-                <div class="products-content_title">Product Categories</div>
-                <div class="product_select">
-                    <select name="category_id" id="product_category" aria-label="Product Categories">
-                        <option value="0" data-url="{:cmf_url('portal/index/product')}">All Products</option>
-                        <foreach name="category_list" item="vo">
-                            <option value="{$vo.id}" data-url="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}"
-                                    {$vo['id']==input('id') ? 'selected' : ''}>{$vo.name}</option>
-                        </foreach>
-                    </select>
-                </div>
-                <div class="mobile-product-summary">Showing {$product_total} product<if condition="$product_total neq 1">s</if></div>
-            </div>
+
 
             <!-- Products Grid Section -->
             <div class="products-showcase-section">

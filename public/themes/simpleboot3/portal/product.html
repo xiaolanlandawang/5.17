@@ -38,7 +38,11 @@
                                 <div class="category-card__image-wrap">
                                     <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.name}" class="category-card__image">
                                 </div>
-                                <div class="category-card__title">{$vo.name}</div>
+                                <div class="category-card__content">
+                                    <div class="category-card__title">{$vo.name}</div>
+                                    <div class="category-card__desc">{$vo.custom_description}</div>
+                                    <div class="category-card__action">Explore Products</div>
+                                </div>
                             </a>
                         </li>
                     </foreach>
@@ -87,10 +91,14 @@
                                 <div class="product_list_item_img">
                                     <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}" title="{$vo.title}">
                                 </div>
-                                <div class="product_list_item_title">{$vo.title}</div>
-                                <div class="product_list_item_category">{$vo.industry|default='Engineered lifting equipment for high-efficiency industrial material handling.'}</div>
+                                <div class="product_item__content">
+                                    <div class="product_list_item_title">{$vo.title}</div>
+                                    <div class="product_list_item_category">{$vo.industry|default='Engineered lifting equipment for high-efficiency industrial material handling.'}</div>
+                                </div>
                             </a>
-                            <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+                            <div class="product_item__footer">
+                                <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+                            </div>
                         </li>
                     </foreach>
                 </ul>

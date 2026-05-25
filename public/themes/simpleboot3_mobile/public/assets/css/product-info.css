@@ -3,6 +3,50 @@
    Mobile-first: 320px / 375px / 390px / 430px
    ============================================================ */
 
+/* ─── Hero Banner ────────────────────────────────────────── */
+.mobile-detail-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 5rem;
+}
+
+.mobile-detail-hero__bg {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.mobile-detail-hero__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    z-index: 2;
+    color: #ffffff;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+
+.mobile-detail-hero__text {
+    font-size: clamp(2.2rem, 6.5vw, 2.6rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.8rem;
+}
+
+.mobile-detail-hero__desc {
+    font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+    line-height: 1.5;
+    font-weight: 400;
+}
+
 /* ─── Page Wrapper ───────────────────────────────────────── */
 .product-info {
     width: 92%;             /* ← was 35rem fixed */

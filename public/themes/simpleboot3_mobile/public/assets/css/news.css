@@ -5,7 +5,7 @@
 .content {
     width: 92%;             /* ← was 35rem fixed */
     max-width: 36rem;
-    margin: 8rem auto 3rem;
+    margin: 2rem auto 3rem;
     font-family: Arial, sans-serif;
     font-size: 1.3rem;
     color: #333;

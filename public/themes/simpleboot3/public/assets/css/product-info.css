@@ -32,16 +32,17 @@
 .product-detail-banner__title{
     max-width: 1180px;
     margin: 0 auto;
-    font-size: 56px;
+    font-size: 58px;
     line-height: 1.15;
     font-weight: 700;
 }
 .product-detail-banner__desc{
     max-width: 980px;
     margin: 22px auto 0;
-    font-size: 18px;
+    font-size: 25px;
     line-height: 1.85;
     color: rgba(255,255,255,.94);
+    font-weight: bold;
 }
 .product-detail-banner__actions{
     margin-top: 34px;

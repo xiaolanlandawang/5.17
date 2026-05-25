@@ -155,9 +155,17 @@ class IndexController extends HomeBaseController
             $currentCategory = $productCategoryModel->where('id', $category_id)->find();
         }
 
+        $heroSettingsAll = cmf_get_option('product_category_hero_settings');
+        $heroSettingsAll = is_array($heroSettingsAll) ? $heroSettingsAll : [];
+
         $categoryCards = $this->category_list->toArray();
         foreach ($categoryCards as $key => $categoryItem) {
             $categoryCards[$key]['product_count'] = $productModel->where('category_id', $categoryItem['id'])->count();
+            
+            $heroContentItem  = $heroSettingsAll[$categoryItem['id']] ?? [];
+            $customHeroDescription = trim((string)($heroContentItem['description'] ?? ''));
+            $categoryCards[$key]['custom_description'] = $customHeroDescription !== '' ? $customHeroDescription : 'Explore our wide range of products in this category and request a custom quotation for your project.';
+
             if (empty($categoryCards[$key]['thumbnail'])) {
                 $firstProduct = $productModel->where('category_id', $categoryItem['id'])
                     ->where('thumbnail', '<>', '')

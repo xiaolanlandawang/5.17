@@ -88,11 +88,15 @@
         <div class="product-list {$key==0 ? 'active' : ''}">
           <foreach name="vo.list" item="v" key="k">
             <div class="product-item">
-              <a href="{:cmf_url('portal/index/product_info', ['id' => $v['id']])}">
+              <a href="{:cmf_url('portal/index/product_info', ['id' => $v['id']])}" class="product-item__link">
                 <div class="product-img">
                   <img loading="lazy" decoding="async" src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.title}">
                 </div>
-                <div class="product-title">{$v.title}</div>
+                <div class="product-item__content">
+                  <div class="product-title">{$v.title}</div>
+                  <div class="product-category-text">{$v.overview|default=$v.industry}</div>
+                  <div class="product-action">EXPLORE →</div>
+                </div>
               </a>
             </div>
           </foreach>

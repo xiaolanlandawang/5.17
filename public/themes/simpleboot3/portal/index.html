@@ -34,7 +34,7 @@
                         <a class="swiper-slide-link" href="{$slideHref}" target="{$slideTarget}">
                             <img src="{:cmf_get_image_url($vo['image'])}" class="d-block w-100" alt="{$vo.title}">
                         </a>
-                        <div class="swiper-slide-title">
+                        <div class="swiper-slide-title swiper-no-swiping">
                             <div class="swiper-slide-name">{$vo.title}</div>
                             <notempty name="vo.description">
                                 <div class="swiper-slide-desc">{$vo.description}</div>
@@ -99,16 +99,19 @@
                         <div class="swiper-slide">
                             <ul class="products-list">
                                 <foreach name="vo['list']" item="v">
-                                    <li>
-                                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$v['id']))}">
+                                    <li class="product_item">
+                                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$v['id']))}" class="product_item__link">
                                             <div class="product_list_item_img">
-                                                <img loading="lazy" src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.title}"
-                                                    title="{$v.title}">
+                                                <img loading="lazy" src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.title}" title="{$v.title}">
                                             </div>
-                                            <div class="product_list_item_title">{$v.title}</div>
-                                            <div class="product_list_item_category">{$v.industry}</div>
+                                            <div class="product_item__content">
+                                                <div class="product_list_item_title">{$v.title}</div>
+                                                <div class="product_list_item_category">{$v.overview|default=$v.industry}</div>
+                                            </div>
                                         </a>
-                                        <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+                                        <div class="product_item__footer">
+                                            <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+                                        </div>
                                     </li>
                                 </foreach>
                             </ul>

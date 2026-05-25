@@ -15,7 +15,20 @@
 <div class="main">
     <include file="public@nav"/>
 
-    <include file="public@banner"/>
+    <!--PRODUCT DETAIL BANNER START-->
+    <section class="mobile-detail-hero">
+        <img class="mobile-detail-hero__bg"
+             src="{:cmf_get_image_url($banner.image)}"
+             alt="{$banner.title|default=$product.title}"
+             fetchpriority="high"
+             loading="eager"
+             decoding="async">
+        <div class="mobile-detail-hero__content">
+            <div class="mobile-detail-hero__text">{$banner.title|default=$product.title}</div>
+            <div class="mobile-detail-hero__desc">{$product.industry}</div>
+        </div>
+    </section>
+    <!--PRODUCT DETAIL BANNER END-->
 
     <div class="mobile-breadcrumb">
         <a href="/">Home</a>
