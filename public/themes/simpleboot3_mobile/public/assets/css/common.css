@@ -585,6 +585,12 @@ a:focus {
     margin-top: 3rem;
 }
 
+.popover_wrap .popover_container .popover_content .popover_form .popover_form_name,
+.popover_wrap .popover_container .popover_content .popover_form .popover_form_phone,
+.popover_wrap .popover_container .popover_content .popover_form .popover_form_email {
+    margin-top: 1.5rem;
+}
+
 /* Form inputs — fluid, no fixed rem widths */
 .popover_wrap .popover_container .popover_content .popover_form .popover_form_name input,
 .popover_wrap .popover_container .popover_content .popover_form .popover_form_phone input,
@@ -595,7 +601,6 @@ a:focus {
     border-radius: 2.5rem;
     padding-left: 2rem;
     border: 1px solid #dcdcdc;
-    margin-top: 1rem;
 }
 
 .popover_wrap .popover_container .popover_content .popover_form .popover_form_content textarea {

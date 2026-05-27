@@ -162,7 +162,7 @@ $(document).ready(function () {
         data.lifting_height = height;
         data.span = span;
         data.operating_voltage = voltage;
-        data.operating_herts = herts;
+        data.operating_herts = hertz;
         data.job_level = job_level;
         data.sling_available = sling_available;
         let file_url = $('#file').val();
@@ -175,7 +175,9 @@ $(document).ready(function () {
                 if (res.code == 1) {
                     alert('submit success');
                     //谷歌点击转化
-                    gtag_report_conversion();
+                    if (typeof gtag_report_conversion === 'function') {
+                        gtag_report_conversion();
+                    }
                     $('#feedback_type').val(2);
                     $('.popover_wrap').hide();
                     $('body').css('overflow', '');

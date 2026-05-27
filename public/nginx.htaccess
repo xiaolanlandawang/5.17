@@ -2,6 +2,18 @@ location ~* (runtime|application)/{
         return 403;
 }
 location / {
+        # SEO Sitemap Routes
+        rewrite ^/sitemap\.xml$ /index.php?s=/portal/sitemap/index last;
+        rewrite ^/sitemap-pages\.xml$ /index.php?s=/portal/sitemap/pages last;
+        rewrite ^/sitemap-products\.xml$ /index.php?s=/portal/sitemap/products last;
+        rewrite ^/sitemap-cases\.xml$ /index.php?s=/portal/sitemap/cases last;
+        rewrite ^/sitemap-news\.xml$ /index.php?s=/portal/sitemap/news last;
+
+        # SEO Slug Routes
+        rewrite ^/products/(.*)$ /index.php?s=/portal/index/product_info_by_slug/slug/$1 last;
+        rewrite ^/cases/(.*)$ /index.php?s=/portal/index/industries_info_by_slug/slug/$1 last;
+        rewrite ^/news/(.*)$ /index.php?s=/portal/index/news_info_by_slug/slug/$1 last;
+
         if (!-e $request_filename){
                 rewrite  ^(.*)$  /index.php?s=$1  last;   break;
         }

@@ -606,6 +606,44 @@ class IndexController extends HomeBaseController
         }
         $this->success('submit success', '', ['session' => session('user_download')]);
     }
+
+    public function product_info_by_slug()
+    {
+        $slug = $this->request->param('slug');
+        $productModel = new ProductModel();
+        $product = $productModel->where('alias', $slug)->find();
+        if ($product) {
+            $this->request->withGet(['id' => $product['id']]);
+            return $this->product_info();
+        }
+        abort(404, 'product not found');
+    }
+
+    public function industries_info_by_slug()
+    {
+        $slug = $this->request->param('slug');
+        $postModel = new PortalPostModel();
+        $post = $postModel->where('post_alias', $slug)->where('post_type', 3)->find();
+        if ($post) {
+            $this->request->withGet(['id' => $post['id']]);
+            return $this->industries_info();
+        }
+        abort(404, 'case not found');
+    }
+
+    public function news_info_by_slug()
+    {
+        $slug = $this->request->param('slug');
+        $postModel = new PortalPostModel();
+        $post = $postModel->where('post_alias', $slug)->where('post_type', 8)->find();
+        if ($post) {
+            $relation = \think\Db::name('portal_category_post')->where('post_id', $post['id'])->find();
+            $cid = $relation ? $relation['category_id'] : 1;
+            $this->request->withGet(['id' => $post['id'], 'cid' => $cid]);
+            return $this->news_info();
+        }
+        abort(404, 'news not found');
+    }
 }
 
 

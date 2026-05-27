@@ -1,6 +1,19 @@
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks -Indexes
   RewriteEngine On
+
+  # SEO Sitemap Routes
+  RewriteRule ^sitemap\.xml$ index.php?s=/portal/sitemap/index [QSA,PT,L]
+  RewriteRule ^sitemap-pages\.xml$ index.php?s=/portal/sitemap/pages [QSA,PT,L]
+  RewriteRule ^sitemap-products\.xml$ index.php?s=/portal/sitemap/products [QSA,PT,L]
+  RewriteRule ^sitemap-cases\.xml$ index.php?s=/portal/sitemap/cases [QSA,PT,L]
+  RewriteRule ^sitemap-news\.xml$ index.php?s=/portal/sitemap/news [QSA,PT,L]
+
+  # SEO Slug Routes
+  RewriteRule ^products/(.*)$ index.php?s=/portal/index/product_info_by_slug/slug/$1 [QSA,PT,L]
+  RewriteRule ^cases/(.*)$ index.php?s=/portal/index/industries_info_by_slug/slug/$1 [QSA,PT,L]
+  RewriteRule ^news/(.*)$ index.php?s=/portal/index/news_info_by_slug/slug/$1 [QSA,PT,L]
+
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
