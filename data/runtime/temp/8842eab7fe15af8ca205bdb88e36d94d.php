@@ -1,4 +1,4 @@
-<?php /*a:5:{s:76:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\industries-info.html";i:1779431578;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/public\banner.html";i:1779779315;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
+<?php /*a:5:{s:76:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\industries-info.html";i:1779937914;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/public\banner.html";i:1779779315;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -208,7 +208,7 @@
     <div class="prev">
       Previous article:
       <?php if(!(empty($prev_article) || (($prev_article instanceof \think\Collection || $prev_article instanceof \think\Paginator ) && $prev_article->isEmpty()))): ?>
-        <a href="<?php echo cmf_url('portal/index/news_info',array('id'=>$prev_article['id'])); ?>">
+        <a href="<?php if(empty($prev_article['post_alias']) || (($prev_article['post_alias'] instanceof \think\Collection || $prev_article['post_alias'] instanceof \think\Paginator ) && $prev_article['post_alias']->isEmpty())): ?><?php echo cmf_url('portal/index/industries_info',array('id'=>$prev_article['id'])); else: ?>/<?php echo $prev_article['post_alias']; ?>.html<?php endif; ?>">
           <?php echo $prev_article['post_title']; ?>
         </a>
         <?php else: ?>
@@ -219,7 +219,7 @@
     <div class="next">
       Next article:
       <?php if(!(empty($next_article) || (($next_article instanceof \think\Collection || $next_article instanceof \think\Paginator ) && $next_article->isEmpty()))): ?>
-        <a href="<?php echo cmf_url('portal/index/news_info',array('id'=>$next_article['id'])); ?>">
+        <a href="<?php if(empty($next_article['post_alias']) || (($next_article['post_alias'] instanceof \think\Collection || $next_article['post_alias'] instanceof \think\Paginator ) && $next_article['post_alias']->isEmpty())): ?><?php echo cmf_url('portal/index/industries_info',array('id'=>$next_article['id'])); else: ?>/<?php echo $next_article['post_alias']; ?>.html<?php endif; ?>">
           <?php echo $next_article['post_title']; ?>
         </a>
         <?php else: ?>

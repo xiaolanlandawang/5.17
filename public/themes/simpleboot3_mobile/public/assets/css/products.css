@@ -25,9 +25,17 @@
     padding-top: 5rem;
 }
 
+.mobile-product-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 23, 46, .32);
+    z-index: 1;
+}
+
 .mobile-overview-hero__content {
     position: absolute;
-    top: 50%;
+    top: 58%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;

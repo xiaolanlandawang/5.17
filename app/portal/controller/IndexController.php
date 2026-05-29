@@ -365,8 +365,7 @@ class IndexController extends HomeBaseController
         $this->assign('category', $category);
 
         $where = [
-            'post_type' => 3,
-            'delete_time' => 0
+            ['post_type', '=', 3]
         ];
 
         if (cmf_is_mobile()) {
@@ -377,11 +376,14 @@ class IndexController extends HomeBaseController
 
         $portalPostModel->where('id', $articleId)->inc('post_hits')->update();
 
-        $article = $portalPostModel->field('*')->where($where)->where('id', $articleId)->find();
+        $article = $portalPostModel->field('*')->where($where)->where('id', $articleId)
+            ->whereRaw('delete_time IS NULL OR delete_time = 0')->find();
         $this->assign('post', $article);
 
-        $prevArticle = $portalPostModel->field('*')->where($where)->where('id', '<', $articleId)->order('id', 'DESC')->find();
-        $nextArticle = $portalPostModel->field('*')->where($where)->where('id', '>', $articleId)->order('id', 'ASC')->find();
+        $prevArticle = $portalPostModel->field('*')->where($where)->where('id', '<', $articleId)
+            ->whereRaw('delete_time IS NULL OR delete_time = 0')->order('id', 'DESC')->find();
+        $nextArticle = $portalPostModel->field('*')->where($where)->where('id', '>', $articleId)
+            ->whereRaw('delete_time IS NULL OR delete_time = 0')->order('id', 'ASC')->find();
         $this->assign('prev_article', $prevArticle);
         $this->assign('next_article', $nextArticle);
 
@@ -521,21 +523,31 @@ class IndexController extends HomeBaseController
 
         $articleId = $this->request->param('id', 0, 'intval');
         $categoryId = $this->request->param('cid', 0, 'intval');
+        
+        if (empty($categoryId) && !empty($articleId)) {
+            $relation = \think\facade\Db::name('portal_category_post')->where('post_id', $articleId)->find();
+            if ($relation) {
+                $categoryId = $relation['category_id'];
+            }
+        }
+        
         $portalCategoryModel = new PortalCategoryModel();
 
         $category = $portalCategoryModel->where('id', $categoryId)->where('status', 1)->find();
         $this->assign('category', $category);
 
         $where = [
-            'post.post_type' => 8,
-            'post.delete_time' => 0,
-            'relation.category_id' => $categoryId,
-            'relation.post_id' => $articleId
+            ['post.post_type', '=', 8]
         ];
+        if (!empty($categoryId)) {
+            $where[] = ['relation.category_id', '=', $categoryId];
+        }
 
         $article = $portalPostModel->alias('post')->field('post.*')
-            ->join('portal_category_post relation', 'post.id = relation.post_id')
+            ->join('portal_category_post relation', 'post.id = relation.post_id', 'left')
             ->where($where)
+            ->where('post.id', $articleId)
+            ->whereRaw('post.delete_time IS NULL OR post.delete_time = 0')
             ->find();
         $this->assign('post', $article);
 
@@ -546,29 +558,26 @@ class IndexController extends HomeBaseController
         $this->getBanner($slide_id);
         $portalPostModel->where('id', $articleId)->inc('post_hits')->update();
 
-        $article = $portalPostModel->alias('post')->field('post.*')
-            ->join('portal_category_post relation', 'post.id = relation.post_id')
-            ->where($where)
-            ->where('relation.post_id', $articleId)
-            ->find();
-        $this->assign('post', $article);
-
         $prevArticle = $portalPostModel
             ->alias('post')
             ->field('post.*')
-            ->join('portal_category_post relation', 'post.id = relation.post_id')
+            ->join('portal_category_post relation', 'post.id = relation.post_id', 'left')
             ->where($where)
-            ->where('relation.post_id', '<', $articleId)
-            ->order('id', 'DESC')
+            ->where('post.id', '<', $articleId)
+            ->whereRaw('post.delete_time IS NULL OR post.delete_time = 0')
+            ->order('post.id', 'DESC')
             ->find();
+            
         $nextArticle = $portalPostModel
             ->alias('post')
             ->field('post.*')
-            ->join('portal_category_post relation', 'post.id = relation.post_id')
+            ->join('portal_category_post relation', 'post.id = relation.post_id', 'left')
             ->where($where)
-            ->where('relation.post_id', '>', $articleId)
-            ->order('id', 'DESC')
+            ->where('post.id', '>', $articleId)
+            ->whereRaw('post.delete_time IS NULL OR post.delete_time = 0')
+            ->order('post.id', 'ASC')
             ->find();
+            
         $this->assign('prev_article', $prevArticle);
         $this->assign('next_article', $nextArticle);
 
@@ -643,6 +652,11 @@ class IndexController extends HomeBaseController
             return $this->news_info();
         }
         abort(404, 'news not found');
+    }
+
+    public function privacy()
+    {
+        return $this->fetch(':privacy');
     }
 }
 

@@ -35,7 +35,7 @@
         <div class="prev">
             Previous article:
             <notempty name="prev_article">
-                <a href="{:cmf_url('portal/index/news_info',array('id'=>$prev_article['id']))}">
+                <a href="<empty name='prev_article.post_alias'>{:cmf_url('portal/index/news_info',array('id'=>$prev_article['id'],'cid'=>$category['id']))}<else/>/{$prev_article.post_alias}.html</empty>">
                     {$prev_article.post_title}
                 </a>
                 <else/>
@@ -46,7 +46,7 @@
         <div class="next">
             Next article:
             <notempty name="next_article">
-                <a href="{:cmf_url('portal/index/news_info',array('id'=>$next_article['id']))}">
+                <a href="<empty name='next_article.post_alias'>{:cmf_url('portal/index/news_info',array('id'=>$next_article['id'],'cid'=>$category['id']))}<else/>/{$next_article.post_alias}.html</empty>">
                     {$next_article.post_title}
                 </a>
                 <else/>

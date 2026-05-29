@@ -23,7 +23,7 @@
     <div class="category-list">
         <ul>
             <foreach name="news_category" item="vo">
-                <li class="category-item {:input('id')==$vo.id ? 'active' : ''}" onclick="location.href='{:cmf_url(\"portal/index/news\",array(\"id\"=>$vo[\"id\"]))}'">
+                <li class="category-item {:input('id')==$vo.id ? 'active' : ''}" onclick="location.href='{:cmf_url('portal/index/news',['id'=>$vo['id']])}'">
                 {$vo.name}
                 </li>
             </foreach>
@@ -33,9 +33,9 @@
     <div class="products-list">
         <ul class="clearfix">
             <foreach name="list" item="vo">
-                <li onclick="location.href='{:cmf_url(\"portal/index/news_info\",array(\"cid\"=>$vo[\"cid\"],\"id\"=>$vo[\"id\"]))}'">
+                <li onclick="location.href='{:cmf_url('portal/index/news_info',['cid'=>$vo['cid'],'id'=>$vo['id']])}'">
                 <div class="item-img">
-                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.post_title}">
+                    <img src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}">
                 </div>
                 <div class="item-content">
                     <div class="item-time">

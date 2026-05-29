@@ -9,7 +9,13 @@ use think\facade\Cache;
 
 class SitemapController extends HomeBaseController
 {
-    private $domain = 'https://weihuahenancrane.com';
+    private $domain = '';
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->domain = $this->request->domain();
+    }
 
 
     public function index()
@@ -27,7 +33,7 @@ class SitemapController extends HomeBaseController
 
     public function pages()
     {
-        $pages = ['/', '/about-us', '/products', '/cases', '/service', '/news', '/contact-us'];
+        $pages = ['/', '/about.html', '/products', '/case.html', '/service', '/portal/index/news.html', '/quote.html'];
         
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;

@@ -1,4 +1,4 @@
-<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/portal\\index.html";i:1779431578;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\head.html";i:1779697000;s:70:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\nav.html";i:1779090902;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\foot.html";i:1779412113;}*/ ?>
+<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/portal\\index.html";i:1779934386;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\head.html";i:1779697000;s:70:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\nav.html";i:1779090902;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\foot.html";i:1780040179;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -488,6 +488,9 @@
         </div>
         <div class="footer-bottom"
             style="text-align: center; color: rgba(255,255,255,0.6); font-size: 1.2rem; margin-top: 2rem; padding-bottom: 2rem;">
+            <div class="footer-policy-links" style="margin-bottom: 1rem;">
+                <a href="<?php echo cmf_url('portal/index/privacy'); ?>" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+            </div>
             Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
         </div>
     </div>
@@ -846,6 +849,7 @@
         window.addEventListener('touchstart', ensureIntlTelInputLoaded, { passive: true, once: true });
     });
 </script>
+
 
 </div>
 </body>

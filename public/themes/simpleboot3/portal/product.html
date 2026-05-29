@@ -16,7 +16,7 @@
 
 <div class="product-page">
     <if condition="!$is_category_page">
-        <section class="products-banner" style="background-image:url('{$hero_image}');">
+        <section class="products-banner" style="background-image: linear-gradient(rgba(7, 23, 46, .32), rgba(7, 23, 46, .32)), url('{$hero_image}');">
             <div class="products-banner__inner">
                 <h1 class="products-banner__title">{$hero_title}</h1>
                 <p class="products-banner__desc">{$hero_description}</p>
@@ -173,7 +173,7 @@
                         <div class="faq-contact-icon">?</div>
                         <div class="faq-contact-title">{$categoryFaqContactTitle}</div>
                         <div class="faq-contact-desc">{$categoryFaqContactDesc}</div>
-                        <a class="faq-contact-btn" href="{$categoryFaqContactLink}">{$categoryFaqContactBtnText}</a>
+                        <a class="faq-contact-btn" href="javascript:;" onclick="$('#feedback_type').val(2); $('#file').val(''); $('.popover_wrap').show();">{$categoryFaqContactBtnText}</a>
                     </div>
                 </div>
             </div>

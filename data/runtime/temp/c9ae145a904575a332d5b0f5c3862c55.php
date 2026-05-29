@@ -1,4 +1,4 @@
-<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product-info.html";i:1779677151;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
+<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product-info.html";i:1779677151;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780040539;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -507,6 +507,9 @@
     </div>
 
     <div class="footer-bottom">
+        <div class="footer-policy-links" style="margin-bottom: 10px;">
+            <a href="<?php echo cmf_url('portal/index/privacy'); ?>" target="_blank" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+        </div>
         Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
     </div>
 </div>
@@ -520,6 +523,8 @@
         <button class="form-message-button" type="button">OK</button>
     </div>
 </div>
+
+
 
 
 <!-- Floating box -->

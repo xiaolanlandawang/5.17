@@ -11,6 +11,14 @@
     padding-top: 5rem;
 }
 
+.mobile-detail-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 23, 46, .32);
+    z-index: 1;
+}
+
 .mobile-detail-hero__bg {
     position: relative;
     width: 100%;

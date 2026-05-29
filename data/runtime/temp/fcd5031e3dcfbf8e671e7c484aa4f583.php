@@ -1,4 +1,4 @@
-<?php /*a:5:{s:68:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product.html";i:1779431578;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:74:"C:\laragon\www\weihua\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
+<?php /*a:5:{s:68:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product.html";i:1780050813;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:74:"C:\laragon\www\weihua\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780040539;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,7 +185,7 @@
 
 <div class="product-page">
     <?php if(!$is_category_page): ?>
-        <section class="products-banner" style="background-image:url('<?php echo $hero_image; ?>');">
+        <section class="products-banner" style="background-image: linear-gradient(rgba(7, 23, 46, .32), rgba(7, 23, 46, .32)), url('<?php echo $hero_image; ?>');">
             <div class="products-banner__inner">
                 <h1 class="products-banner__title"><?php echo $hero_title; ?></h1>
                 <p class="products-banner__desc"><?php echo $hero_description; ?></p>
@@ -393,7 +393,7 @@
                         <div class="faq-contact-icon">?</div>
                         <div class="faq-contact-title"><?php echo $categoryFaqContactTitle; ?></div>
                         <div class="faq-contact-desc"><?php echo $categoryFaqContactDesc; ?></div>
-                        <a class="faq-contact-btn" href="<?php echo $categoryFaqContactLink; ?>"><?php echo $categoryFaqContactBtnText; ?></a>
+                        <a class="faq-contact-btn" href="javascript:;" onclick="$('#feedback_type').val(2); $('#file').val(''); $('.popover_wrap').show();"><?php echo $categoryFaqContactBtnText; ?></a>
                     </div>
                 </div>
             </div>
@@ -536,6 +536,9 @@
     </div>
 
     <div class="footer-bottom">
+        <div class="footer-policy-links" style="margin-bottom: 10px;">
+            <a href="<?php echo cmf_url('portal/index/privacy'); ?>" target="_blank" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+        </div>
         Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
     </div>
 </div>
@@ -549,6 +552,8 @@
         <button class="form-message-button" type="button">OK</button>
     </div>
 </div>
+
+
 
 
 <!-- Floating box -->

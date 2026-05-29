@@ -30,6 +30,7 @@
             <div class="mobile-overview-hero__content">
                 <div class="mobile-overview-hero__text">PRODUCTS</div>
                 <div class="mobile-overview-hero__desc">The company mainly produces core products such as intelligent cranes, multi-functional special cranes, port cranes, ship cranes, and metallurgical cranes.</div>
+                <a href="javascript:;" class="mobile-product-hero__btn" id="inquiry">Get A Free Quote</a>
             </div>
         </section>
 
@@ -201,7 +202,6 @@
             <div class="swiper product-case-swiper">
                 <div class="swiper-wrapper">
                     <foreach name="case_list" item="vo" key="k">
-                        <if condition="$k lt 4">
                             <div class="swiper-slide case-item" title="{$vo.post_title}">
                                 <a href="{:cmf_url('portal/index/industries_info',array('id'=>$vo.id))}">
                                     <div class="case-item-img">
@@ -211,7 +211,6 @@
                                     <div class="case-item-desc">{$vo.post_excerpt}</div>
                                 </a>
                             </div>
-                        </if>
                     </foreach>
                 </div>
                 <div class="swiper-pagination product-case-pagination"></div>

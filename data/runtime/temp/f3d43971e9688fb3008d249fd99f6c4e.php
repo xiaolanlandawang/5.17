@@ -1,4 +1,4 @@
-<?php /*a:4:{s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\index.html";i:1779701451;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
+<?php /*a:4:{s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\index.html";i:1780050813;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780040539;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -558,7 +558,7 @@
                     <div class="faq-contact-icon">?</div>
                     <div class="faq-contact-title"><?php echo $faqContactTitle; ?></div>
                     <div class="faq-contact-desc"><?php echo $faqContactDesc; ?></div>
-                    <a class="faq-contact-btn" href="<?php echo $faqContactLink; ?>"><?php echo $faqContactBtnText; ?></a>
+                    <a class="faq-contact-btn" href="javascript:;" onclick="$('#feedback_type').val(2); $('#file').val(''); $('.popover_wrap').show();"><?php echo $faqContactBtnText; ?></a>
                 </div>
             </div>
         </div>
@@ -697,6 +697,9 @@
     </div>
 
     <div class="footer-bottom">
+        <div class="footer-policy-links" style="margin-bottom: 10px;">
+            <a href="<?php echo cmf_url('portal/index/privacy'); ?>" target="_blank" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+        </div>
         Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
     </div>
 </div>
@@ -710,6 +713,8 @@
         <button class="form-message-button" type="button">OK</button>
     </div>
 </div>
+
+
 
 
 <!-- Floating box -->
