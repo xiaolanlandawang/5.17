@@ -1,4 +1,4 @@
-<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product-info.html";i:1779677151;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780040539;}*/ ?>
+<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product-info.html";i:1780540519;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1780538078;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780538078;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,19 +66,19 @@
         <div class="header-container">
             <div class="header-contact">
                 <div class="header-contact-item">
-                    <a href="mailto:<?php echo $site_info['email']; ?>">
+                    <a href="mailto:<?php echo $site_info['email']; ?>" target="_blank" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                         <img src="/themes/simpleboot3/public/assets/images/header-email.png" alt="email">
                         <span class="contact-label">E-Mail:</span> <?php echo $site_info['email']; ?>
                     </a>
                 </div>
                 <div class="header-contact-item">
-                    <a href="tel:<?php echo $site_info['sale_tel']; ?>">
+                    <a href="tel:<?php echo $site_info['sale_tel']; ?>" target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-tel.svg" alt="tel">
                         <span class="contact-label">Tel:</span> <?php echo $site_info['sale_tel']; ?>
                     </a>
                 </div>
                 <div class="header-contact-item">
-                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>">
+                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>" target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-whatsapp.png" alt="whatsapp">
                         <span class="contact-label">WhatsApp:</span> <?php echo $site_info['whatsapp']; ?>
                     </a>
@@ -90,16 +90,16 @@
             </div>
             <div class="header-link">
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['facebook']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-facebook.png" alt="facebook"></a>
+                    <a href="<?php echo $site_info['facebook']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-facebook.png" alt="facebook"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['youtube']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-youtube.png" alt="youtube"></a>
+                    <a href="<?php echo $site_info['youtube']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-youtube.png" alt="youtube"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['linkedin']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-linkedin.png" alt="linkedin"></a>
+                    <a href="<?php echo $site_info['linkedin']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-linkedin.png" alt="linkedin"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['vk']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk"></a>
+                    <a href="<?php echo $site_info['vk']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk"></a>
                 </div>
             </div>
         </div>
@@ -397,6 +397,56 @@
 
 
 
+        <!-- Customize Inquiry / Quick Quote Section -->
+        <section class="product-collect-section reveal">
+            <div class="home-collect">
+                <div class="home-collect-container">
+                    <div class="home-collect-left">
+                        <div class="quote-intro">
+                            <h2 class="intro-title">Need a Quick Quote? Help Us Serve You Better!</h2>
+                            <p class="intro-subtitle">To ensure we provide the most accurate solution, please share:</p>
+                            <ul class="intro-list">
+                                <li>
+                                    <strong>1. Application:</strong> What will the crane be used for? 
+                                </li>
+                                <li>
+                                    <strong>2. Key Specs:</strong> Lifting capacity (ton), span (m), and lifting height (m) required.
+                                </li>
+                                <li>
+                                    <strong>3. Project Details:</strong> Site conditions (indoor/outdoor), budget range, and timeline.
+                                </li>
+                            </ul>
+                            <div class="intro-footer">
+                                Our team will recommend the most suitable and cost-effective solution for your project.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="home-collect-form-section">
+                        <h2 class="form-title">Customize Your Lifting Solutions</h2>
+                        <div class="home-collect-form">
+                            <div class="home-collect-field">
+                                <label>Name</label>
+                                <input type="text" class="home-collect-name" placeholder="Name">
+                            </div>
+                            <div class="home-collect-field">
+                                <label>Email</label>
+                                <input type="text" class="home-collect-email" placeholder="Email">
+                            </div>
+                            <div class="home-collect-field full-width">
+                                <label>Phone / Whatsapp</label>
+                                <input type="text" class="home-collect-phone" placeholder="Phone / Whatsapp">
+                            </div>
+                            <div class="home-collect-field full-width">
+                                <label>Message</label>
+                                <textarea class="home-collect-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                            </div>
+                            <div class="home-collect-submit">SEND MESSAGE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- HOT PRODUCTS START -->
         <?php if(!(empty($recommended_list) || (($recommended_list instanceof \think\Collection || $recommended_list instanceof \think\Paginator ) && $recommended_list->isEmpty()))): ?>
             <div class="hot-products">
@@ -465,7 +515,7 @@
 
         <div class="footer-contact">
             <div class="footer-title">Contact Info</div>
-            <div class="footer-contact-item footer-contact-email" onclick="location.href='mailto:<?php echo $site_info['email']; ?>';">
+            <div class="footer-contact-item footer-contact-email" onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) location.href='mailto:<?php echo $site_info['email']; ?>';">
                 <?php echo $site_info['email']; ?></div>
             <div class="footer-contact-item footer-contact-address"><?php echo $site_info['address']; ?></div>
             <?php 
@@ -551,7 +601,7 @@
             </div>
         </div>
         <div class="right_fix_box right_fix_email">
-            <a href="mailto:<?php echo $site_info['email']; ?>">
+            <a href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                 <img src="/themes/simpleboot3/public/assets/images/fix-email.webp" alt="email" title="email">
                 <div class="right_fix_box_connect">
                     <p>Email:</p>
@@ -576,7 +626,7 @@
             <div class="popover_title">
                 <h2>Develop your lifting solution</h2>
                 <p class="popover_title_description">Contact us today by email at :<a
-                        href="mailto:<?php echo $site_info['email']; ?>"><?php echo $site_info['email']; ?></a>,
+                        href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');"><?php echo $site_info['email']; ?></a>,
                     or fill out the form below.</p>
             </div>
             <div class="popover_form">

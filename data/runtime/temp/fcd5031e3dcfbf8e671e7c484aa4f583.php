@@ -1,4 +1,4 @@
-<?php /*a:5:{s:68:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product.html";i:1780050813;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:74:"C:\laragon\www\weihua\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780040539;}*/ ?>
+<?php /*a:5:{s:68:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\product.html";i:1780050813;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1780538078;s:74:"C:\laragon\www\weihua\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780538078;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,19 +67,19 @@
         <div class="header-container">
             <div class="header-contact">
                 <div class="header-contact-item">
-                    <a href="mailto:<?php echo $site_info['email']; ?>">
+                    <a href="mailto:<?php echo $site_info['email']; ?>" target="_blank" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                         <img src="/themes/simpleboot3/public/assets/images/header-email.png" alt="email">
                         <span class="contact-label">E-Mail:</span> <?php echo $site_info['email']; ?>
                     </a>
                 </div>
                 <div class="header-contact-item">
-                    <a href="tel:<?php echo $site_info['sale_tel']; ?>">
+                    <a href="tel:<?php echo $site_info['sale_tel']; ?>" target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-tel.svg" alt="tel">
                         <span class="contact-label">Tel:</span> <?php echo $site_info['sale_tel']; ?>
                     </a>
                 </div>
                 <div class="header-contact-item">
-                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>">
+                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>" target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-whatsapp.png" alt="whatsapp">
                         <span class="contact-label">WhatsApp:</span> <?php echo $site_info['whatsapp']; ?>
                     </a>
@@ -91,16 +91,16 @@
             </div>
             <div class="header-link">
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['facebook']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-facebook.png" alt="facebook"></a>
+                    <a href="<?php echo $site_info['facebook']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-facebook.png" alt="facebook"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['youtube']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-youtube.png" alt="youtube"></a>
+                    <a href="<?php echo $site_info['youtube']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-youtube.png" alt="youtube"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['linkedin']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-linkedin.png" alt="linkedin"></a>
+                    <a href="<?php echo $site_info['linkedin']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-linkedin.png" alt="linkedin"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['vk']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk"></a>
+                    <a href="<?php echo $site_info['vk']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk"></a>
                 </div>
             </div>
         </div>
@@ -494,7 +494,7 @@
 
         <div class="footer-contact">
             <div class="footer-title">Contact Info</div>
-            <div class="footer-contact-item footer-contact-email" onclick="location.href='mailto:<?php echo $site_info['email']; ?>';">
+            <div class="footer-contact-item footer-contact-email" onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) location.href='mailto:<?php echo $site_info['email']; ?>';">
                 <?php echo $site_info['email']; ?></div>
             <div class="footer-contact-item footer-contact-address"><?php echo $site_info['address']; ?></div>
             <?php 
@@ -580,7 +580,7 @@
             </div>
         </div>
         <div class="right_fix_box right_fix_email">
-            <a href="mailto:<?php echo $site_info['email']; ?>">
+            <a href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                 <img src="/themes/simpleboot3/public/assets/images/fix-email.webp" alt="email" title="email">
                 <div class="right_fix_box_connect">
                     <p>Email:</p>
@@ -605,7 +605,7 @@
             <div class="popover_title">
                 <h2>Develop your lifting solution</h2>
                 <p class="popover_title_description">Contact us today by email at :<a
-                        href="mailto:<?php echo $site_info['email']; ?>"><?php echo $site_info['email']; ?></a>,
+                        href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');"><?php echo $site_info['email']; ?></a>,
                     or fill out the form below.</p>
             </div>
             <div class="popover_form">

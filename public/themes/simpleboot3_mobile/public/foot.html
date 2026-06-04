@@ -9,7 +9,7 @@
             <div class="footer-contact-item">
                 <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-email.webp" alt="email">
                 <p class="footer-contact-item-content">
-                    <a onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>
+                    <a onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>
                 </p>
             </div>
             <div class="footer-contact-item">
@@ -97,7 +97,7 @@
     <div class="right_fix">
         <div class="right_fix_connect">
             <div class="right_fix_box right_fix_email">
-                <a href="mailto:{$site_info.email}">
+                <a href="mailto:{$site_info.email}" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                     <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/fix-email-mobile.webp"
                         alt="email" title="email">
                     <p class="right_fix_box_title">Send Email</p>
@@ -138,7 +138,7 @@
             <div class="popover_title">
                 <h2>Develop your lifting solution</h2>
                 <p class="popover_title_description">Contact us today by email at :<a
-                        onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>, or fill
+                        onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>, or fill
                     out the form below.</p>
             </div>
             <div class="popover_form">

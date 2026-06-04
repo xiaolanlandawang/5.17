@@ -14,19 +14,19 @@
         <div class="header-container">
             <div class="header-contact">
                 <div class="header-contact-item">
-                    <a href="mailto:{$site_info.email}">
+                    <a href="mailto:{$site_info.email}" target="_blank" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                         <img src="__TMPL__/public/assets/images/header-email.png" alt="email">
                         <span class="contact-label">E-Mail:</span> {$site_info.email}
                     </a>
                 </div>
                 <div class="header-contact-item">
-                    <a href="tel:{$site_info.sale_tel}">
+                    <a href="tel:{$site_info.sale_tel}" target="_blank">
                         <img src="__TMPL__/public/assets/images/header-tel.svg" alt="tel">
                         <span class="contact-label">Tel:</span> {$site_info.sale_tel}
                     </a>
                 </div>
                 <div class="header-contact-item">
-                    <a href="https://api.whatsapp.com/send?phone={$cleanNumber}">
+                    <a href="https://api.whatsapp.com/send?phone={$cleanNumber}" target="_blank">
                         <img src="__TMPL__/public/assets/images/header-whatsapp.png" alt="whatsapp">
                         <span class="contact-label">WhatsApp:</span> {$site_info.whatsapp}
                     </a>
@@ -38,16 +38,16 @@
             </div>
             <div class="header-link">
                 <div class="header-link-item">
-                    <a href="{$site_info.facebook}"><img src="__TMPL__/public/assets/images/header-facebook.png" alt="facebook"></a>
+                    <a href="{$site_info.facebook}" target="_blank"><img src="__TMPL__/public/assets/images/header-facebook.png" alt="facebook"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="{$site_info.youtube}"><img src="__TMPL__/public/assets/images/header-youtube.png" alt="youtube"></a>
+                    <a href="{$site_info.youtube}" target="_blank"><img src="__TMPL__/public/assets/images/header-youtube.png" alt="youtube"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="{$site_info.linkedin}"><img src="__TMPL__/public/assets/images/header-linkedin.png" alt="linkedin"></a>
+                    <a href="{$site_info.linkedin}" target="_blank"><img src="__TMPL__/public/assets/images/header-linkedin.png" alt="linkedin"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="{$site_info.vk}"><img src="__TMPL__/public/assets/images/header-vk.png" alt="vk"></a>
+                    <a href="{$site_info.vk}" target="_blank"><img src="__TMPL__/public/assets/images/header-vk.png" alt="vk"></a>
                 </div>
             </div>
         </div>

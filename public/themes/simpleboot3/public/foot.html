@@ -40,7 +40,7 @@
 
         <div class="footer-contact">
             <div class="footer-title">Contact Info</div>
-            <div class="footer-contact-item footer-contact-email" onclick="location.href='mailto:{$site_info.email}';">
+            <div class="footer-contact-item footer-contact-email" onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) location.href='mailto:{$site_info.email}';">
                 {$site_info.email}</div>
             <div class="footer-contact-item footer-contact-address">{$site_info.address}</div>
             <php>
@@ -127,7 +127,7 @@
             </div>
         </div>
         <div class="right_fix_box right_fix_email">
-            <a href="mailto:{$site_info.email}">
+            <a href="mailto:{$site_info.email}" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                 <img src="__TMPL__/public/assets/images/fix-email.webp" alt="email" title="email">
                 <div class="right_fix_box_connect">
                     <p>Email:</p>
@@ -152,7 +152,7 @@
             <div class="popover_title">
                 <h2>Develop your lifting solution</h2>
                 <p class="popover_title_description">Contact us today by email at :<a
-                        href="mailto:{$site_info.email}">{$site_info.email}</a>,
+                        href="mailto:{$site_info.email}" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">{$site_info.email}</a>,
                     or fill out the form below.</p>
             </div>
             <div class="popover_form">
