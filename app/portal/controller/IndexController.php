@@ -605,6 +605,40 @@ class IndexController extends HomeBaseController
             $UserAccessLogModel->saveLog($ip, $message_id);
 
             Db::commit();
+
+            // 发送邮件提醒给管理员
+            try {
+                $site_info = cmf_get_option('site_info');
+                if (!empty($site_info['email'])) {
+                    $to = $site_info['email'];
+                    $subject = "New Inquiry from " . ($data['name'] ?? 'Website User');
+                    
+                    $email_content = "<h2>New Inquiry Received</h2>";
+                    $email_content .= "<p><strong>Name:</strong> " . htmlspecialchars($data['name'] ?? 'N/A') . "</p>";
+                    $email_content .= "<p><strong>Email:</strong> " . htmlspecialchars($data['email'] ?? 'N/A') . "</p>";
+                    if (!empty($data['phone'])) {
+                        $email_content .= "<p><strong>Phone:</strong> " . htmlspecialchars($data['phone']) . "</p>";
+                    }
+                    if (!empty($data['product_id'])) {
+                        $product = Db::name('portal_post')->where('id', $data['product_id'])->find();
+                        if ($product) {
+                            $email_content .= "<p><strong>Product:</strong> " . htmlspecialchars($product['post_title']) . "</p>";
+                        }
+                    }
+                    $email_content .= "<p><strong>Message:</strong><br/> " . nl2br(htmlspecialchars($data['content'] ?? 'N/A')) . "</p>";
+                    
+                    $referer_url = $this->request->server('HTTP_REFERER');
+                    if (!empty($referer_url)) {
+                        $email_content .= "<p><strong>Source Page URL:</strong> <a href='" . htmlspecialchars($referer_url) . "'>" . htmlspecialchars($referer_url) . "</a></p>";
+                    }
+                    
+                    $email_content .= "<p><strong>IP:</strong> " . $ip . "</p>";
+                    
+                    cmf_send_email($to, $subject, $email_content);
+                }
+            } catch (\Exception $e) {
+                // 忽略邮件发送错误，防止影响表单正常提交
+            }
         } catch (\Exception $e) {
             Db::rollback();
             $this->error($e->getMessage());

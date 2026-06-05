@@ -161,6 +161,13 @@ class AdminNewsController extends AdminBaseController
             ];
             hook('portal_admin_after_save_article', $hookParam);
 
+            if (!empty($data['post']['post_alias'])){
+                $routeModel = new RouteModel();
+                $routeUrl   = $data['post']['post_alias'];
+                $routeModel->setRoute($routeUrl, 'portal/index/news_info', ['id' => $data['post']['id'],'cid'=>$data['post']['categories']], 2, 1000);
+
+                $routeModel->getRoutes(true);
+            }
 
             $this->success('添加成功!', url('AdminNews/index'));
         }
@@ -273,7 +280,7 @@ class AdminNewsController extends AdminBaseController
             if (!empty($data['post']['post_alias'])){
                 $routeModel = new RouteModel();
                 $routeUrl   = $data['post']['post_alias'];
-                $routeModel->setRoute($routeUrl, 'portal/index/news_info', ['id' => $data['post']['id'],'cid'=>$data['post']['categories']], 2, 5000);
+                $routeModel->setRoute($routeUrl, 'portal/index/news_info', ['id' => $data['post']['id'],'cid'=>$data['post']['categories']], 2, 1000);
 
                 $routeModel->getRoutes(true);
             }

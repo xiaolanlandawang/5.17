@@ -1,4 +1,4 @@
-<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/portal\\index.html";i:1779934386;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\head.html";i:1779697000;s:70:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\nav.html";i:1779090902;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\foot.html";i:1780040179;}*/ ?>
+<?php /*a:4:{s:73:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/portal\\index.html";i:1780648937;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\head.html";i:1780621050;s:70:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\nav.html";i:1779090902;s:71:"C:\laragon\www\weihua\public/themes/simpleboot3_mobile/public\foot.html";i:1780655347;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +9,7 @@
   <meta name="google-site-verification" content="xq1U9Wx4JsDxE2JtMVkiWU4bMGKhuJOgiHulcoo4Wy4" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2V25J0DR5Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2V25J0DR5Z');
-</script>
+  
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 <script>
     // Immediate font-size calculation to prevent layout shifts
@@ -41,13 +33,7 @@
     <?php echo htmlspecialchars_decode($site_info['google_head']); ?>
 <?php endif; ?>
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wwe66llrvz");
-</script>
+
 
 
 
@@ -412,7 +398,7 @@
             <div class="footer-contact-item">
                 <img loading="lazy" decoding="async" src="/themes/simpleboot3_mobile/public/assets/images/foot-email.webp" alt="email">
                 <p class="footer-contact-item-content">
-                    <a onclick="gtag_report_conversion('mailto:<?php echo $site_info['email']; ?>');"><?php echo $site_info['email']; ?></a>
+                    <a onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) gtag_report_conversion('mailto:<?php echo $site_info['email']; ?>');"><?php echo $site_info['email']; ?></a>
                 </p>
             </div>
             <div class="footer-contact-item">
@@ -430,7 +416,7 @@
                     <img loading="lazy" decoding="async" src="/themes/simpleboot3_mobile/public/assets/images/quote-whatsapp.webp"
                         alt="whatsapp">
                     <p class="footer-contact-item-content">
-                        <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>');"
+                        <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote.');"
                             target="_blank"><?php echo $site_info['whatsapp']; ?></a>
                     </p>
                 </div>
@@ -497,14 +483,14 @@
     <div class="right_fix">
         <div class="right_fix_connect">
             <div class="right_fix_box right_fix_email">
-                <a href="mailto:<?php echo $site_info['email']; ?>">
+                <a href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                     <img loading="lazy" decoding="async" src="/themes/simpleboot3_mobile/public/assets/images/fix-email-mobile.webp"
                         alt="email" title="email">
                     <p class="right_fix_box_title">Send Email</p>
                 </a>
             </div>
             <div class="right_fix_box right_fix_whatsapp">
-                <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>">
+                <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote.">
                     <img loading="lazy" decoding="async" src="/themes/simpleboot3_mobile/public/assets/images/fix-whatsapp-mobile.webp"
                         alt="whatsapp" title="whatsapp">
                     <p class="right_fix_box_title">WhatsApp</p>
@@ -538,7 +524,7 @@
             <div class="popover_title">
                 <h2>Develop your lifting solution</h2>
                 <p class="popover_title_description">Contact us today by email at :<a
-                        onclick="gtag_report_conversion('mailto:<?php echo $site_info['email']; ?>');"><?php echo $site_info['email']; ?></a>, or fill
+                        onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) gtag_report_conversion('mailto:<?php echo $site_info['email']; ?>');"><?php echo $site_info['email']; ?></a>, or fill
                     out the form below.</p>
             </div>
             <div class="popover_form">
@@ -568,70 +554,6 @@
     </div>
 </div>
 
-<!-- Floating WhatsApp Button (above live chat) -->
-<?php if(!empty($site_info['whatsapp'])): 
-        $cleanNumberWa = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
-     ?>
-    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumberWa; ?>" target="_blank" id="mobile-float-whatsapp" title="WhatsApp">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.978 14.057.95 11.433.95c-5.449 0-9.873 4.38-9.877 9.808 0 1.813.499 3.59 1.443 5.161l-1.005 3.67 3.774-.984zm11.085-6.732c-.3-.15-1.774-.875-2.05-.975-.273-.1-.472-.15-.672.15-.2.3-.775.975-.95 1.174-.175.2-.35.225-.65.075-1.127-.566-1.958-1.034-2.738-2.372-.2-.35-.2-.6-.35-.75-.15-.15-.3-.35-.45-.525-.15-.175-.2-.3-.3-.5-.1-.2-.05-.375.025-.525.075-.15.672-.782.75-.95.08-.175.04-.325-.02-.475-.06-.15-.672-1.62-.92-2.21-.242-.58-.487-.5-.672-.51-.173-.008-.371-.01-.57-.01-.2 0-.525.075-.8.375-.273.3-1.042 1.016-1.042 2.479 0 1.462 1.067 2.877 1.217 3.078.15.2 2.1 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
-        </svg>
-    </a>
-    <style>
-        #mobile-float-whatsapp {
-            position: fixed;
-            bottom: 80px;
-            right: 10px;
-            width: 60px;
-            height: 60px;
-            background-color: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 99998;
-            box-shadow: 0 4px 14px rgba(37,211,102,0.5);
-            opacity: 0;
-            transform: scale(0.5);
-            pointer-events: none;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        #mobile-float-whatsapp.wa-visible {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-        #mobile-float-whatsapp:active {
-            transform: scale(0.92);
-        }
-        #mobile-float-whatsapp svg {
-            width: 32px;
-            height: 32px;
-            fill: #fff;
-        }
-        #mobile-float-whatsapp::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #25D366;
-            opacity: 0.35;
-            z-index: -1;
-            animation: wa-pulse 2s ease-out infinite;
-        }
-        @keyframes wa-pulse {
-            0%   { transform: scale(1);   opacity: 0.35; }
-            100% { transform: scale(1.7); opacity: 0; }
-        }
-    </style>
-    <script>
-        setTimeout(function () {
-            var btn = document.getElementById('mobile-float-whatsapp');
-            if (btn) btn.classList.add('wa-visible');
-        }, 4000);
-    </script>
-<?php endif; ?>
 
 <!-- Tawk.to position alignment: match WhatsApp button right:6px -->
 <script>

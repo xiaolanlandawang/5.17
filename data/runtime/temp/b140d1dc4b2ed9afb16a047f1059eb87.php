@@ -1,4 +1,4 @@
-<?php /*a:2:{s:77:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/admin\setting\site.html";i:1779090617;s:72:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/public\header.html";i:1730268636;}*/ ?>
+<?php /*a:2:{s:77:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/admin\setting\site.html";i:1780543330;s:72:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/public\header.html";i:1730268636;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,6 +176,7 @@
         <li><a href="#B" data-toggle="tab"><?php echo lang('SEO_SETTING'); ?></a></li>
         <li><a href="#C" data-toggle="tab">主页设置</a></li>
         <li><a href="#D" data-toggle="tab">产品设置</a></li>
+        <li><a href="javascript:parent.openapp('<?php echo url('admin/mailer/index'); ?>','admin_mailer_index','邮箱设置',true);" style="color: #d9534f; font-weight: bold;"><i class="fa fa-envelope"></i> 邮箱配置</a></li>
     </ul>
     <form class="form-horizontal js-ajax-form margin-top-20" role="form" action="<?php echo url('Setting/sitePost'); ?>"
           method="post">

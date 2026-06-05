@@ -259,19 +259,7 @@ Route::get('Suspension Overhead Crane LX Type', 'portal/index/product_info?id=18
 
 Route::get('Cleanroom-Overhead-Crane', 'portal/index/product_info?id=183')->append(array('id' => '183',));
 
-Route::get('CampanyNews/:id', 'portal/index/news_info?cid=1')->append(array('cid' => '1',));
-
-Route::get('CampanyNews', 'portal/index/news?id=1')->append(array('id' => '1',));
-
-Route::get('Case1', 'portal/index/industries_info?id=3')->append(array('id' => '3',));
-
 Route::get('company1', 'portal/index/news_info?cid=1&id=2')->append(array('cid' => '1',  'id' => '2',));
-
-Route::get('intelligent-overhead-crane-for-brewery', 'portal/index/industries_info?id=6')->append(array('id' => '6',));
-
-Route::get('600t-gantry-crane-for-hydropower-project', 'portal/index/industries_info?id=7')->append(array('id' => '7',));
-
-Route::get('weihua-made-450-ton-shipbuilding-gantry-crane', 'portal/index/industries_info?id=8')->append(array('id' => '8',));
 
 Route::get('acf-ic-expert-group-visits-weihua-for-one-enterprise-one-policy-pilot-study', 'portal/index/news_info?cid=1&id=10')->append(array('cid' => '1',  'id' => '10',));
 
@@ -284,6 +272,24 @@ Route::get('beliefs-forge-the-soul-weihuas-new-year-training-session-held-succes
 Route::get('liu-ning-secretary-of-the-henan-provincial-party-committee-visited-weihua-for-research', 'portal/index/news_info?cid=1&id=13')->append(array('cid' => '1',  'id' => '13',));
 
 Route::get('remembering-revolutionary-martyrs-and-cultivating-a-deep-sense-of-patriotism', 'portal/index/news_info?cid=1&id=14')->append(array('cid' => '1',  'id' => '14',));
+
+Route::get('qweqwe', 'portal/index/news_info?cid=1&id=26')->append(array('cid' => '1',  'id' => '26',));
+
+Route::get('qw-qweqw', 'portal/index/news_info?cid=1&id=27')->append(array('cid' => '1',  'id' => '27',));
+
+Route::get('ewe-wewe', 'portal/index/news_info?cid=1&id=32')->append(array('cid' => '1',  'id' => '32',));
+
+Route::get('CampanyNews/:id', 'portal/index/news_info?cid=1')->append(array('cid' => '1',));
+
+Route::get('CampanyNews', 'portal/index/news?id=1')->append(array('id' => '1',));
+
+Route::get('Case1', 'portal/index/industries_info?id=3')->append(array('id' => '3',));
+
+Route::get('intelligent-overhead-crane-for-brewery', 'portal/index/industries_info?id=6')->append(array('id' => '6',));
+
+Route::get('600t-gantry-crane-for-hydropower-project', 'portal/index/industries_info?id=7')->append(array('id' => '7',));
+
+Route::get('weihua-made-450-ton-shipbuilding-gantry-crane', 'portal/index/industries_info?id=8')->append(array('id' => '8',));
 
 Route::get('Weihua-Provide-Port-Crane-Solutions-for-Inland-River-Port', 'portal/index/industries_info?id=21')->append(array('id' => '21',));
 

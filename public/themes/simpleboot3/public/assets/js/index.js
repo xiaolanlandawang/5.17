@@ -197,7 +197,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click','#inquiry',function (){
-        $('#feedback_type').val(1);
+        $('#feedback_type').val(2);
         $('.popover_wrap').show();
     })
 

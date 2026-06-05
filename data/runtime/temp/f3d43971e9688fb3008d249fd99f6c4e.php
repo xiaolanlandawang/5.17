@@ -1,4 +1,4 @@
-<?php /*a:4:{s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\index.html";i:1780050813;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1780538078;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780538078;}*/ ?>
+<?php /*a:4:{s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\index.html";i:1780648937;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1780621034;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1780643260;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780655279;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,15 +8,7 @@
     <meta name="keywords" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
     <meta name="description" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
     <meta name="google-site-verification" content="xq1U9Wx4JsDxE2JtMVkiWU4bMGKhuJOgiHulcoo4Wy4" />
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2V25J0DR5Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2V25J0DR5Z');
-</script>
+    
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="shortcut icon" type="image/x-icon" href="/themes/simpleboot3/public/assets/images/logo.ico">
@@ -34,13 +26,7 @@
     <?php echo htmlspecialchars_decode($site_info['google_head']); ?>
 <?php endif; ?>
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wwe66llrvz");
-</script>
+
 
 
 <style>
@@ -74,22 +60,22 @@
                         <span class="contact-label">E-Mail:</span> <?php echo $site_info['email']; ?>
                     </a>
                 </div>
-                <div class="header-contact-item">
+                <!-- <div class="header-contact-item">
                     <a href="tel:<?php echo $site_info['sale_tel']; ?>" target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-tel.svg" alt="tel">
                         <span class="contact-label">Tel:</span> <?php echo $site_info['sale_tel']; ?>
                     </a>
-                </div>
+                </div> -->
                 <div class="header-contact-item">
-                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>" target="_blank">
+                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote." target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-whatsapp.png" alt="whatsapp">
                         <span class="contact-label">WhatsApp:</span> <?php echo $site_info['whatsapp']; ?>
                     </a>
                 </div>
-                <div class="header-contact-item">
+                <!-- <div class="header-contact-item">
                     <img src="/themes/simpleboot3/public/assets/images/header-wechat.png" alt="wechat">
                     <span class="contact-label">Wechat:</span> <?php echo $site_info['wechat']; ?>
-                </div>
+                </div> -->
             </div>
             <div class="header-link">
                 <div class="header-link-item">
@@ -209,7 +195,7 @@
                                 <div class="swiper-slide-desc"><?php echo $vo['description']; ?></div>
                             <?php endif; ?>
                             <div class="swiper-slide-actions">
-                                <a href="<?php echo cmf_url('portal/index/quote'); ?>" class="btn-quote">GET A QUOTE</a>
+                                <a href="javascript:;" id="inquiry" class="btn-quote">GET A QUOTE</a>
                                 <a href="<?php echo cmf_url('portal/index/product'); ?>" class="btn-products">VIEW PRODUCTS</a>
                             </div>
                         </div>
@@ -664,7 +650,7 @@
                     $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
                 }
              if(!empty($site_info['whatsapp'])): ?>
-                <div class="footer-contact-item footer-contact-whatsapp" onclick="window.open('https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>', '_blank');">
+                <div class="footer-contact-item footer-contact-whatsapp" onclick="window.open('https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote.', '_blank');">
                     <?php echo $site_info['whatsapp']; ?></div>
             <?php endif; ?>
             <div class="footer-contact-item footer-contact-tel" onclick="location.href='tel:<?php echo $site_info['sale_tel']; ?>';">
@@ -725,7 +711,7 @@
             <img src="/themes/simpleboot3/public/assets/images/fix-form.webp" alt="form" title="form">
         </div>
         <div class="right_fix_box right_fix_whatsapp">
-            <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>" target="_blank">
+            <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote." target="_blank">
                 <img src="/themes/simpleboot3/public/assets/images/fix-whatsapp.webp" alt="whatsapp" title="whatsapp">
                 <div class="right_fix_box_connect">
                     <p>WhatsApp:</p>
@@ -796,72 +782,7 @@
 </div>
 
 
-<!-- Floating WhatsApp Button (above live chat) - PC -->
-<?php if(!empty($site_info['whatsapp'])): 
-        $cleanNumberWaPC = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
-     ?>
-    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumberWaPC; ?>" target="_blank" id="pc-float-whatsapp" title="WhatsApp">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.978 14.057.95 11.433.95c-5.449 0-9.873 4.38-9.877 9.808 0 1.813.499 3.59 1.443 5.161l-1.005 3.67 3.774-.984zm11.085-6.732c-.3-.15-1.774-.875-2.05-.975-.273-.1-.472-.15-.672.15-.2.3-.775.975-.95 1.174-.175.2-.35.225-.65.075-1.127-.566-1.958-1.034-2.738-2.372-.2-.35-.2-.6-.35-.75-.15-.15-.3-.35-.45-.525-.15-.175-.2-.3-.3-.5-.1-.2-.05-.375.025-.525.075-.15.672-.782.75-.95.08-.175.04-.325-.02-.475-.06-.15-.672-1.62-.92-2.21-.242-.58-.487-.5-.672-.51-.173-.008-.371-.01-.57-.01-.2 0-.525.075-.8.375-.273.3-1.042 1.016-1.042 2.479 0 1.462 1.067 2.877 1.217 3.078.15.2 2.1 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
-        </svg>
-    </a>
-    <style>
-        #pc-float-whatsapp {
-            position: fixed;
-            bottom: 100px;
-            right: 28px;
-            width: 60px;
-            height: 60px;
-            background-color: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 99998;
-            box-shadow: 0 4px 14px rgba(37,211,102,0.5);
-            text-decoration: none;
-            opacity: 0;
-            transform: scale(0.5);
-            pointer-events: none;
-            transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.2s ease;
-        }
-        #pc-float-whatsapp.wa-visible {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-        #pc-float-whatsapp:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 22px rgba(37,211,102,0.6);
-        }
-        #pc-float-whatsapp svg {
-            width: 32px;
-            height: 32px;
-            fill: #fff;
-        }
-        #pc-float-whatsapp::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #25D366;
-            opacity: 0.35;
-            z-index: -1;
-            animation: wa-pulse-pc 2s ease-out infinite;
-        }
-        @keyframes wa-pulse-pc {
-            0%   { transform: scale(1);   opacity: 0.35; }
-            100% { transform: scale(1.7); opacity: 0; }
-        }
-    </style>
-    <script>
-        setTimeout(function () {
-            var btn = document.getElementById('pc-float-whatsapp');
-            if (btn) btn.classList.add('wa-visible');
-        }, 4000);
-    </script>
-<?php endif; ?>
+
 
 <!-- Tawk.to position alignment: match WhatsApp button right:24px -->
 <script>

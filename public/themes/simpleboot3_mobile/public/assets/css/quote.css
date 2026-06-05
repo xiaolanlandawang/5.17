@@ -84,6 +84,16 @@
     box-sizing: border-box;
 }
 
+/* Fix IntlTelInput wrapper gap */
+.quote .iti {
+    width: 100%;
+    margin-top: 1rem;
+    display: block;
+}
+.quote .iti input {
+    margin-top: 0;
+}
+
 .quote .quote-message {
     height: 20rem;
     resize: none;

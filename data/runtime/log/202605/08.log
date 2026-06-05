@@ -1,2 +1,0 @@
-[2026-05-08T11:17:15+08:00][error] [10501]SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'industry' at row 1
-[2026-05-08T22:24:38+08:00][error] [8]Trying to access array offset on value of type null

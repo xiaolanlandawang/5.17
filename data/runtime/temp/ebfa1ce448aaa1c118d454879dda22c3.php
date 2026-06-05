@@ -1,4 +1,4 @@
-<?php /*a:5:{s:71:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\industries.html";i:1779431578;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1779697000;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1779265794;s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/public\banner.html";i:1779779315;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
+<?php /*a:5:{s:71:"C:\laragon\www\weihua\public/themes/simpleboot3/portal\\industries.html";i:1779431578;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\head.html";i:1780621034;s:63:"C:\laragon\www\weihua\public/themes/simpleboot3/public\nav.html";i:1780643260;s:66:"C:\laragon\www\weihua\public/themes/simpleboot3/public\banner.html";i:1779779315;s:64:"C:\laragon\www\weihua\public/themes/simpleboot3/public\foot.html";i:1780643253;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +6,7 @@
     <title><?php echo (isset($site_info['site_seo_title']) && ($site_info['site_seo_title'] !== '')?$site_info['site_seo_title']:''); ?></title>
     <meta name="keywords" content="<?php echo (isset($site_info['site_seo_keywords']) && ($site_info['site_seo_keywords'] !== '')?$site_info['site_seo_keywords']:''); ?>">
     <meta name="description" content="<?php echo (isset($site_info['site_seo_description']) && ($site_info['site_seo_description'] !== '')?$site_info['site_seo_description']:''); ?>">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2V25J0DR5Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2V25J0DR5Z');
-</script>
+    
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="shortcut icon" type="image/x-icon" href="/themes/simpleboot3/public/assets/images/logo.ico">
@@ -32,13 +24,7 @@
     <?php echo htmlspecialchars_decode($site_info['google_head']); ?>
 <?php endif; ?>
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wwe66llrvz");
-</script>
+
 
 
 <style>
@@ -65,40 +51,40 @@
         <div class="header-container">
             <div class="header-contact">
                 <div class="header-contact-item">
-                    <a href="mailto:<?php echo $site_info['email']; ?>">
+                    <a href="mailto:<?php echo $site_info['email']; ?>" target="_blank" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                         <img src="/themes/simpleboot3/public/assets/images/header-email.png" alt="email">
                         <span class="contact-label">E-Mail:</span> <?php echo $site_info['email']; ?>
                     </a>
                 </div>
-                <div class="header-contact-item">
-                    <a href="tel:<?php echo $site_info['sale_tel']; ?>">
+                <!-- <div class="header-contact-item">
+                    <a href="tel:<?php echo $site_info['sale_tel']; ?>" target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-tel.svg" alt="tel">
                         <span class="contact-label">Tel:</span> <?php echo $site_info['sale_tel']; ?>
                     </a>
-                </div>
+                </div> -->
                 <div class="header-contact-item">
-                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>">
+                    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote." target="_blank">
                         <img src="/themes/simpleboot3/public/assets/images/header-whatsapp.png" alt="whatsapp">
                         <span class="contact-label">WhatsApp:</span> <?php echo $site_info['whatsapp']; ?>
                     </a>
                 </div>
-                <div class="header-contact-item">
+                <!-- <div class="header-contact-item">
                     <img src="/themes/simpleboot3/public/assets/images/header-wechat.png" alt="wechat">
                     <span class="contact-label">Wechat:</span> <?php echo $site_info['wechat']; ?>
-                </div>
+                </div> -->
             </div>
             <div class="header-link">
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['facebook']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-facebook.png" alt="facebook"></a>
+                    <a href="<?php echo $site_info['facebook']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-facebook.png" alt="facebook"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['youtube']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-youtube.png" alt="youtube"></a>
+                    <a href="<?php echo $site_info['youtube']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-youtube.png" alt="youtube"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['linkedin']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-linkedin.png" alt="linkedin"></a>
+                    <a href="<?php echo $site_info['linkedin']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-linkedin.png" alt="linkedin"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['vk']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk"></a>
+                    <a href="<?php echo $site_info['vk']; ?>" target="_blank"><img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk"></a>
                 </div>
             </div>
         </div>
@@ -261,7 +247,7 @@
 
         <div class="footer-contact">
             <div class="footer-title">Contact Info</div>
-            <div class="footer-contact-item footer-contact-email" onclick="location.href='mailto:<?php echo $site_info['email']; ?>';">
+            <div class="footer-contact-item footer-contact-email" onclick="if(confirm('Ready to get in touch? Click OK to open your email app. 📬')) location.href='mailto:<?php echo $site_info['email']; ?>';">
                 <?php echo $site_info['email']; ?></div>
             <div class="footer-contact-item footer-contact-address"><?php echo $site_info['address']; ?></div>
             <?php 
@@ -270,7 +256,7 @@
                     $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
                 }
              if(!empty($site_info['whatsapp'])): ?>
-                <div class="footer-contact-item footer-contact-whatsapp" onclick="window.open('https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>', '_blank');">
+                <div class="footer-contact-item footer-contact-whatsapp" onclick="window.open('https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote.', '_blank');">
                     <?php echo $site_info['whatsapp']; ?></div>
             <?php endif; ?>
             <div class="footer-contact-item footer-contact-tel" onclick="location.href='tel:<?php echo $site_info['sale_tel']; ?>';">
@@ -303,6 +289,9 @@
     </div>
 
     <div class="footer-bottom">
+        <div class="footer-policy-links" style="margin-bottom: 10px;">
+            <a href="<?php echo cmf_url('portal/index/privacy'); ?>" target="_blank" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+        </div>
         Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
     </div>
 </div>
@@ -318,6 +307,8 @@
 </div>
 
 
+
+
 <!-- Floating box -->
 
 <div class="right_fix">
@@ -326,7 +317,7 @@
             <img src="/themes/simpleboot3/public/assets/images/fix-form.webp" alt="form" title="form">
         </div>
         <div class="right_fix_box right_fix_whatsapp">
-            <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>" target="_blank">
+            <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumber; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote." target="_blank">
                 <img src="/themes/simpleboot3/public/assets/images/fix-whatsapp.webp" alt="whatsapp" title="whatsapp">
                 <div class="right_fix_box_connect">
                     <p>WhatsApp:</p>
@@ -342,7 +333,7 @@
             </div>
         </div>
         <div class="right_fix_box right_fix_email">
-            <a href="mailto:<?php echo $site_info['email']; ?>">
+            <a href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                 <img src="/themes/simpleboot3/public/assets/images/fix-email.webp" alt="email" title="email">
                 <div class="right_fix_box_connect">
                     <p>Email:</p>
@@ -367,7 +358,7 @@
             <div class="popover_title">
                 <h2>Develop your lifting solution</h2>
                 <p class="popover_title_description">Contact us today by email at :<a
-                        href="mailto:<?php echo $site_info['email']; ?>"><?php echo $site_info['email']; ?></a>,
+                        href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');"><?php echo $site_info['email']; ?></a>,
                     or fill out the form below.</p>
             </div>
             <div class="popover_form">
@@ -401,7 +392,7 @@
 <?php if(!empty($site_info['whatsapp'])): 
         $cleanNumberWaPC = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
      ?>
-    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumberWaPC; ?>" target="_blank" id="pc-float-whatsapp" title="WhatsApp">
+    <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanNumberWaPC; ?>&text=Hi,%20I%20am%20interested%20in%20your%20products%20on%20weihualifting.com.%20Please%20send%20me%20a%20quote." target="_blank" id="pc-float-whatsapp" title="WhatsApp">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.978 14.057.95 11.433.95c-5.449 0-9.873 4.38-9.877 9.808 0 1.813.499 3.59 1.443 5.161l-1.005 3.67 3.774-.984zm11.085-6.732c-.3-.15-1.774-.875-2.05-.975-.273-.1-.472-.15-.672.15-.2.3-.775.975-.95 1.174-.175.2-.35.225-.65.075-1.127-.566-1.958-1.034-2.738-2.372-.2-.35-.2-.6-.35-.75-.15-.15-.3-.35-.45-.525-.15-.175-.2-.3-.3-.5-.1-.2-.05-.375.025-.525.075-.15.672-.782.75-.95.08-.175.04-.325-.02-.475-.06-.15-.672-1.62-.92-2.21-.242-.58-.487-.5-.672-.51-.173-.008-.371-.01-.57-.01-.2 0-.525.075-.8.375-.273.3-1.042 1.016-1.042 2.479 0 1.462 1.067 2.877 1.217 3.078.15.2 2.1 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
         </svg>

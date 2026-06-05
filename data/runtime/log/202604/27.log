@@ -1,5 +1,0 @@
-[2026-04-27T08:56:30+08:00][error] [10501]SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'industry' at row 1
-[2026-04-27T08:56:49+08:00][error] [10501]SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'industry' at row 1
-[2026-04-27T08:58:25+08:00][error] [10501]SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'industry' at row 1
-[2026-04-27T17:47:20+08:00][error] [10501]SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'industry' at row 1
-[2026-04-27T17:47:39+08:00][error] [10501]SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'industry' at row 1

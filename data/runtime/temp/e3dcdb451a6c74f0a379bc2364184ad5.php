@@ -1,4 +1,4 @@
-<?php /*a:2:{s:81:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/portal\admin_news\edit.html";i:1780649747;s:72:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/public\header.html";i:1730268636;}*/ ?>
+<?php /*a:2:{s:80:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/portal\admin_news\add.html";i:1780650497;s:72:"C:\laragon\www\weihua\public/themes/admin_simpleboot3/public\header.html";i:1730268636;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,61 +123,55 @@
 </head>
 <body>
 <div class="wrap js-check-wrap">
-    <form action="<?php echo url('AdminNews/editPost'); ?>" method="post" class="form-horizontal js-ajax-form">
+    <ul class="nav nav-tabs">
+        <li><a href="<?php echo url('AdminNews/index'); ?>">文章列表</a></li>
+        <li class="active"><a href="<?php echo url('AdminNews/add'); ?>">添加文章</a></li>
+    </ul>
+    <form action="<?php echo url('AdminNews/addPost'); ?>" method="post" class="form-horizontal js-ajax-form margin-top-20">
         <div class="row">
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <tr>
                         <th width="100">分类<span class="form-required">*</span></th>
                         <td>
-                            <input class="form-control" type="text" style="width:400px;" required
-                                   value="<?php echo implode(' ',$post_categories); ?>"
+                            <input class="form-control" type="text" style="width:400px;" required value=""
                                    placeholder="请选择分类" onclick="doSelectCategory();" id="js-categories-name-input"
                                    readonly/>
-                            <input class="form-control" type="hidden" value="<?php echo $post_category_ids; ?>"
-                                   name="post[categories]"
+                            <input class="form-control" type="hidden" value="" name="post[categories]"
                                    id="js-categories-id-input"/>
                         </td>
                     </tr>
                     <tr>
                         <th>标题<span class="form-required">*</span></th>
                         <td>
-                            <input id="post-id" type="hidden" name="post[id]" value="<?php echo $post['id']; ?>">
                             <input class="form-control" type="text" name="post[post_title]"
-                                   required value="<?php echo $post['post_title']; ?>" placeholder="请输入标题"/>
+                                   id="title" required value="" placeholder="请输入标题"/>
                         </td>
                     </tr>
                     <tr>
                         <th>摘要</th>
                         <td>
                             <textarea class="form-control" name="post[post_excerpt]" style="height: 50px;"
-                                      placeholder="请填写摘要"><?php echo $post['post_excerpt']; ?></textarea>
+                                      placeholder="请填写摘要"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <th width="100">别名</th>
                         <td>
                             <input class="form-control" type="text" style="width: 400px;" name="post[post_alias]"
-                                   value="<?php echo $post['post_alias']; ?>" placeholder="请输入别名"/>
+                                   value="" placeholder="请输入别名"/>
                             <p class="help-block">用于美化url链接</p>
                         </td>
                     </tr>
                     <tr>
-                        <th>缩略图</th>
+                        <th><b>缩略图</b></th>
                         <td>
                             <div>
-                                <input type="hidden" name="post[more][thumbnail]" id="thumbnail"
-                                       value="<?php echo (isset($post['more']['thumbnail']) && ($post['more']['thumbnail'] !== '')?$post['more']['thumbnail']:''); ?>">
+                                <input type="hidden" name="post[more][thumbnail]" id="thumbnail" value="">
                                 <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
-                                    <?php if(empty($post['more']['thumbnail'])): ?>
-                                        <img src="/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png"
-                                             id="thumbnail-preview"
-                                             width="135" style="cursor: pointer"/>
-                                        <?php else: ?>
-                                        <img src="<?php echo cmf_get_image_preview_url($post['more']['thumbnail']); ?>"
-                                             id="thumbnail-preview"
-                                             width="135" style="cursor: pointer"/>
-                                    <?php endif; ?>
+                                    <img src="/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png"
+                                         id="thumbnail-preview"
+                                         width="135" style="cursor: pointer"/>
                                 </a>
                                 <br>
                                 <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
@@ -187,23 +181,21 @@
                     <tr>
                         <th>内容</th>
                         <td>
-                            <script type="text/plain" id="content" name="post[post_content]"><?php echo $post['post_content']; ?></script>
+                            <script type="text/plain" id="content" name="post[post_content]"></script>
                         </td>
                     </tr>
                 </table>
-
                 <?php 
     hook('portal_admin_article_edit_view_main',null,false);
  ?>
-
                 <div class="form-group">
                     <div class="col-sm-12 text-center">
-                        <button type="submit" class="btn btn-primary js-ajax-submit"><?php echo lang('SAVE'); ?></button>
+                        <button type="submit" class="btn btn-primary js-ajax-submit"><?php echo lang('ADD'); ?></button>
+                        <a class="btn btn-default" href="<?php echo url('AdminNews/index'); ?>"><?php echo lang('BACK'); ?></a>
                     </div>
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 <script type="text/javascript" src="/static/js/admin.js?v=<?php echo $_static_version; ?>"></script>
@@ -221,8 +213,6 @@
             $('#thumbnail-preview').attr('src', '/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png');
             $('#thumbnail').val('');
         });
-
-        $('#more-template-select').val("<?php echo (isset($post['more']['template']) && ($post['more']['template'] !== '')?$post['more']['template']:''); ?>");
     });
 
     function doSelectCategory() {
@@ -247,110 +237,5 @@
         });
     }
 </script>
-
-<script>
-
-    var publishYesUrl = "<?php echo url('AdminNews/publish',array('yes'=>1)); ?>";
-    var publishNoUrl = "<?php echo url('AdminNews/publish',array('no'=>1)); ?>";
-    var topYesUrl = "<?php echo url('AdminNews/top',array('yes'=>1)); ?>";
-    var topNoUrl = "<?php echo url('AdminNews/top',array('no'=>1)); ?>";
-    var recommendYesUrl = "<?php echo url('AdminNews/recommend',array('yes'=>1)); ?>";
-    var recommendNoUrl = "<?php echo url('AdminNews/recommend',array('no'=>1)); ?>";
-
-    var postId = $('#post-id').val();
-
-    //发布操作
-    $("#post-status-checkbox").change(function () {
-        if ($('#post-status-checkbox').is(':checked')) {
-            //发布
-            $.ajax({
-                url: publishYesUrl, type: "post", dataType: "json", data: {ids: postId}, success: function (data) {
-                    if (data.code != 1) {
-                        $('#post-status-checkbox').removeAttr("checked");
-                        $('#post-status-error').html(data.msg).show();
-
-                    } else {
-                        $('#post-status-error').hide();
-                    }
-                }
-            });
-        } else {
-            //取消发布
-            $.ajax({
-                url: publishNoUrl, type: "post", dataType: "json", data: {ids: postId}, success: function (data) {
-                    if (data.code != 1) {
-                        $('#post-status-checkbox').prop("checked", 'true');
-                        $('#post-status-error').html(data.msg).show();
-                    } else {
-                        $('#post-status-error').hide();
-                    }
-                }
-            });
-        }
-    });
-
-    //置顶操作
-    $("#is-top-checkbox").change(function () {
-        if ($('#is-top-checkbox').is(':checked')) {
-            //置顶
-            $.ajax({
-                url: topYesUrl, type: "post", dataType: "json", data: {ids: postId}, success: function (data) {
-                    if (data.code != 1) {
-                        $('#is-top-checkbox').removeAttr("checked");
-                        $('#is-top-error').html(data.msg).show();
-
-                    } else {
-                        $('#is-top-error').hide();
-                    }
-                }
-            });
-        } else {
-            //取消置顶
-            $.ajax({
-                url: topNoUrl, type: "post", dataType: "json", data: {ids: postId}, success: function (data) {
-                    if (data.code != 1) {
-                        $('#is-top-checkbox').prop("checked", 'true');
-                        $('#is-top-error').html(data.msg).show();
-                    } else {
-                        $('#is-top-error').hide();
-                    }
-                }
-            });
-        }
-    });
-    //推荐操作
-    $("#recommended-checkbox").change(function () {
-        if ($('#recommended-checkbox').is(':checked')) {
-            //推荐
-            $.ajax({
-                url: recommendYesUrl, type: "post", dataType: "json", data: {ids: postId}, success: function (data) {
-                    if (data.code != 1) {
-                        $('#recommended-checkbox').removeAttr("checked");
-                        $('#recommended-error').html(data.msg).show();
-
-                    } else {
-                        $('#recommended-error').hide();
-                    }
-                }
-            });
-        } else {
-            //取消推荐
-            $.ajax({
-                url: recommendNoUrl, type: "post", dataType: "json", data: {ids: postId}, success: function (data) {
-                    if (data.code != 1) {
-                        $('#recommended-checkbox').prop("checked", 'true');
-                        $('#recommended-error').html(data.msg).show();
-                    } else {
-                        $('#recommended-error').hide();
-                    }
-                }
-            });
-        }
-    });
-
-
-</script>
-
-
 </body>
 </html>
