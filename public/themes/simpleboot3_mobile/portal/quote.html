@@ -114,7 +114,7 @@
                         if (typeof gtag_report_conversion === 'function') {
                             gtag_report_conversion();
                         }
-                        alert('submit success');
+                        window.location.href = '/thankyou.html';
                     } else {
                         alert('submit failed:' + res.msg);
                     }

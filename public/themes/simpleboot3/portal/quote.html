@@ -127,8 +127,7 @@
                     if (typeof gtag_report_conversion === 'function') {
                         gtag_report_conversion();
                     }
-                    clearQuoteForm();
-                    showQuoteMessage('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
+                    window.location.href = '/thankyou.html';
                 } else {
                     showQuoteMessage('Submit Failed', res.msg || 'Please try again later.', 'error');
                 }

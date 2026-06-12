@@ -91,11 +91,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    $('.home-collect-name, .home-collect-email, .home-collect-phone, .home-collect-message').val('');
-                    if ($('.home-collect-phone')[0] && $('.home-collect-phone')[0]._iti) {
-                        $('.home-collect-phone')[0]._iti.setNumber('');
-                    }
-                    alert('Submit success! We will contact you soon.');
+                    window.location.href = '/thankyou.html';
                 } else {
                     alert(res.msg || 'Submit failed. Please try again.');
                 }

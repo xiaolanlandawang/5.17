@@ -688,6 +688,13 @@ class IndexController extends HomeBaseController
         abort(404, 'news not found');
     }
 
+    public function thankyou()
+    {
+        $site_info = cmf_get_option('site_info');
+        $this->assign('site_info', $site_info);
+        return $this->fetch(':thankyou');
+    }
+
     public function privacy()
     {
         return $this->fetch(':privacy');

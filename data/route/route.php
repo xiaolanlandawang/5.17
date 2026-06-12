@@ -315,4 +315,6 @@ Route::get('excellent_service', 'portal/index/excellent_service');
 
 Route::get('download', 'portal/index/download');
 
+Route::get('thankyou', 'portal/index/thankyou');
+
 

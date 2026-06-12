@@ -116,8 +116,7 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    clearFooterForm();
-                    notifyFormResult('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
+                    window.location.href = '/thankyou.html';
                 } else {
                     notifyFormResult('Submit Failed', res.msg || 'Please try again later.', 'error');
                 }
@@ -159,8 +158,7 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    clearHomeCollectForm();
-                    notifyFormResult('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
+                    window.location.href = '/thankyou.html';
                 } else {
                     notifyFormResult('Submit Failed', res.msg || 'Please try again later.', 'error');
                 }
@@ -272,18 +270,14 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    notifyFormResult('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
                     //谷歌点击转化
                     if (typeof gtag_report_conversion === 'function') {
                         gtag_report_conversion();
                     }
-                    $('#feedback_type').val(2);
-                    clearPopoverForm();
-                    $('.popover_wrap').hide();
                     if(file_url!==''){
-                        $('#file').val('');
-                        window.location.href=file_url;
+                        window.open(file_url);
                     }
+                    window.location.href = '/thankyou.html';
                 } else {
                     notifyFormResult('Submit Failed', res.msg || 'Please try again later.', 'error');
                 }
@@ -305,13 +299,8 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    notifyFormResult('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
-                    $('#feedback_type').val(2);
-                    $('#session').val(res.data.session)
-                    clearPopoverForm();
-                    $('.popover_wrap').hide();
-                    $file_url.val('');
-                    window.open(file)
+                    window.open(file);
+                    window.location.href = '/thankyou.html';
                 } else {
                     notifyFormResult('Submit Failed', res.msg || 'Please try again later.', 'error');
                 }
@@ -330,10 +319,7 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    notifyFormResult('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
-                    $('#feedback_type').val(2);
-                    clearPopoverForm();
-                    $('.popover_wrap').hide();
+                    window.location.href = '/thankyou.html';
                 } else {
                     notifyFormResult('Submit Failed', res.msg || 'Please try again later.', 'error');
                 }
