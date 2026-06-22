@@ -21,8 +21,8 @@ $(document).ready(function () {
         let phone = getFormattedPhoneNumber($('input[name=footer-phone]'));
         let message=$('input[name=footer-message]').val();
 
-        if(name==''||email==''||phone==''||message=='') {
-            alert('Please fill in all information completely.')
+        if(name==''||email==''||message=='') {
+            alert('Please fill in Name, Email and Message.');
             return;
         }
         let data = {
@@ -98,8 +98,8 @@ $(document).ready(function () {
         let email = $('#popover-email').val();// 邮箱
         let content = $('#popover-content').val();// 内容
 
-        if (!name || !phone || !email || !content){
-            alert('Please fill in all the information completely.');
+        if (!name || !email || !content){
+            alert('Please fill in Name, Email and Message.');
             return;
         }
 

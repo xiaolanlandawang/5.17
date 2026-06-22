@@ -43,11 +43,11 @@
             <div class="quote">
                 <div class="quote-field">
                     <label>Name</label>
-                    <input type="text" name="name" class="quote-name" placeholder="Name">
+                    <input type="text" name="name" class="quote-name" placeholder="Name *">
                 </div>
                 <div class="quote-field">
                     <label>Email</label>
-                    <input type="text" name="email" class="quote-email" placeholder="Email">
+                    <input type="text" name="email" class="quote-email" placeholder="Email *">
                 </div>
                 <div class="quote-field full-width">
                     <label>Phone/Whatsapp</label>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="quote-field full-width">
                     <label>Message</label>
-                    <textarea name="message" class="quote-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                    <textarea name="message" class="quote-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details. *"></textarea>
                 </div>
                 <div class="quote-btn" onclick="submit()">SEND MESSAGE</div>
             </div>
@@ -101,6 +101,11 @@
         let phone = getFormattedPhoneNumber($('.quote-phone'));// 手机号
         let email = $('.quote-email').val();// 邮箱
         let content = $('.quote-message').val();// 内容
+
+        if (!name || !email || !content) {
+            showQuoteMessage('Incomplete Information', 'Please fill in Name, Email and Message.', 'error');
+            return;
+        }
 
         if (quoteSubmitting) {
             return;

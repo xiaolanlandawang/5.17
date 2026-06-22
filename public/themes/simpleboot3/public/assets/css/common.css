@@ -817,7 +817,7 @@ a:focus {
     width: 100%;
     font-family: Arial-BoldMT, Arial-BoldMT;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 32px;
     color: #333333;
     line-height: 44px;
     text-align: center;
@@ -830,7 +830,7 @@ a:focus {
     height: 20px;
     font-family: ArialMT, ArialMT;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 14px;
     color: #333333;
     line-height: 20px;
     text-align: center;
@@ -932,7 +932,7 @@ a:focus {
         line-height: 33px;
     }
     .popover_wrap .popover_container .popover_content .popover_title .popover_title_description{
-        font-size: 18px;
+        font-size: 14px;
     }
     .popover_wrap .popover_container .popover_content .popover_form{
         margin-top: 20px;
@@ -971,7 +971,7 @@ a:focus {
         line-height: 28px;
     }
     .popover_wrap .popover_container .popover_content .popover_title .popover_title_description{
-        font-size: 16px;
+        font-size: 14px;
         margin-top: 10px;
     }
     .popover_wrap .popover_container .popover_content .popover_form{

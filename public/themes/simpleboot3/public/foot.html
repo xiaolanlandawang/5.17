@@ -62,11 +62,11 @@
             <div class="footer-title">CONTACT US</div>
             <div class="footer-field">
                 <label>Name</label>
-                <input type="text" class="footer-name" placeholder="Name">
+                <input type="text" class="footer-name" placeholder="Name *">
             </div>
             <div class="footer-field">
                 <label>Email</label>
-                <input type="text" class="footer-email" placeholder="Email">
+                <input type="text" class="footer-email" placeholder="Email *">
             </div>
             <div class="footer-field">
                 <label>Phone/Whatsapp</label>
@@ -75,7 +75,7 @@
             <div class="footer-field">
                 <label>Message</label>
                 <textarea class="footer-message"
-                    placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                    placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details. *"></textarea>
             </div>
             <div class="footer-submit">SUBMIT</div>
         </div>
@@ -150,24 +150,23 @@
         </div>
         <div class="popover_content">
             <div class="popover_title">
-                <h2>Develop your lifting solution</h2>
-                <p class="popover_title_description">Contact us today by email at :<a
-                        href="mailto:{$site_info.email}" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">{$site_info.email}</a>,
-                    or fill out the form below.</p>
+                <h2>Get Your Crane Quote & Solution Now</h2>
+                <p class="popover_title_description">Our crane engineers will reply within 24 hours. For more detailed requirements, contact us at <a
+                        href="mailto:{$site_info.email}" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">{$site_info.email}</a></p>
             </div>
             <div class="popover_form">
                 <form method="post">
                     <div class="popover_form_name">
-                        <input id="popover-name" type="text" name="name" placeholder="Name:">
+                        <input id="popover-name" type="text" name="name" placeholder="Name: *">
                     </div>
                     <div class="popover_form_phone">
                         <input id="popover-phone" type="text" name="phone" placeholder="Phone / WhatsApp:">
                     </div>
                     <div class="popover_form_email">
-                        <input id="popover-email" type="text" name="email" placeholder="E-mail:">
+                        <input id="popover-email" type="text" name="email" placeholder="E-mail: *">
                     </div>
                     <div class="popover_form_content">
-                        <textarea id="popover-content" name="content" placeholder="Message:"></textarea>
+                        <textarea id="popover-content" name="content" placeholder="Message: *    Please enter your inquiry details (crane type, ton, span, height, etc.) for a quick and accurate quote!"></textarea>
                     </div>
                     <div class="popover_form_submit">
                         <input name="product_id" id="product-id" type="hidden" value="{$product.id|default=''}">
@@ -273,126 +272,4 @@
 
 
 
-<script>
-    $(document).ready(function () {
-        var itiReady = false;
-        var itiLoading = false;
-        var itiPromise = null;
-
-        function loadCss(href) {
-            return new Promise(function (resolve, reject) {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = href;
-                link.onload = resolve;
-                link.onerror = function () { reject(new Error('CSS load failed')); };
-                document.head.appendChild(link);
-            });
-        }
-
-        function loadJs(src) {
-            return new Promise(function (resolve, reject) {
-                var script = document.createElement('script');
-                script.src = src;
-                script.async = true;
-                script.onload = resolve;
-                script.onerror = function () { reject(new Error('JS load failed')); };
-                document.body.appendChild(script);
-            });
-        }
-
-        function appendStylesOnce() {
-            if (document.getElementById('iti-custom-styles')) {
-                return;
-            }
-            var style = document.createElement('style');
-            style.id = 'iti-custom-styles';
-            style.innerHTML = `
-                .iti { 
-                    width: 100%; 
-                    display: block !important;
-                }
-                .iti__country-list { 
-                    z-index: 9999; 
-                    color: #333;
-                    text-align: left;
-                }
-                /* Fix for input padding when ITI is active */
-                .iti input {
-                    padding-left: 52px !important;
-                    width: 100% !important;
-                }
-                .iti__selected-flag {
-                    padding: 0 8px 0 12px !important;
-                    background: transparent !important;
-                }
-                .iti__flag-container {
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        function initIntlTelInputs() {
-            if (!window.intlTelInput) {
-                return;
-            }
-            var phoneInputs = document.querySelectorAll('.home-collect-phone, .quote-phone, .footer-phone, #popover-phone');
-            phoneInputs.forEach(function (input) {
-                if (input._iti) {
-                    return;
-                }
-                var iti = window.intlTelInput(input, {
-                    initialCountry: "auto",
-                    geoIpLookup: function (callback) {
-                        fetch("https://ipapi.co/json")
-                            .then(function (res) { return res.json(); })
-                            .then(function (data) { callback(data.country_code || "us"); })
-                            .catch(function () { callback("us"); });
-                    },
-                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/utils.js"
-                });
-                // Store the instance on the element for later access
-                input._iti = iti;
-            });
-            itiReady = true;
-        }
-
-        function ensureIntlTelInputLoaded() {
-            if (itiReady) {
-                return Promise.resolve();
-            }
-            if (itiLoading && itiPromise) {
-                return itiPromise;
-            }
-
-            itiLoading = true;
-            itiPromise = Promise.all([
-                loadCss("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intlTelInput.css"),
-                loadJs("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intlTelInput.min.js")
-            ]).then(function () {
-                appendStylesOnce();
-                initIntlTelInputs();
-            }).catch(function () {
-                // Keep form available even when CDN/network fails
-            }).finally(function () {
-                itiLoading = false;
-            });
-
-            return itiPromise;
-        }
-
-        // Load on focus/click of any phone input elements
-        $(document).on('focus click', '.home-collect-phone, .quote-phone, .footer-phone, #popover-phone, #popover-submit', function () {
-            ensureIntlTelInputLoaded();
-        });
-
-        // Listen to interaction to load immediately
-        window.addEventListener('scroll', ensureIntlTelInputLoaded, { passive: true, once: true });
-        window.addEventListener('mousemove', ensureIntlTelInputLoaded, { passive: true, once: true });
-        window.addEventListener('touchstart', ensureIntlTelInputLoaded, { passive: true, once: true });
-    });
-</script>
 <!-- old -->

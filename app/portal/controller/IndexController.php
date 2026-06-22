@@ -594,10 +594,12 @@ class IndexController extends HomeBaseController
         if (!$InquiryValidate->check($data)) {
             $this->error($InquiryValidate->getError());
         }
+        
+        $ip = cmf_client_ip();
+        
         Db::startTrans();
         try {
             $messageModel = new MessageModel();
-            $ip = cmf_client_ip();
             $messageModel->saveMessage($ip, $data);
             $message_id = $messageModel->id;
 
@@ -605,40 +607,6 @@ class IndexController extends HomeBaseController
             $UserAccessLogModel->saveLog($ip, $message_id);
 
             Db::commit();
-
-            // 发送邮件提醒给管理员
-            try {
-                $site_info = cmf_get_option('site_info');
-                if (!empty($site_info['email'])) {
-                    $to = $site_info['email'];
-                    $subject = "New Inquiry from " . ($data['name'] ?? 'Website User');
-                    
-                    $email_content = "<h2>New Inquiry Received</h2>";
-                    $email_content .= "<p><strong>Name:</strong> " . htmlspecialchars($data['name'] ?? 'N/A') . "</p>";
-                    $email_content .= "<p><strong>Email:</strong> " . htmlspecialchars($data['email'] ?? 'N/A') . "</p>";
-                    if (!empty($data['phone'])) {
-                        $email_content .= "<p><strong>Phone:</strong> " . htmlspecialchars($data['phone']) . "</p>";
-                    }
-                    if (!empty($data['product_id'])) {
-                        $product = Db::name('portal_post')->where('id', $data['product_id'])->find();
-                        if ($product) {
-                            $email_content .= "<p><strong>Product:</strong> " . htmlspecialchars($product['post_title']) . "</p>";
-                        }
-                    }
-                    $email_content .= "<p><strong>Message:</strong><br/> " . nl2br(htmlspecialchars($data['content'] ?? 'N/A')) . "</p>";
-                    
-                    $referer_url = $this->request->server('HTTP_REFERER');
-                    if (!empty($referer_url)) {
-                        $email_content .= "<p><strong>Source Page URL:</strong> <a href='" . htmlspecialchars($referer_url) . "'>" . htmlspecialchars($referer_url) . "</a></p>";
-                    }
-                    
-                    $email_content .= "<p><strong>IP:</strong> " . $ip . "</p>";
-                    
-                    cmf_send_email($to, $subject, $email_content);
-                }
-            } catch (\Exception $e) {
-                // 忽略邮件发送错误，防止影响表单正常提交
-            }
         } catch (\Exception $e) {
             Db::rollback();
             $this->error($e->getMessage());
@@ -647,7 +615,67 @@ class IndexController extends HomeBaseController
         if ($data['type'] == 3) {
             session('user_download', 1);
         }
-        $this->success('submit success', '', ['session' => session('user_download')]);
+
+        // Return JSON success response immediately to the client
+        $result = [
+            'code' => 1,
+            'msg' => 'submit success',
+            'data' => ['session' => session('user_download')],
+            'url' => '',
+            'wait' => 3
+        ];
+        
+        $response = \think\Response::create($result, 'json');
+        $response->send();
+        
+        // FastCGI finish request to close browser connection
+        if (function_exists('fastcgi_finish_request')) {
+            session_write_close();
+            fastcgi_finish_request();
+        }
+        
+        // Asynchronously forward inquiry details to the admin email in the background
+        ignore_user_abort(true);
+        set_time_limit(0);
+        
+        if (empty($data['name']) || empty($data['email'])) {
+            exit;
+        }
+
+        try {
+            $site_info = cmf_get_option('site_info');
+            if (!empty($site_info['email'])) {
+                $to = $site_info['email'];
+                $subject = "New Inquiry from " . ($data['name'] ?? 'Website User');
+                
+                $email_content = "<h2>New Inquiry Received</h2>";
+                $email_content .= "<p><strong>Name:</strong> " . htmlspecialchars($data['name'] ?? 'N/A') . "</p>";
+                $email_content .= "<p><strong>Email:</strong> " . htmlspecialchars($data['email'] ?? 'N/A') . "</p>";
+                if (!empty($data['phone'])) {
+                    $email_content .= "<p><strong>Phone:</strong> " . htmlspecialchars($data['phone']) . "</p>";
+                }
+                if (!empty($data['product_id'])) {
+                    $product = Db::name('portal_post')->where('id', $data['product_id'])->find();
+                    if ($product) {
+                        $email_content .= "<p><strong>Product:</strong> " . htmlspecialchars($product['post_title']) . "</p>";
+                    }
+                }
+                $email_content .= "<p><strong>Message:</strong><br/> " . nl2br(htmlspecialchars($data['content'] ?? 'N/A')) . "</p>";
+                
+                $referer_url = $this->request->server('HTTP_REFERER');
+                if (!empty($referer_url)) {
+                    $email_content .= "<p><strong>Source Page URL:</strong> <a href='" . htmlspecialchars($referer_url) . "'>" . htmlspecialchars($referer_url) . "</a></p>";
+                }
+                
+                $email_content .= "<p><strong>IP:</strong> " . ($ip ?? 'N/A') . "</p>";
+                
+                cmf_send_email($to, $subject, $email_content);
+            }
+        } catch (\Exception $e) {
+            // Ignore errors
+        }
+        
+        exit;
     }
 
     public function product_info_by_slug()

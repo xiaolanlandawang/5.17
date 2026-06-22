@@ -18,13 +18,14 @@ class InquiryValidate extends Validate
     protected $rule = [
         'name' => 'require',
         'email' => 'require|email',
+        'content' => 'require',
         'type' => 'require|in:1,2,3',
         'product_id' => 'requireIf:type,1',
     ];
     protected $message = [
         'name.require' => 'Please Enter Your Name',
-        'phone.require' => 'Please Enter Your Phone or WhatsApp',
         'email.require' => 'Please Enter Your Email',
+        'content.require' => 'Please Enter Your Message',
         'email.email' => 'Email Is Invalid',
         'lifting_capacity.requireIf' => 'Please Select Lifting Capacity',
         'lifting_height.requireIf' => 'Please Select Lifting Height',

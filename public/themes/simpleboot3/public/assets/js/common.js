@@ -99,7 +99,7 @@ $(document).ready(function(){
         let phone = getFormattedPhoneNumber($('.footer-phone'));
         let message = $('.footer-message').val();
         if (name == '' || email == '' || message == '') {
-            notifyFormResult('Incomplete Information', 'Please fill in the complete information.', 'error');
+            notifyFormResult('Incomplete Information', 'Please fill in Name, Email and Message.', 'error');
             return;
         }
         let data = {
@@ -138,7 +138,7 @@ $(document).ready(function(){
         let phone = getFormattedPhoneNumber($('.home-collect-phone'));
         let message = $('.home-collect-message').val();
         if (name == '' || email == '' || message == '') {
-            notifyFormResult('Incomplete Information', 'Please fill in the complete information.', 'error');
+            notifyFormResult('Incomplete Information', 'Please fill in Name, Email and Message.', 'error');
             return;
         }
         let data = {
@@ -204,8 +204,8 @@ $(document).ready(function(){
         let email = $('#popover-email').val();// 邮箱
         let content = $('#popover-content').val();// 内容
 
-        if (!name || !phone || !email || !content){
-            notifyFormResult('Incomplete Information', 'Please fill in all the information completely.', 'error');
+        if (!name || !email || !content){
+            notifyFormResult('Incomplete Information', 'Please fill in Name, Email and Message.', 'error');
             return;
         }
 
